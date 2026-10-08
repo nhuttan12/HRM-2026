@@ -1,0 +1,50 @@
+:host {
+  display: inline-block;
+}
+
+:host ::ng-deep {
+  .p-button {
+    min-width: 120px;
+    min-height: 40px;
+
+    border-radius: 10px;
+    padding: 0.625rem 1rem;
+
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+
+    transition:
+      transform 120ms ease,
+      box-shadow 150ms ease,
+      background-color 150ms ease,
+      border-color 150ms ease;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgb(59 130 246 / 20%);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+      transform: none;
+    }
+
+    .p-button-icon {
+      font-size: 0.875rem;
+    }
+
+    .p-button-label {
+      font-weight: 600;
+    }
+  }
+}

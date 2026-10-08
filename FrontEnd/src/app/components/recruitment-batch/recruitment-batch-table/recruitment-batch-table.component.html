@@ -1,0 +1,22 @@
+@if (loading()) {
+  <div class="recruitment-batch-table-skeleton">
+    @for (row of [1, 2, 3, 4, 5]; track row) {
+      <div class="skeleton-row">
+        @for (column of columns(); track column.field) {
+          <lib-skeleton
+            [width]="column.width ?? '150px'"
+            height="20px"
+          />
+        }
+      </div>
+    }
+  </div>
+} @else {
+  <lib-hrm-table
+    [data]="data()"
+    [columns]="columns()"
+    [selectable]="selectable()"
+    [(selectedData)]="selectedData"
+    (selectionChange)="onSelectionChange($event)"
+  />
+}

@@ -1,0 +1,50 @@
+:host {
+  display: block;
+}
+
+.candidate-profile-header {
+  .search-container {
+    display: flex;
+    width: 100%;
+  }
+
+  .search-input {
+    height: 2.5rem;
+    width: 100%;
+    border: 1px solid var(--p-surface-300);
+    border-right: 0;
+    border-radius: 0.5rem 0 0 0.5rem;
+    background-color: var(--p-surface-0);
+    padding: 0 0.75rem;
+    font-size: 0.875rem;
+    outline: none;
+    transition:
+      border-color 150ms ease,
+      box-shadow 150ms ease;
+
+    &::placeholder {
+      color: var(--p-surface-500);
+    }
+
+    &:focus {
+      border-color: var(--p-primary-color);
+      box-shadow: 0 0 0 1px var(--p-primary-color);
+    }
+  }
+
+  .search-button {
+    flex-shrink: 0;
+  }
+}
+
+@media (min-width: 640px) {
+  .candidate-profile-header {
+    .search-container {
+      width: auto;
+    }
+
+    .search-input {
+      width: 16rem;
+    }
+  }
+}

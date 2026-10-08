@@ -1,0 +1,19 @@
+<div class="search-wrapper">
+  <div class="search-container">
+    <input
+      type="text"
+      [value]="keyword()"
+      (input)="onKeywordChange($event)"
+      (keyup.enter)="onSearch()"
+      [placeholder]="placeholder()"
+      class="search-input"
+    />
+
+    <lib-command-button
+      label="Tìm kiếm"
+      icon="pi pi-search"
+      severity="info"
+      (clicked)="onSearch()"
+    />
+  </div>
+</div>

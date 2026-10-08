@@ -1,0 +1,13 @@
+<div
+  class="lib-skeleton"
+  [class.lib-skeleton--text]="variant() === 'text'"
+  [class.lib-skeleton--rect]="variant() === 'rect'"
+  [class.lib-skeleton--circle]="variant() === 'circle'"
+  [class.lib-skeleton--animated]="animated()"
+  [class]="customClass()"
+  [style.width]="variant() === 'circle' ? height() : width()"
+  [style.height]="height()"
+  [style.border-radius]="
+    variant() === 'circle' ? '50%' : borderRadius()
+  "
+></div>

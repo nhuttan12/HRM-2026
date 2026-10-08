@@ -1,0 +1,83 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.hrm-table-wrapper {
+  width: 100%;
+  max-height: 32rem;
+  overflow-x: auto;
+  overflow-y: auto;
+
+  border: 1px solid var(--p-surface-200);
+  border-radius: 0.75rem;
+
+  background: var(--p-surface-0);
+
+  scrollbar-width: thin;
+}
+
+.hrm-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  font-size: 0.875rem;
+  color: var(--p-surface-700);
+
+  th,
+  td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--p-surface-200);
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    background: var(--p-surface-50);
+
+    th {
+      font-weight: 600;
+      color: var(--p-surface-700);
+    }
+  }
+
+  tbody {
+    tr {
+      transition: background-color 150ms ease;
+
+      &:hover {
+        background: var(--p-surface-50);
+      }
+
+      &:last-child {
+        td {
+          border-bottom: 0;
+        }
+      }
+    }
+
+    td {
+      color: var(--p-surface-700);
+    }
+  }
+}
+
+.hrm-table-checkbox-column {
+  width: 3rem !important;
+  min-width: 3rem;
+  padding-left: 1rem !important;
+  padding-right: 0.5rem !important;
+  text-align: center !important;
+}
+
+.hrm-table-empty {
+  padding: 3rem 1rem !important;
+  text-align: center !important;
+  color: var(--p-surface-500) !important;
+}

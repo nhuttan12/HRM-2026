@@ -1,0 +1,56 @@
+<div class="hrm-table-wrapper">
+  <table class="hrm-table">
+    <thead>
+      <tr>
+        @if (selectable()) {
+          <th class="hrm-table-checkbox-column">
+            <input
+              type="checkbox"
+              [checked]="isAllSelected()"
+              (change)="toggleAll()"
+            />
+          </th>
+        }
+
+        @for (column of columns(); track column.field) {
+          <th [style.width]="column.width">
+            {{ column.header }}
+          </th>
+        }
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (row of data(); track trackByRow($index, row)) {
+        <tr>
+          @if (selectable()) {
+            <td class="hrm-table-checkbox-column">
+              <input
+                type="checkbox"
+                [checked]="isSelected(row)"
+                (change)="toggleRow(row)"
+              />
+            </td>
+          }
+
+          @for (column of columns(); track column.field) {
+            <td>
+              {{ getCellValue(row, column.field) }}
+            </td>
+          }
+        </tr>
+      }
+
+      @if (data().length === 0) {
+        <tr>
+          <td
+            [attr.colspan]="columns().length + (selectable() ? 1 : 0)"
+            class="hrm-table-empty"
+          >
+            Không có dữ liệu.
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

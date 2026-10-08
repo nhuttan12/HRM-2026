@@ -1,0 +1,49 @@
+<div class="candidate-profile-table">
+  @if (loading()) {
+    <div class="candidate-profile-table__skeleton">
+
+      <!-- Header -->
+      <div class="candidate-profile-table__skeleton-header">
+        <lib-skeleton
+          width="40px"
+          height="20px"
+        />
+
+        @for (column of columns; track column.field) {
+          <lib-skeleton
+            [width]="column.width ?? '150px'"
+            height="20px"
+          />
+        }
+      </div>
+
+      <!-- Rows -->
+      @for (row of skeletonRows; track $index) {
+        <div class="candidate-profile-table__skeleton-row">
+
+          <!-- Checkbox -->
+          <lib-skeleton
+            width="40px"
+            height="20px"
+          />
+
+          @for (column of columns; track column.field) {
+            <lib-skeleton
+              [width]="column.width ?? '150px'"
+              height="20px"
+            />
+          }
+
+        </div>
+      }
+    </div>
+  } @else {
+    <lib-hrm-table
+      [data]="candidates"
+      [columns]="columns"
+      [selectable]="true"
+      [(selectedData)]="selectedCandidates"
+      (selectionChange)="onSelectionChange($event)"
+    />
+  }
+</div>

@@ -1,0 +1,48 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.candidate-profile-table {
+  width: 100%;
+
+  &__skeleton {
+    width: 100%;
+    overflow-x: auto;
+
+    border: 1px solid var(--p-surface-200);
+    border-radius: 0.75rem;
+    background: var(--p-surface-0);
+  }
+
+  &__skeleton-header,
+  &__skeleton-row {
+    display: grid;
+    grid-template-columns:
+      40px
+      150px
+      220px
+      260px
+      160px
+      220px
+      140px;
+
+    min-width: 1190px;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.875rem 1rem;
+  }
+
+  &__skeleton-header {
+    border-bottom: 1px solid var(--p-surface-200);
+    background: var(--p-surface-50);
+  }
+
+  &__skeleton-row {
+    border-bottom: 1px solid var(--p-surface-200);
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+}

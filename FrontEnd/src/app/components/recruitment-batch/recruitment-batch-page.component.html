@@ -1,0 +1,12 @@
+<div class="recruitment-batch flex flex-col gap-6 p-6">
+  <lib-recruitment-batch-header />
+
+  <lib-recruitment-batch-table
+    [data]="recruitmentBatches()"
+    [columns]="columns"
+    [loading]="loading()"
+    [selectable]="true"
+    [(selectedData)]="selectedData"
+    (selectionChange)="onSelectionChange($event)"
+  />
+</div>

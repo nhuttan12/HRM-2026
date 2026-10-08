@@ -1,0 +1,18 @@
+.recruitment-batch-table-skeleton {
+  width: 100%;
+}
+
+.skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  min-height: 56px;
+  padding: 1rem;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.skeleton-row lib-skeleton {
+  flex-shrink: 0;
+}
