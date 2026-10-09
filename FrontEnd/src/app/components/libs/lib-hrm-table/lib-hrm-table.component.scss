@@ -81,3 +81,12 @@
   text-align: center !important;
   color: var(--p-surface-500) !important;
 }
+
+.hrm-table-row {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #f8fafc;
+  }
+}

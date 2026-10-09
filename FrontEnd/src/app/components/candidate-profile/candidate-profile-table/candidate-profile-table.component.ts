@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
-import { Candidate, hrmTableColumns, mockingCandidates } from './candidate-profile-table.model';
+import { Component, output, signal } from '@angular/core';
 import { LibHrmTableComponent } from '../../libs/lib-hrm-table/lib-hrm-table.component';
 import { LibSkeletonComponent } from '../../libs/lib-skeleton/lib-skeleton.component';
+import { Candidate, hrmTableColumns, mockingCandidates } from './candidate-profile-table.model';
 
 @Component({
   selector: 'app-candidate-profile-table',
@@ -19,7 +19,8 @@ export class CandidateProfileTableComponent {
 
   selectedCandidates: Candidate[] = [];
 
-  @Output() selectionAction = new EventEmitter<Candidate[]>();
+  readonly selectionAction = output<Candidate[]>();
+  readonly candidateClick = output<Candidate>();
 
   constructor() {
     setTimeout(() => {
@@ -31,5 +32,9 @@ export class CandidateProfileTableComponent {
     this.selectedCandidates = selected;
 
     this.selectionAction.emit(selected);
+  }
+
+  onCandidateClick(candidate: Candidate): void {
+    this.candidateClick.emit(candidate);
   }
 }

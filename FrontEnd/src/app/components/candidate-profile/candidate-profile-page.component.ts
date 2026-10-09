@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, signal, viewChild } from '@angular/core';
 import { CandidateProfileTableComponent } from './candidate-profile-table/candidate-profile-table.component';
 import { LibCandidateProfileHeaderComponent } from './candidate-profile-header/candidate-profile-header.component';
+import { LibCanvasComponent } from '../libs/lib-canvas/lib-canvas.component';
+import { Candidate } from './candidate-profile-table/candidate-profile-table.model';
 
 @Component({
   selector: 'app-candidate-profile',
   standalone: true,
   imports: [
+    LibCanvasComponent,
     LibCandidateProfileHeaderComponent,
     CandidateProfileTableComponent,
   ],
@@ -13,15 +16,25 @@ import { LibCandidateProfileHeaderComponent } from './candidate-profile-header/c
   styleUrl: './candidate-profile-page.component.scss',
 })
 export class CandidateProfilePageComponent {
-  onSearch(keyword: string): void {
-    console.log('Search candidate:', keyword);
+  readonly canvas = viewChild.required(LibCanvasComponent);
 
-    // Sau này gọi API search candidate ở đây
+  readonly selectedCandidate = signal<Candidate | null>(null);
+  readonly canvasMode = signal<'create' | 'detail'>('create');
+
+  onCandidateClick(candidate: Candidate): void {
+    this.selectedCandidate.set(candidate);
+    this.canvasMode.set('detail');
+    this.canvas().open();
+  }
+
+  onSearch(keyword: string): void {
+    // TODO: Xử lý tìm kiếm ứng viên.
+    console.log('Search:', keyword);
   }
 
   onAdd(): void {
-    console.log('Add candidate');
-
-    // Sau này mở dialog / canvas thêm candidate ở đây
+    this.selectedCandidate.set(null);
+    this.canvasMode.set('create');
+    this.canvas().open();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { LibCommandButtonComponent } from '../lib-command-button.component';
 
 @Component({
@@ -8,7 +8,7 @@ import { LibCommandButtonComponent } from '../lib-command-button.component';
   templateUrl: './lib-add-button.component.html',
 })
 export class LibAddButtonComponent {
-  @Output() add = new EventEmitter<void>();
+  readonly add = output<void>();
 
   onAdd(): void {
     this.add.emit();

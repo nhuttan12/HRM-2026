@@ -7,6 +7,7 @@
             <input
               type="checkbox"
               [checked]="isAllSelected()"
+              (click)="$event.stopPropagation()"
               (change)="toggleAll()"
             />
           </th>
@@ -22,9 +23,15 @@
 
     <tbody>
       @for (row of data(); track trackByRow($index, row)) {
-        <tr>
+        <tr
+          class="hrm-table-row"
+          (click)="onRowClick(row)"
+        >
           @if (selectable()) {
-            <td class="hrm-table-checkbox-column">
+            <td
+              class="hrm-table-checkbox-column"
+              (click)="$event.stopPropagation()"
+            >
               <input
                 type="checkbox"
                 [checked]="isSelected(row)"

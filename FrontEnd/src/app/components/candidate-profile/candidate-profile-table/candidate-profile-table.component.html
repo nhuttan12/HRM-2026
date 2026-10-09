@@ -44,6 +44,7 @@
       [selectable]="true"
       [(selectedData)]="selectedCandidates"
       (selectionChange)="onSelectionChange($event)"
+      (rowClick)="onCandidateClick($event)"
     />
   }
 </div>

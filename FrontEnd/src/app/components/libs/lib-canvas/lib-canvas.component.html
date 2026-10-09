@@ -1,0 +1,27 @@
+<button
+  type="button"
+  class="canvas-backdrop"
+  [class.canvas-backdrop--visible]="opened()"
+  [attr.aria-label]="opened() ? 'Đóng cửa sổ' : null"
+  [attr.aria-hidden]="!opened()"
+  [attr.tabindex]="opened() ? 0 : -1"
+  (click)="onClose()"
+></button>
+
+<aside
+  class="canvas-panel"
+  [class.canvas-panel--open]="opened()"
+  [attr.aria-hidden]="!opened()"
+  [attr.inert]="!opened() ? '' : null"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-label]="title()"
+>
+  <header class="canvas-panel__header">
+    <h2>{{ title() }}</h2>
+    <button type="button" class="canvas-panel__close" aria-label="Đóng cửa sổ" (click)="onClose()">
+      &times;
+    </button>
+  </header>
+  <section class="canvas-panel__body"><ng-content /></section>
+</aside>

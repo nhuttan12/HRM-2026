@@ -20,8 +20,12 @@ export class LibHrmTableComponent<T> {
   selectable = input(false);
   
   selectedData = model<T[]>([]);
-
   selectionChange = output<T[]>();
+  readonly rowClick = output<T>();
+
+  onRowClick(row: T): void {
+    this.rowClick.emit(row);
+  }
 
   isSelected(row: T): boolean {
     return this.selectedData().includes(row);
@@ -65,7 +69,6 @@ export class LibHrmTableComponent<T> {
 
   private updateSelection(selection: T[]): void {
     this.selectedData.set(selection);
-
     this.selectionChange.emit(selection);
   }
 

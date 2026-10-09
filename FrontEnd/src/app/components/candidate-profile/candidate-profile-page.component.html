@@ -6,5 +6,47 @@
   />
 
   <!-- Table -->
-  <app-candidate-profile-table />
+  <app-candidate-profile-table
+    (candidateClick)="onCandidateClick($event)"
+  />
 </div>
+
+<lib-canvas
+  [title]="canvasMode() === 'create'
+    ? 'Thêm ứng viên'
+    : 'Thông tin ứng viên'"
+  width="560px"
+>
+  @if (canvasMode() === 'create') {
+    <div class="flex flex-col gap-4">
+      <!-- Form thêm ứng viên -->
+    </div>
+  } @else if (selectedCandidate(); as candidate) {
+    <div class="flex flex-col gap-4">
+      <div>
+        <p class="text-sm text-surface-500">Mã ứng viên</p>
+        <p class="font-medium">{{ candidate.candidateCode }}</p>
+      </div>
+
+      <div>
+        <p class="text-sm text-surface-500">Họ và tên</p>
+        <p class="font-medium">{{ candidate.fullName }}</p>
+      </div>
+
+      <div>
+        <p class="text-sm text-surface-500">Email</p>
+        <p class="font-medium">{{ candidate.email }}</p>
+      </div>
+
+      <div>
+        <p class="text-sm text-surface-500">Số điện thoại</p>
+        <p class="font-medium">{{ candidate.phone }}</p>
+      </div>
+
+      <div>
+        <p class="text-sm text-surface-500">Vị trí ứng tuyển</p>
+        <p class="font-medium">{{ candidate.position }}</p>
+      </div>
+    </div>
+  }
+</lib-canvas>
