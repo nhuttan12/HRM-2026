@@ -21,6 +21,7 @@ export class LibCommandButtonComponent {
     | 'help'
     | undefined
   >();
+  size = input<'small' | 'large' | undefined>('small');
   disabled = input(false);
   loading = input(false);
   

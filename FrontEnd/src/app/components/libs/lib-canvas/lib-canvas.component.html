@@ -19,9 +19,10 @@
 >
   <header class="canvas-panel__header">
     <h2>{{ title() }}</h2>
-    <button type="button" class="canvas-panel__close" aria-label="Đóng cửa sổ" (click)="onClose()">
-      &times;
-    </button>
+    <lib-close-button size="large" (closed)="onClose()"/>
   </header>
-  <section class="canvas-panel__body"><ng-content /></section>
+  
+  <section class="canvas-panel__body">
+    <ng-content />
+  </section>
 </aside>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LibSidebarComponent } from '../components/libs/lib-side-bar/lib-sidebar.component';
+import { LibSidebarComponent } from '../components/libs/lib-sidebar/lib-sidebar.component';
 
 @Component({
   selector: 'app-main-layout',

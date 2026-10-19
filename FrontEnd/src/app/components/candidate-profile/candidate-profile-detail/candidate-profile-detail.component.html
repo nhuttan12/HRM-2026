@@ -1,0 +1,64 @@
+@if (loading()) {
+  <div class="candidate-detail">
+    @for (field of fields; track field.key) {
+      <div class="candidate-detail__item">
+        <lib-skeleton
+          width="120px"
+          height="14px"
+          variant="text"
+        />
+        <lib-skeleton
+          width="70%"
+          height="18px"
+          variant="text"
+        />
+      </div>
+    }
+  </div>
+} @else if (error()) {
+  <div class="candidate-detail__error">
+    {{ error() }}
+  </div>
+} @else if (candidate(); as item) {
+  <div class="candidate-detail">
+    @for (field of fields; track field.key) {
+      <div class="candidate-detail__item">
+        <lib-text
+          tag="span"
+          className="candidate-detail__label"
+          [text]="field.label"
+        />
+
+        <lib-text
+          tag="strong"
+          className="candidate-detail__value"
+          [text]="formatValue(item[field.key])"
+        />
+      </div>
+    }
+
+    <section class="candidate-detail__section">
+      <lib-text
+        tag="h3"
+        className="candidate-detail__section-title"
+        text="Kỹ năng"
+      />
+
+      <div class="candidate-detail__skills">
+        @for (skill of item.skills; track skill) {
+          <lib-text
+            tag="span"
+            className="candidate-detail__skill"
+            [text]="skill"
+          />
+        }
+      </div>
+    </section>
+  </div>
+} @else {
+  <lib-text
+    tag="p"
+    className="candidate-detail__empty"
+    text="Chưa có thông tin ứng viên."
+  />
+}

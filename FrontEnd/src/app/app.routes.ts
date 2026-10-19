@@ -12,6 +12,13 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
       {
+        path: 'candidate-profile/detail',
+        loadComponent: () =>
+          import(
+            './components/candidate-profile/candidate-profile-page.component'
+          ).then((m) => m.CandidateProfilePageComponent),
+      },
+      {
         path: 'candidate-profile',
         loadComponent: () =>
           import('./components/candidate-profile/candidate-profile-page.component')

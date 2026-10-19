@@ -4,13 +4,11 @@
 
 :host ::ng-deep {
   .p-button {
-    min-width: 120px;
-    min-height: 40px;
-
-    border-radius: 10px;
-    padding: 0.625rem 1rem;
-
-    font-size: 0.875rem;
+    min-width: var(--lib-button-min-width, 120px);
+    min-height: var(--lib-button-height, 40px);
+    border-radius: var(--lib-button-radius, 10px);
+    padding: var(--lib-button-padding, 0.625rem 1rem);
+    font-size: var(--lib-button-font-size, 0.875rem);
     font-weight: 600;
     line-height: 1.25rem;
 
@@ -40,11 +38,30 @@
     }
 
     .p-button-icon {
-      font-size: 0.875rem;
+      font-size: inherit;
     }
 
     .p-button-label {
       font-weight: 600;
     }
   }
+
+  .p-button-sm {
+    --lib-button-min-width: 80px;
+    --lib-button-height: 32px;
+    --lib-button-padding: 0.375rem 0.75rem;
+    --lib-button-font-size: 0.75rem;
+  }
+
+  .p-button-lg {
+    --lib-button-min-width: 140px;
+    --lib-button-height: 48px;
+    --lib-button-padding: 0.75rem 1.25rem;
+    --lib-button-font-size: 1rem;
+  }
+}
+
+:host ::ng-deep .p-button.p-button-icon-only {
+  min-width: var(--lib-button-height, 40px);
+  padding-inline: 0;
 }

@@ -1,0 +1,20 @@
+import { Component, input, output } from '@angular/core';
+import { InputTextModule } from 'primeng/inputtext';
+
+@Component({
+  selector: 'lib-input',
+  standalone: true,
+  imports: [InputTextModule],
+  templateUrl: './lib-input.component.html',
+})
+export class LibInputComponent {
+  inputId = input(`lib-input-${Math.random().toString(36).slice(2)}`);
+  label = input('');
+  placeholder = input('');
+  value = input('');
+  type = input('text');
+  disabled = input(false);
+  required = input(false);
+
+  valueChange = output<string>();
+}

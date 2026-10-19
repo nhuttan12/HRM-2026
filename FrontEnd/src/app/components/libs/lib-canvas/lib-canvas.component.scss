@@ -116,12 +116,3 @@
   overscroll-behavior: contain;
   padding: 24px;
 }
-
-/* Hỗ trợ người dùng giảm chuyển động */
-@media (prefers-reduced-motion: reduce) {
-  .canvas-panel,
-  .canvas-backdrop {
-    transition: none;
-    will-change: auto;
-  }
-}

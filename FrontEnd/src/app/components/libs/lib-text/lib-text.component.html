@@ -1,0 +1,33 @@
+
+@switch (tag()) {
+  @case ('span') {
+    <span [class]="className()" [ngStyle]="styles()">{{ text() }}</span>
+  }
+  @case ('strong') {
+    <strong [class]="className()" [ngStyle]="styles()">{{ text() }}</strong>
+  }
+  @case ('em') {
+    <em [class]="className()" [ngStyle]="styles()">{{ text() }}</em>
+  }
+  @case ('small') {
+    <small [class]="className()" [ngStyle]="styles()">{{ text() }}</small>
+  }
+  @case ('h1') {
+    <h1 [class]="className()" [ngStyle]="styles()">{{ text() }}</h1>
+  }
+  @case ('h2') {
+    <h2 [class]="className()" [ngStyle]="styles()">{{ text() }}</h2>
+  }
+  @case ('h3') {
+    <h3 [class]="className()" [ngStyle]="styles()">{{ text() }}</h3>
+  }
+  @case ('h4') {
+    <h4 [class]="className()" [ngStyle]="styles()">{{ text() }}</h4>
+  }
+  @case ('h5') {
+    <h5 [class]="className()" [ngStyle]="styles()">{{ text() }}</h5>
+  }
+  @default {
+    <p [class]="className()" [ngStyle]="styles()">{{ text() }}</p>
+  }
+}
