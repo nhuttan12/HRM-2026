@@ -25,27 +25,22 @@ export class CandidateProfileDetailComponent {
     effect((onCleanup) => {
       const code = this.candidateCode();
 
-      console.log('[Detail] candidateCode:', code);
-
       this.candidate.set(null);
       this.error.set(null);
 
-      // Tạm thời không chặn việc tải dữ liệu khi code là null.
+      if (!code) {
+        this.loading.set(false);
+        return;
+      }
+
       this.loading.set(true);
 
       const subscription = this.candidateService.getByCode(code).subscribe({
         next: (data) => {
-          console.log('[Detail] Nhận dữ liệu:', data);
-
           this.candidate.set(data);
           this.loading.set(false);
-
-          console.log('[Detail] Signal candidate:', this.candidate());
-          console.log('[Detail] Signal loading:', this.loading());
         },
         error: (err: unknown) => {
-          console.error('[Detail] Lỗi tải ứng viên:', err);
-
           this.error.set(
             err instanceof Error
               ? err.message

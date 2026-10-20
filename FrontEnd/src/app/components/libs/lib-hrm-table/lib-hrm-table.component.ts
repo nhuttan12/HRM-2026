@@ -22,9 +22,14 @@ export class LibHrmTableComponent<T> {
   selectedData = model<T[]>([]);
   selectionChange = output<T[]>();
   readonly rowClick = output<T>();
+  readonly rowDoubleClick = output<T>();
 
   onRowClick(row: T): void {
     this.rowClick.emit(row);
+  }
+
+  onRowDoubleClick(row: T): void {
+    this.rowDoubleClick.emit(row);
   }
 
   isSelected(row: T): boolean {

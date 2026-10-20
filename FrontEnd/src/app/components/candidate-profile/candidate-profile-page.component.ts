@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, signal, viewChild } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, inject, signal, viewChild } from '@angular/core';
 import { CandidateProfileTableComponent } from './candidate-profile-table/candidate-profile-table.component';
 import { LibCandidateProfileHeaderComponent } from './candidate-profile-header/candidate-profile-header.component';
 import { LibCanvasComponent } from '../libs/lib-canvas/lib-canvas.component';
@@ -20,7 +20,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './candidate-profile-page.component.html',
   styleUrl: './candidate-profile-page.component.scss',
 })
-export class CandidateProfilePageComponent {
+export class CandidateProfilePageComponent implements AfterViewInit {
   readonly canvas = viewChild.required(LibCanvasComponent);
 
   readonly selectedCandidateCode  = signal<string | null>(null);
@@ -56,16 +56,16 @@ export class CandidateProfilePageComponent {
   }
 
   private syncCanvasWithUrl(): void {
-    if (this.isDetailUrl()) {
-      this.canvasMode.set('detail');
-      this.selectedCandidateCode.set(
-        this.route.snapshot.queryParamMap.get('code'),
-      );
+    const code = this.route.snapshot.queryParamMap.get('code');
 
+    if (code) {
+      this.canvasMode.set('detail');
+      this.selectedCandidateCode.set(code);
       this.canvas().open();
     } else {
-      this.resetCandidateState();
-      this.canvas().close();
+      if (this.canvas().opened()) {
+        this.canvas().close();
+      }
     }
 
     this.openingDetail.set(false);
@@ -80,29 +80,10 @@ export class CandidateProfilePageComponent {
   }
 
   async onCandidateClick(candidate: Candidate): Promise<void> {
-    if (this.openingDetail() || this.isDetailUrl()) {
-      return;
-    }
-
-    this.openingDetail.set(true);
-
-    try {
-      const navigated = await this.router.navigate(
-        ['/candidate-profile/detail'],
-        {
-          queryParams: {
-            code: candidate.candidateCode,
-          },
-        },
-      );
-
-      if (!navigated) {
-        this.openingDetail.set(false);
-      }
-    } catch (error) {
-      this.openingDetail.set(false);
-      console.error('Không thể mở chi tiết ứng viên:', error);
-    }
+    await this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { code: candidate.candidateCode },
+    });
   }
 
   async onCanvasClosed(): Promise<void> {

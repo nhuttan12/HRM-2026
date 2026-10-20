@@ -26,6 +26,7 @@
         <tr
           class="hrm-table-row"
           (click)="onRowClick(row)"
+          (dblclick)="onRowDoubleClick(row)"
         >
           @if (selectable()) {
             <td
