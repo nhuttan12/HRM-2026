@@ -1,64 +1,218 @@
-@if (loading()) {
-  <div class="candidate-detail">
-    @for (field of fields; track field.key) {
-      <div class="candidate-detail__item">
-        <lib-skeleton
-          width="120px"
-          height="14px"
-          variant="text"
-        />
-        <lib-skeleton
-          width="70%"
-          height="18px"
-          variant="text"
-        />
+<div class="flex h-full w-full overflow-hidden">
+  @if (loading()) {
+    <!-- Sidebar skeleton -->
+    <aside
+      class="hidden w-64 shrink-0 border-r border-gray-200 bg-white p-4 md:block"
+    >
+      <div class="mb-8 flex items-center gap-3 px-2">
+        <lib-skeleton width="40px" height="40px" variant="rect" />
+
+        <div class="min-w-0 flex-1 space-y-2">
+          <lib-skeleton width="70%" height="14px" variant="text" />
+          <lib-skeleton width="45%" height="12px" variant="text" />
+        </div>
       </div>
-    }
-  </div>
-} @else if (error()) {
-  <div class="candidate-detail__error">
-    {{ error() }}
-  </div>
-} @else if (candidate(); as item) {
-  <div class="candidate-detail">
-    @for (field of fields; track field.key) {
-      <div class="candidate-detail__item">
-        <lib-text
-          tag="span"
-          className="candidate-detail__label"
-          [text]="field.label"
-        />
 
-        <lib-text
-          tag="strong"
-          className="candidate-detail__value"
-          [text]="formatValue(item[field.key])"
-        />
-      </div>
-    }
-
-    <section class="candidate-detail__section">
-      <lib-text
-        tag="h3"
-        className="candidate-detail__section-title"
-        text="Kỹ năng"
-      />
-
-      <div class="candidate-detail__skills">
-        @for (skill of item.skills; track skill) {
-          <lib-text
-            tag="span"
-            className="candidate-detail__skill"
-            [text]="skill"
-          />
+      <div class="space-y-3">
+        @for (row of [1, 2, 3, 4, 5, 6]; track row) {
+          <div class="flex items-center gap-3 rounded-lg px-3 py-3">
+            <lib-skeleton width="20px" height="20px" variant="rect" />
+            <lib-skeleton width="65%" height="14px" variant="text" />
+          </div>
         }
       </div>
-    </section>
-  </div>
-} @else {
-  <lib-text
-    tag="p"
-    className="candidate-detail__empty"
-    text="Chưa có thông tin ứng viên."
-  />
-}
+    </aside>
+
+    <!-- Skeleton tổng quát cho vùng nội dung -->
+    <main class="min-w-0 flex-1 overflow-y-auto p-6">
+      <!-- Header -->
+      <div class="mb-8 space-y-3">
+        <lib-skeleton width="220px" height="28px" variant="text" />
+        <lib-skeleton width="320px" height="14px" variant="text" />
+      </div>
+
+      <!-- Các khối thông tin tổng quát -->
+      <div class="space-y-8">
+        @for (section of [1, 2, 3]; track section) {
+          <section class="rounded-xl border border-gray-200 bg-white p-5">
+            <div class="mb-6">
+              <lib-skeleton width="180px" height="22px" variant="text" />
+            </div>
+
+            <div class="grid grid-cols-1 gap-x-6 gap-y-6 md:grid-cols-2">
+              @for (field of [1, 2, 3, 4]; track field) {
+                <div class="min-w-0">
+                  <lib-skeleton width="120px" height="14px" variant="text" />
+
+                  <div class="mt-3">
+                    <lib-skeleton
+                      width="100%"
+                      height="42px"
+                      variant="rect"
+                    />
+                  </div>
+                </div>
+              }
+            </div>
+          </section>
+        }
+      </div>
+    </main>
+  } @else {
+    <!-- Sidebar bên trái -->
+    <app-candidate-profile-detail-sidebar (sectionChange)="onSectionChange($event)" />
+
+    <!-- Main content bên phải -->
+    <main class="min-w-0 flex-1 overflow-y-auto p-6">
+      @if (loading()) {
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+          @for (field of fields; track field.key) {
+            <div class="min-w-0">
+              <lib-skeleton width="120px" height="14px" variant="text" />
+              <div class="mt-2">
+                <lib-skeleton width="70%" height="18px" variant="text" />
+              </div>
+            </div>
+          }
+        </div>
+      } @else if (error()) {
+        <div class="py-3 text-red-600" role="alert">
+          {{ error() }}
+        </div>
+      } @else if (candidate(); as item) {
+        @switch (activeSection()) {
+          <!-- Tổng quan -->
+          @case ('overview') {
+            <section>
+              <h2 class="mb-6 text-xl font-semibold">Tổng quan</h2>
+
+              <div class="grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2">
+                @for (field of fields; track field.key) {
+                  <div
+                    [class]="{
+                      'min-w-0': true,
+                      'md:col-span-2': field.width === 'full',
+                    }"
+                  >
+                    <lib-input
+                      [label]="field.label"
+                      [value]="formatValue(item[field.key])"
+                      [isView]="true"
+                    />
+                  </div>
+                }
+              </div>
+            </section>
+          }
+
+          <!-- Thông tin cá nhân -->
+          @case ('personal') {
+            <section class="flex flex-col gap-8">
+              <div>
+                <h2 class="mb-6 text-xl font-semibold">Liên kết mạng xã hội</h2>
+
+                <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+                  <lib-input
+                    label="Facebook"
+                    [value]="item.socialLinks.facebook ?? ''"
+                    [isView]="true"
+                  />
+                  <lib-input
+                    label="LinkedIn"
+                    [value]="item.socialLinks.linkedin ?? ''"
+                    [isView]="true"
+                  />
+                  <lib-input label="GitHub" [value]="item.socialLinks.github ?? ''" [isView]="true" />
+                  <lib-input
+                    label="Portfolio"
+                    [value]="item.socialLinks.portfolio ?? ''"
+                    [isView]="true"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <h2 class="mb-4 text-xl font-semibold">Thông tin thân nhân</h2>
+
+                @for (relative of item.relatives; track $index) {
+                  <div class="mb-4 rounded-xl border border-gray-200 p-4">
+                    <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+                      <lib-input label="Họ và tên" [value]="relative.fullName" [isView]="true" />
+                      <lib-input label="Quan hệ" [value]="relative.relationship" [isView]="true" />
+                      <lib-input
+                        label="Năm sinh"
+                        [value]="formatValue(relative.birthYear)"
+                        [isView]="true"
+                      />
+                      <lib-input
+                        label="Nghề nghiệp hiện tại"
+                        [value]="relative.currentOccupation ?? ''"
+                        [isView]="true"
+                      />
+                    </div>
+                  </div>
+                } @empty {
+                  <p class="text-sm text-gray-500">Chưa có thông tin thân nhân.</p>
+                }
+              </div>
+            </section>
+          }
+
+          <!-- Kỹ năng -->
+          @case ('skills') {
+            <section>
+              <h2 class="mb-6 text-xl font-semibold">Kỹ năng</h2>
+
+              <lib-hrm-table
+                [data]="skillRows()"
+                [columns]="skillColumns"
+              />
+            </section>
+          }
+
+          <!-- Chứng chỉ -->
+          @case ('certificates') {
+            <section>
+              <h2 class="mb-6 text-xl font-semibold">Chứng chỉ</h2>
+
+              <lib-hrm-table
+                [data]="item.certificates"
+                [columns]="certificateColumns"
+              />
+            </section>
+          }
+
+          <!-- Kinh nghiệm -->
+          @case ('experience') {
+            <section>
+              <h2 class="mb-6 text-xl font-semibold">Kinh nghiệm làm việc</h2>
+
+              <lib-hrm-table
+                [data]="item.workHistories"
+                [columns]="workHistoryColumns"
+              />
+            </section>
+          }
+
+          <!-- Học vấn -->
+          @case ('education') {
+            <section>
+              <h2 class="mb-6 text-xl font-semibold">Học vấn</h2>
+
+              <lib-hrm-table
+                [data]="item.degrees"
+                [columns]="degreeColumns"
+              />
+            </section>
+          }
+
+          @default {
+            <p class="text-sm text-gray-500">Không tìm thấy nội dung.</p>
+          }
+        }
+      } @else {
+        <p class="mb-0 py-3 text-gray-500">Chưa có thông tin ứng viên.</p>
+      }
+    </main>
+  }
+</div>

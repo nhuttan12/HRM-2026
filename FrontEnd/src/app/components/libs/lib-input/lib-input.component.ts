@@ -15,6 +15,7 @@ export class LibInputComponent {
   type = input('text');
   disabled = input(false);
   required = input(false);
+  isView = input(false);
 
   valueChange = output<string>();
 }

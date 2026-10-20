@@ -1,21 +1,35 @@
-<div class="lib-input">
+<div class="w-full">
   @if (label()) {
-    <label class="lib-input__label" [for]="inputId()">
-        {{ label() }}
-        @if (required()) {
-        <span aria-hidden="true">*</span>
-        }
+    <label class="mb-1.5 block text-sm font-medium text-gray-700" [for]="inputId()">
+      {{ label() }}
+
+      @if (required()) {
+        <span class="text-red-500" aria-hidden="true">*</span>
+      }
     </label>
   }
 
-  <input
-    pInputText
-    class="w-full"
-    [type]="type()"
-    [value]="value()"
-    [placeholder]="placeholder()"
-    [disabled]="disabled()"
-    [required]="required()"
-    (input)="valueChange.emit($any($event.target).value)"
-  />
+  <div class="group relative w-full">
+    <input
+      pInputText
+      [id]="inputId()"
+      class="w-full"
+      [class.cursor-not-allowed]="disabled()"
+      [class.pr-10]="disabled()"
+      [type]="type()"
+      [value]="value()"
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      [readonly]="isView()"
+      [required]="required()"
+      (input)="valueChange.emit($any($event.target).value)"
+    />
+
+    @if (disabled()) {
+      <i
+        class="pi pi-ban pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 opacity-0 transition-opacity group-hover:opacity-100"
+        aria-hidden="true"
+      ></i>
+    }
+  </div>
 </div>

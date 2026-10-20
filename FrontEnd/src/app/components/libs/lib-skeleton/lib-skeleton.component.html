@@ -1,13 +1,11 @@
 <div
-  class="lib-skeleton"
-  [class.lib-skeleton--text]="variant() === 'text'"
-  [class.lib-skeleton--rect]="variant() === 'rect'"
-  [class.lib-skeleton--circle]="variant() === 'circle'"
-  [class.lib-skeleton--animated]="animated()"
+  class="block bg-gray-200"
+  [class.animate-pulse]="animated()"
+  [class.rounded-sm]="variant() === 'text'"
+  [class.rounded-lg]="variant() === 'rect'"
+  [class.rounded-full]="variant() === 'circle'"
   [class]="customClass()"
   [style.width]="variant() === 'circle' ? height() : width()"
   [style.height]="height()"
-  [style.border-radius]="
-    variant() === 'circle' ? '50%' : borderRadius()
-  "
+  [style.border-radius]="borderRadius()"
 ></div>

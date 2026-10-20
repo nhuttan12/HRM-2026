@@ -1,64 +1,80 @@
-<div class="hrm-table-wrapper">
-  <table class="hrm-table">
-    <thead>
-      <tr>
-        @if (selectable()) {
-          <th class="hrm-table-checkbox-column">
-            <input
-              type="checkbox"
-              [checked]="isAllSelected()"
-              (click)="$event.stopPropagation()"
-              (change)="toggleAll()"
-            />
-          </th>
-        }
-
-        @for (column of columns(); track column.field) {
-          <th [style.width]="column.width">
-            {{ column.header }}
-          </th>
-        }
-      </tr>
-    </thead>
-
-    <tbody>
-      @for (row of data(); track trackByRow($index, row)) {
-        <tr
-          class="hrm-table-row"
-          (click)="onRowClick(row)"
-          (dblclick)="onRowDoubleClick(row)"
-        >
+<div class="block w-full">
+  <div
+    class="max-h-[32rem] w-full overflow-auto rounded-xl border border-gray-200 bg-white"
+  >
+    <table
+      class="w-full min-w-[800px] border-separate border-spacing-0 text-left text-sm text-gray-700"
+    >
+      <thead class="sticky top-0 z-10 bg-gray-50">
+        <tr>
           @if (selectable()) {
-            <td
-              class="hrm-table-checkbox-column"
-              (click)="$event.stopPropagation()"
+            <th
+              class="w-12 border-b border-gray-200 px-4 py-3 text-center"
             >
               <input
                 type="checkbox"
-                [checked]="isSelected(row)"
-                (change)="toggleRow(row)"
+                class="size-4 cursor-pointer accent-blue-600"
+                [checked]="isAllSelected()"
+                (click)="$event.stopPropagation()"
+                (change)="toggleAll()"
               />
-            </td>
+            </th>
           }
 
           @for (column of columns(); track column.field) {
-            <td>
-              {{ getCellValue(row, column.field) }}
-            </td>
+            <th
+              class="whitespace-nowrap border-b border-gray-200 px-4 py-3 font-semibold text-gray-700"
+              [style.width]="column.width"
+            >
+              {{ column.header }}
+            </th>
           }
         </tr>
-      }
+      </thead>
 
-      @if (data().length === 0) {
-        <tr>
-          <td
-            [attr.colspan]="columns().length + (selectable() ? 1 : 0)"
-            class="hrm-table-empty"
+      <tbody>
+        @for (row of data(); track trackByRow($index, row)) {
+          <tr
+            class="transition-colors hover:bg-gray-50"
+            [class.cursor-pointer]="true"
+            (click)="onRowClick(row)"
+            (dblclick)="onRowDoubleClick(row)"
           >
-            Không có dữ liệu.
-          </td>
-        </tr>
-      }
-    </tbody>
-  </table>
+            @if (selectable()) {
+              <td
+                class="w-12 border-b border-gray-200 px-4 py-3 text-center"
+                (click)="$event.stopPropagation()"
+              >
+                <input
+                  type="checkbox"
+                  class="size-4 cursor-pointer accent-blue-600"
+                  [checked]="isSelected(row)"
+                  (change)="toggleRow(row)"
+                />
+              </td>
+            }
+
+            @for (column of columns(); track column.field) {
+              <td
+                class="whitespace-nowrap border-b border-gray-200 px-4 py-3 last:border-b-0"
+              >
+                {{ getCellValue(row, column.field) }}
+              </td>
+            }
+          </tr>
+        }
+
+        @if (data().length === 0) {
+          <tr>
+            <td
+              [attr.colspan]="columns().length + (selectable() ? 1 : 0)"
+              class="px-4 py-12 text-center text-gray-500"
+            >
+              Không có dữ liệu.
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>

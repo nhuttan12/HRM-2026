@@ -61,7 +61,10 @@ export class CandidateProfilePageComponent implements AfterViewInit {
     if (code) {
       this.canvasMode.set('detail');
       this.selectedCandidateCode.set(code);
-      this.canvas().open();
+
+      if (!this.canvas().opened()) {
+        this.canvas().open();
+      }
     } else {
       if (this.canvas().opened()) {
         this.canvas().close();
@@ -69,14 +72,6 @@ export class CandidateProfilePageComponent implements AfterViewInit {
     }
 
     this.openingDetail.set(false);
-  }
-
-  private async navigateToList(): Promise<void> {
-    if (!this.isDetailUrl()) {
-      return;
-    }
-
-    await this.router.navigate(['/candidate-profile']);
   }
 
   async onCandidateClick(candidate: Candidate): Promise<void> {
@@ -87,7 +82,12 @@ export class CandidateProfilePageComponent implements AfterViewInit {
   }
 
   async onCanvasClosed(): Promise<void> {
-    await this.navigateToList();
+    await this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { code: null },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
   }
 
   onSearch(keyword: string): void {

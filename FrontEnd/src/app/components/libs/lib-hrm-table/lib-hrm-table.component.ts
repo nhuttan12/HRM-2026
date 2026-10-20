@@ -38,38 +38,30 @@ export class LibHrmTableComponent<T> {
 
   isAllSelected(): boolean {
     const data = this.data();
-    const selectedData = this.selectedData();
+    const selected = this.selectedData();
 
-    return (
-      data.length > 0 &&
-      data.every((row) => selectedData.includes(row))
-    );
+    return data.length > 0 && data.every((row) => selected.includes(row));
   }
 
   toggleRow(row: T): void {
-    const selected = this.isSelected(row);
-    const currentSelection = this.selectedData();
+    const current = this.selectedData();
 
-    const updatedSelection = selected
-      ? currentSelection.filter((item) => item !== row)
-      : [...currentSelection, row];
+    const updated = this.isSelected(row)
+      ? current.filter((item) => item !== row)
+      : [...current, row];
 
-    this.updateSelection(updatedSelection);
+    this.updateSelection(updated);
   }
 
   toggleAll(): void {
     const data = this.data();
-    const currentSelection = this.selectedData();
-    const allSelected = this.isAllSelected();
+    const current = this.selectedData();
 
-    const updatedSelection = allSelected
-      ? currentSelection.filter((item) => !data.includes(item))
-      : [
-          ...currentSelection,
-          ...data.filter((row) => !currentSelection.includes(row)),
-        ];
+    const updated = this.isAllSelected()
+      ? current.filter((item) => !data.includes(item))
+      : [...current, ...data.filter((row) => !current.includes(row))];
 
-    this.updateSelection(updatedSelection);
+    this.updateSelection(updated);
   }
 
   private updateSelection(selection: T[]): void {
@@ -81,7 +73,7 @@ export class LibHrmTableComponent<T> {
     return row[field as keyof T];
   }
 
-  trackByRow(index: number, row: T): T {
+  trackByRow(_index: number, row: T): T {
     return row;
   }
 }

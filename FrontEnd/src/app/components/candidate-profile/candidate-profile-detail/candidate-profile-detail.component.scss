@@ -1,41 +1,8 @@
-.candidate-detail {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-
-  &__item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-
-    span {
-      color: var(--text-color-secondary);
-      font-size: 0.875rem;
-    }
-
-    strong {
-      font-weight: 500;
-      overflow-wrap: anywhere;
-    }
-  }
-}
-
-.candidate-detail__item {
-  display: grid;
-  grid-template-columns: 140px minmax(0, 1fr);
-  align-items: center;
-  gap: 1rem;
-}
-
 .candidate-detail__label {
   color: var(--text-color-secondary);
 }
 
 .candidate-detail__value {
+  font-weight: 500;
   overflow-wrap: anywhere;
-}
-
-.candidate-detail__error,
-.candidate-detail__empty {
-  padding: 1rem 0;
 }

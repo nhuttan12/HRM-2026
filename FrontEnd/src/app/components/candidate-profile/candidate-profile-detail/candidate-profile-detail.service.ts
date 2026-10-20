@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
-import { CandidateProfileDetail } from './candidate-profile-detail.data';
+import { CandidateProfileDetail } from './candidate-profile-detail.model';
 
 export const mockCandidateDetails: CandidateProfileDetail[] = [
   {
@@ -87,7 +87,13 @@ export const mockCandidateDetails: CandidateProfileDetail[] = [
       portfolio: 'https://portfolio.example.com',
     },
 
-    skills: ['Angular', 'TypeScript', 'RxJS', 'HTML', 'SCSS'],
+    skills: [
+      { skill: 'Angular', yearsOfExperience: 3, companyName: 'ABC Technology' },
+      { skill: 'TypeScript', yearsOfExperience: 4, companyName: 'ABC Technology' },
+      { skill: 'RxJS', yearsOfExperience: 2, companyName: 'ABC Technology' },
+      { skill: 'HTML', yearsOfExperience: 4, companyName: 'XYZ Solutions' },
+      { skill: 'SCSS', yearsOfExperience: 3, companyName: 'XYZ Solutions' },
+    ],
     cvUrl: 'https://example.com/cv/UV001.pdf',
     note: 'Có kinh nghiệm phát triển ứng dụng Angular.',
   },
@@ -162,7 +168,12 @@ export const mockCandidateDetails: CandidateProfileDetail[] = [
       portfolio: null,
     },
 
-    skills: ['Node.js', 'NestJS', 'PostgreSQL', 'Docker'],
+    skills: [
+      { skill: 'Node.js', yearsOfExperience: 4, companyName: 'Tech Solutions' },
+      { skill: 'NestJS', yearsOfExperience: 3, companyName: 'Tech Solutions' },
+      { skill: 'PostgreSQL', yearsOfExperience: 3, companyName: 'Data Systems' },
+      { skill: 'Docker', yearsOfExperience: 2, companyName: 'Data Systems' },
+    ],
     cvUrl: 'https://example.com/cv/UV002.pdf',
     note: 'Có kinh nghiệm thiết kế REST API và microservices.',
   },
