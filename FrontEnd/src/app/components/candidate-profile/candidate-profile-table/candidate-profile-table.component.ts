@@ -8,7 +8,6 @@ import { Candidate, hrmTableColumns, mockingCandidates } from './candidate-profi
   standalone: true,
   imports: [LibHrmTableComponent, LibSkeletonComponent],
   templateUrl: './candidate-profile-table.component.html',
-  styleUrl: './candidate-profile-table.component.scss',
 })
 export class CandidateProfileTableComponent {
   loading = signal(true);

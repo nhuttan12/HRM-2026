@@ -6,7 +6,6 @@ import { ButtonModule } from 'primeng/button';
   standalone: true,
   imports: [ButtonModule],
   templateUrl: './lib-command-button.component.html',
-  styleUrl: './lib-command-button.component.scss',
 })
 export class LibCommandButtonComponent {
   label = input('');

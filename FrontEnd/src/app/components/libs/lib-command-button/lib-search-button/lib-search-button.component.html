@@ -1,12 +1,11 @@
-<div class="search-wrapper">
-  <div class="search-container">
-    <input
-      type="text"
+
+<div class="w-full rounded-lg border border-gray-300 bg-white p-1">
+  <div class="flex w-full items-center gap-2">
+    <lib-input
+      class="min-w-0 flex-1"
       [value]="keyword()"
-      (input)="onKeywordChange($event)"
-      (keyup.enter)="onSearch()"
       [placeholder]="placeholder()"
-      class="search-input"
+      (valueChange)="keywordChange.emit($event)"
     />
 
     <lib-command-button

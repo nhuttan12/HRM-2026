@@ -1,21 +1,26 @@
 <div
-  class="candidate-profile-header flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+  class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
 >
   <!-- Tiêu đề -->
   <div>
-    <h2 class="text-xl font-semibold text-surface-900">
-      Hồ sơ ứng viên
-    </h2>
+    <lib-text
+      tag="h2"
+      text="Hồ sơ ứng viên"
+      className="text-xl font-semibold text-surface-900"
+    />
 
-    <p class="mt-1 text-sm text-surface-500">
-      Quản lý và tìm kiếm hồ sơ ứng viên
-    </p>
+    <lib-text
+      tag="p"
+      text="Quản lý và tìm kiếm hồ sơ ứng viên"
+      className="mt-1 text-sm text-surface-500"
+    />
   </div>
 
   <!-- Thao tác -->
   <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
     <!-- Tìm kiếm -->
     <lib-search-button
+      class="w-full sm:w-auto"
       [keyword]="searchKeyword()"
       (keywordChange)="searchKeyword.set($event)"
       placeholder="Tìm kiếm ứng viên..."
@@ -23,8 +28,9 @@
     />
 
     <!-- Thêm ứng viên -->
-    <lib-add-button
-      (addAction)="onAdd()"
-    />
+    <lib-add-button (addAction)="onAdd()" />
+
+    <!-- Xóa ứng viên -->
+    <lib-remove-button (clicked)="onRemove()" />
   </div>
 </div>

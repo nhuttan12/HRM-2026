@@ -12,7 +12,6 @@ export interface HrmTableColumn<T> {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './lib-hrm-table.component.html',
-  styleUrl: './lib-hrm-table.component.scss',
 })
 export class LibHrmTableComponent<T> {
   data = input<T[]>([]);

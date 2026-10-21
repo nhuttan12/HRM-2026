@@ -8,7 +8,6 @@ import { MenuItem } from 'primeng/api';
   standalone: true,
   imports: [RouterModule, PanelMenuModule],
   templateUrl: './lib-sidebar.component.html',
-  styleUrl: './lib-sidebar.component.scss',
 })
 export class LibSidebarComponent {
   readonly menuItems: MenuItem[] = [

@@ -5,7 +5,6 @@ import { LibCloseButtonComponent } from '../lib-command-button/lib-close-button/
   selector: 'lib-canvas',
   standalone: true,
   templateUrl: './lib-canvas.component.html',
-  styleUrl: './lib-canvas.component.scss',
   imports: [LibCloseButtonComponent],
 })
 export class LibCanvasComponent {

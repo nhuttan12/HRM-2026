@@ -1,13 +1,14 @@
-<div class="candidate-profile-table">
-  @if (loading()) {
-    <div class="candidate-profile-table__skeleton">
 
+<div class="block w-full">
+  @if (loading()) {
+    <div
+      class="w-full overflow-x-auto rounded-xl border border-surface-200 bg-surface-0"
+    >
       <!-- Header -->
-      <div class="candidate-profile-table__skeleton-header">
-        <lib-skeleton
-          width="40px"
-          height="20px"
-        />
+      <div
+        class="grid min-w-[1190px] grid-cols-[40px_150px_220px_260px_160px_220px_140px] items-center gap-4 border-b border-surface-200 bg-surface-50 px-4 py-3.5"
+      >
+        <lib-skeleton width="40px" height="20px" />
 
         @for (column of columns; track column.field) {
           <lib-skeleton
@@ -19,13 +20,11 @@
 
       <!-- Rows -->
       @for (row of skeletonRows; track $index) {
-        <div class="candidate-profile-table__skeleton-row">
-
+        <div
+          class="grid min-w-[1190px] grid-cols-[40px_150px_220px_260px_160px_220px_140px] items-center gap-4 border-b border-surface-200 px-4 py-3.5 last:border-b-0"
+        >
           <!-- Checkbox -->
-          <lib-skeleton
-            width="40px"
-            height="20px"
-          />
+          <lib-skeleton width="40px" height="20px" />
 
           @for (column of columns; track column.field) {
             <lib-skeleton
@@ -33,7 +32,6 @@
               height="20px"
             />
           }
-
         </div>
       }
     </div>

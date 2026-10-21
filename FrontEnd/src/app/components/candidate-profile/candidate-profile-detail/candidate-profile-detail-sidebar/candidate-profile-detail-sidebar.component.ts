@@ -6,7 +6,6 @@ import { candidateProfileSidebarItems } from './candidate-profile-detail-sidebar
   selector: 'app-candidate-profile-detail-sidebar',
   standalone: true,
   templateUrl: './candidate-profile-detail-sidebar.component.html',
-  styleUrl: './candidate-profile-detail-sidebar.component.scss',
 })
 export class CandidateProfileDetailSidebarComponent {
   readonly sectionChange = output<string>();

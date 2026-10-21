@@ -1,7 +1,10 @@
 <button
   type="button"
-  class="canvas-backdrop"
-  [class.canvas-backdrop--visible]="opened()"
+  class="fixed inset-0 z-[1000] h-full w-full cursor-default border-0 bg-black/[0.35] p-0 opacity-0 invisible pointer-events-none transition-[opacity,visibility] duration-300 ease-in-out [transition-delay:0.3s]"
+  [class.opacity-100]="opened()"
+  [class.visible]="opened()"
+  [class.pointer-events-auto]="opened()"
+  [class.!transition-delay-0]="opened()"
   [attr.aria-label]="opened() ? 'Đóng cửa sổ' : null"
   [attr.aria-hidden]="!opened()"
   [attr.tabindex]="opened() ? 0 : -1"
@@ -9,20 +12,32 @@
 ></button>
 
 <aside
-  class="canvas-panel"
-  [class.canvas-panel--open]="opened()"
-  [attr.aria-hidden]="!opened()"
-  [attr.inert]="!opened() ? '' : null"
+  class="fixed inset-0 z-[1001] flex h-full max-h-[100vh] max-h-[100dvh] w-full max-w-full flex-col bg-white shadow-[-8px_0_32px_rgb(0_0_0_/_12%)] invisible pointer-events-none translate-x-full transition-[transform,visibility] duration-[450ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] [transition-delay:450ms] will-change-transform"
+  [class.!visible]="opened()"
+  [class.!pointer-events-auto]="opened()"
+  [class.translate-x-0]="opened()"
+  [class.!transition-delay-0]="opened()"
   role="dialog"
   aria-modal="true"
+  [attr.aria-hidden]="!opened()"
+  [attr.inert]="!opened() ? '' : null"
   [attr.aria-label]="title()"
 >
-  <header class="canvas-panel__header">
-    <h2>{{ title() }}</h2>
-    <lib-close-button size="large" (closed)="onClose()"/>
+  <!-- Header -->
+  <header
+    class="flex min-h-16 shrink-0 items-center justify-between border-b border-gray-200 px-6"
+  >
+    <h2 class="m-0 text-lg font-semibold">
+      {{ title() }}
+    </h2>
+
+    <lib-close-button size="large" (closed)="onClose()" />
   </header>
-  
-  <section class="canvas-panel__body">
+
+  <!-- Body -->
+  <section
+    class="min-h-0 flex-1 overflow-y-auto overscroll-contain p-6"
+  >
     <ng-content />
   </section>
 </aside>

@@ -47,7 +47,32 @@
 
     <p-panelmenu
       [model]="menuItems"
-      styleClass="hrm-sidebar-menu"
+      styleClass="
+        w-full border-0 bg-transparent
+        [&_.p-panelmenu-panel]:mb-1.5
+        [&_.p-panelmenu-panel]:border-0
+        [&_.p-panelmenu-panel]:bg-transparent
+        [&_.p-menuitem-content]:my-[3px]
+        [&_.p-menuitem-content]:rounded-[10px]
+        [&_.p-menuitem-content]:bg-transparent
+        [&_.p-menuitem-content]:transition-[background-color,transform,box-shadow]
+        [&_.p-menuitem-content]:duration-[180ms]
+        [&_.p-menuitem-content:hover]:bg-surface-100
+        [&_.p-menuitem-content:hover]:translate-x-[3px]
+        [&_.p-menuitem-content:hover]:shadow-[0_2px_6px_rgb(0_0_0_/_5%)]
+        [&_.p-menuitem-link]:min-h-11
+        [&_.p-menuitem-link]:rounded-[10px]
+        [&_.p-menuitem-link]:px-[13px]
+        [&_.p-menuitem-text]:text-sm
+        [&_.p-menuitem-text]:font-medium
+        [&_.p-menuitem-text]:text-surface-700
+        [&_.p-menuitem-icon]:mr-[11px]
+        [&_.p-menuitem-icon]:w-5
+        [&_.p-menuitem-icon]:text-surface-500
+        [&_.p-menuitem-icon]:transition-[color,transform]
+        [&_.p-menuitem-icon]:duration-[180ms]
+        [&_.p-menuitem-content:hover_.p-menuitem-icon]:scale-105
+      "
     />
   </nav>
 

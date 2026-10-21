@@ -6,7 +6,6 @@ export type SkeletonVariant = 'text' | 'rect' | 'circle';
   selector: 'lib-skeleton',
   standalone: true,
   templateUrl: './lib-skeleton.component.html',
-  styleUrl: './lib-skeleton.component.scss',
 })
 export class LibSkeletonComponent {
   width = input('100%');

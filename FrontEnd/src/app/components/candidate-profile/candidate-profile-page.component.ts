@@ -18,7 +18,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     CandidateProfileDetailComponent
 ],
   templateUrl: './candidate-profile-page.component.html',
-  styleUrl: './candidate-profile-page.component.scss',
 })
 export class CandidateProfilePageComponent implements AfterViewInit {
   readonly canvas = viewChild.required(LibCanvasComponent);

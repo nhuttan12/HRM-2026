@@ -11,7 +11,6 @@ import { CandidateProfileDetail, CandidateSkillRow } from './candidate-profile-d
   selector: 'app-candidate-profile-detail',
   standalone: true,
   templateUrl: './candidate-profile-detail.component.html',
-  styleUrl: './candidate-profile-detail.component.scss',
   imports: [
     LibSkeletonComponent,
     CandidateProfileDetailSidebarComponent,

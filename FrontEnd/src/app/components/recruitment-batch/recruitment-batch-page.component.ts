@@ -9,7 +9,6 @@ import { columnsConfig, RecruitmentBatch } from './recruitment-batch-header/recr
   standalone: true,
   imports: [RecruitmentBatchHeaderComponent, RecruitmentBatchTableComponent],
   templateUrl: './recruitment-batch-page.component.html',
-  styleUrl: './recruitment-batch-page.component.scss',
 })
 export class RecruitmentBatchPageComponent {
   recruitmentBatches = signal<RecruitmentBatch[]>(recruitmentBatchesData);

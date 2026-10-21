@@ -1,12 +1,12 @@
 import { Component, input, output } from '@angular/core';
 import { LibCommandButtonComponent } from '../lib-command-button.component';
+import { LibInputComponent } from '../../lib-input/lib-input.component';
 
 @Component({
   selector: 'lib-search-button',
   standalone: true,
-  imports: [LibCommandButtonComponent],
+  imports: [LibCommandButtonComponent, LibInputComponent],
   templateUrl: './lib-search-button.component.html',
-  styleUrl: './lib-search-button.component.scss'
 })
 export class LibSearchButtonComponent {
   placeholder = input('Tìm kiếm...');

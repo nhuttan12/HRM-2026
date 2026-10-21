@@ -11,7 +11,6 @@ import { RecruitmentBatch } from '../recruitment-batch-header/recruitment-batch-
     LibSkeletonComponent,
   ],
   templateUrl: './recruitment-batch-table.component.html',
-  styleUrl: './recruitment-batch-table.component.scss',
 })
 export class RecruitmentBatchTableComponent {
   data = input<RecruitmentBatch[]>([]);
