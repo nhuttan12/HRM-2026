@@ -84,7 +84,15 @@
           <!-- Tổng quan -->
           @case ('overview') {
             <section>
-              <h2 class="mb-6 text-xl font-semibold">Tổng quan</h2>
+              <div class="mb-6 flex items-center justify-between gap-4">
+                <lib-text
+                  tag="h2"
+                  text="Tổng quan"
+                  className="text-xl font-semibold"
+                />
+
+                <lib-edit-button (editAction)="onEditSection('overview')" />
+              </div>
 
               <div class="grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2">
                 @for (field of fields; track field.key) {
@@ -109,7 +117,15 @@
           @case ('personal') {
             <section class="flex flex-col gap-8">
               <div>
-                <h2 class="mb-6 text-xl font-semibold">Liên kết mạng xã hội</h2>
+                <div class="mb-6 flex items-center justify-between gap-4">
+                  <lib-text
+                    tag="h2"
+                    text="Liên kết mạng xã hội"
+                    className="text-xl font-semibold"
+                  />
+
+                  <lib-edit-button (editAction)="onEditSection('socialLinks')" />
+                </div>
 
                 <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
                   <lib-input
@@ -132,7 +148,15 @@
               </div>
 
               <div>
-                <h2 class="mb-4 text-xl font-semibold">Thông tin thân nhân</h2>
+                <div class="mb-4 flex items-center justify-between gap-4">
+                  <lib-text
+                    tag="h2"
+                    text="Thông tin thân nhân"
+                    className="text-xl font-semibold"
+                  />
+
+                  <lib-edit-button (editAction)="onEditSection('relatives')" />
+                </div>
 
                 @for (relative of item.relatives; track $index) {
                   <div class="mb-4 rounded-xl border border-gray-200 p-4">
@@ -152,7 +176,11 @@
                     </div>
                   </div>
                 } @empty {
-                  <p class="text-sm text-gray-500">Chưa có thông tin thân nhân.</p>
+                  <lib-text
+                    tag="p"
+                    text="Chưa có thông tin thân nhân."
+                    className="text-sm text-gray-500"
+                  />
                 }
               </div>
             </section>
@@ -161,7 +189,18 @@
           <!-- Kỹ năng -->
           @case ('skills') {
             <section>
-              <h2 class="mb-6 text-xl font-semibold">Kỹ năng</h2>
+              <div class="mb-6 flex items-center justify-between gap-4">
+                <lib-text
+                  tag="h2"
+                  text="Kỹ năng"
+                  className="text-xl font-semibold"
+                />
+
+                <div class="flex shrink-0 items-center gap-2">
+                  <lib-add-button (addAction)="onAddSectionItem('skills')" />
+                  <lib-remove-button (clicked)="onRemoveSectionItem('skills')" />
+                </div>
+              </div>
 
               <lib-hrm-table
                 [data]="skillRows()"
@@ -173,7 +212,18 @@
           <!-- Chứng chỉ -->
           @case ('certificates') {
             <section>
-              <h2 class="mb-6 text-xl font-semibold">Chứng chỉ</h2>
+              <div class="mb-6 flex items-center justify-between gap-4">
+                <lib-text
+                  tag="h2"
+                  text="Chứng chỉ"
+                  className="text-xl font-semibold"
+                />
+
+                <div class="flex shrink-0 items-center gap-2">
+                  <lib-add-button (addAction)="onAddSectionItem('certificates')" />
+                  <lib-remove-button (clicked)="onRemoveSectionItem('certificates')" />
+                </div>
+              </div>
 
               <lib-hrm-table
                 [data]="item.certificates"
@@ -185,7 +235,18 @@
           <!-- Kinh nghiệm -->
           @case ('experience') {
             <section>
-              <h2 class="mb-6 text-xl font-semibold">Kinh nghiệm làm việc</h2>
+              <div class="mb-6 flex items-center justify-between gap-4">
+                <lib-text
+                  tag="h2"
+                  text="Kinh nghiệm làm việc"
+                  className="text-xl font-semibold"
+                />
+
+                <div class="flex shrink-0 items-center gap-2">
+                  <lib-add-button (addAction)="onAddSectionItem('workHistories')" />
+                  <lib-remove-button (clicked)="onRemoveSectionItem('workHistories')" />
+                </div>
+              </div>
 
               <lib-hrm-table
                 [data]="item.workHistories"
@@ -197,7 +258,18 @@
           <!-- Học vấn -->
           @case ('education') {
             <section>
-              <h2 class="mb-6 text-xl font-semibold">Học vấn</h2>
+              <div class="mb-6 flex items-center justify-between gap-4">
+                <lib-text
+                  tag="h2"
+                  text="Học vấn"
+                  className="text-xl font-semibold"
+                />
+
+                <div class="flex shrink-0 items-center gap-2">
+                  <lib-add-button (addAction)="onAddSectionItem('degrees')" />
+                  <lib-remove-button (clicked)="onRemoveSectionItem('degrees')" />
+                </div>
+              </div>
 
               <lib-hrm-table
                 [data]="item.degrees"
@@ -207,11 +279,19 @@
           }
 
           @default {
-            <p class="text-sm text-gray-500">Không tìm thấy nội dung.</p>
+            <lib-text
+              tag="p"
+              text="Không tìm thấy nội dung."
+              className="text-sm text-gray-500"
+            />
           }
         }
       } @else {
-        <p class="mb-0 py-3 text-gray-500">Chưa có thông tin ứng viên.</p>
+        <lib-text
+          tag="p"
+          text="Chưa có thông tin ứng viên."
+          className="mb-0 py-3 text-gray-500"
+        />
       }
     </main>
   }

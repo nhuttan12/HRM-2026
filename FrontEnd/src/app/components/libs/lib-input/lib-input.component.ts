@@ -1,10 +1,11 @@
 import { Component, input, output } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
+import { LibTextComponent } from '../lib-text/lib-text.component';
 
 @Component({
   selector: 'lib-input',
   standalone: true,
-  imports: [InputTextModule],
+  imports: [InputTextModule, LibTextComponent],
   templateUrl: './lib-input.component.html',
 })
 export class LibInputComponent {

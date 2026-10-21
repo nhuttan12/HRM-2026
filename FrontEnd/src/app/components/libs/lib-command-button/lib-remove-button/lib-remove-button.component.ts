@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { LibCommandButtonComponent } from '../lib-command-button.component';
 
 @Component({
@@ -7,13 +7,17 @@ import { LibCommandButtonComponent } from '../lib-command-button.component';
   imports: [LibCommandButtonComponent],
   templateUrl: './lib-remove-button.component.html',
 })
-export class LibRemoveButtonComponent extends LibCommandButtonComponent {
-  override readonly label = input('Xóa');
-  override readonly icon = input('pi pi-trash');
+export class LibRemoveButtonComponent {
+  readonly label = input('Xóa');
+  readonly icon = input('pi pi-trash');
 
-  override readonly severity = input<
+  readonly severity = input<
     'secondary' | 'success' | 'info' | 'warn' | 'danger' | 'contrast' | 'help' | undefined
   >('danger');
 
-  override readonly size = input<'small' | 'large' | undefined>('small');
+  readonly size = input<'small' | 'large' | undefined>('small');
+  readonly disabled = input(false);
+  readonly loading = input(false);
+
+  readonly clicked = output<void>();
 }

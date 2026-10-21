@@ -5,7 +5,11 @@ import { LibSkeletonComponent } from '../../libs/lib-skeleton/lib-skeleton.compo
 import { CandidateProfileDetailSidebarComponent } from './candidate-profile-detail-sidebar/candidate-profile-detail-sidebar.component';
 import { CandidateDetailService } from './candidate-profile-detail.service';
 import { candidateCertificateColumns, candidateDegreeColumns, candidateProfileFields, candidateSkillColumns, candidateWorkHistoryColumns } from './candidate-profile-detail.config';
-import { CandidateProfileDetail, CandidateSkillRow } from './candidate-profile-detail.model';
+import { CandidateEditableSection, CandidateListSection, CandidateProfileDetail, CandidateProfileSection, CandidateSkillRow } from './candidate-profile-detail.model';
+import { LibEditButtonComponent } from '../../libs/lib-command-button/lib-edit-button/lib-edit-button.component';
+import { LibAddButtonComponent } from '../../libs/lib-command-button/lib-add-button/lib-add-button.component';
+import { LibRemoveButtonComponent } from '../../libs/lib-command-button/lib-remove-button/lib-remove-button.component';
+import { LibTextComponent } from '../../libs/lib-text/lib-text.component';
 
 @Component({
   selector: 'app-candidate-profile-detail',
@@ -16,6 +20,10 @@ import { CandidateProfileDetail, CandidateSkillRow } from './candidate-profile-d
     CandidateProfileDetailSidebarComponent,
     LibInputComponent,
     LibHrmTableComponent,
+    LibEditButtonComponent,
+    LibAddButtonComponent,
+    LibRemoveButtonComponent,
+    LibTextComponent,
   ],
 })
 export class CandidateProfileDetailComponent {
@@ -25,7 +33,7 @@ export class CandidateProfileDetailComponent {
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
   readonly fields = candidateProfileFields;
-  readonly activeSection = signal('overview');
+  readonly activeSection = signal <CandidateProfileSection>('overview');
 
   readonly skillColumns = candidateSkillColumns;
   readonly workHistoryColumns = candidateWorkHistoryColumns;
@@ -76,7 +84,23 @@ export class CandidateProfileDetailComponent {
     return String(value);
   }
 
-  onSectionChange(section: string): void {
+  onSectionChange(section: CandidateProfileSection): void {
     this.activeSection.set(section);
+  }
+
+  onEditSection(section: CandidateEditableSection): void {
+    console.log('Edit section:', section);
+  }
+
+  onAddSectionItem(section: CandidateListSection): void {
+    console.log('Thêm dữ liệu vào section:', section);
+
+    // TODO: Mở form thêm dữ liệu tương ứng.
+  }
+
+  onRemoveSectionItem(section: CandidateListSection): void {
+    console.log('Xóa dữ liệu trong section:', section);
+
+    // TODO: Xử lý chọn dòng và xác nhận xóa.
   }
 }

@@ -1,11 +1,12 @@
 import { Component, input, output, signal } from '@angular/core';
 import { LibCloseButtonComponent } from '../lib-command-button/lib-close-button/lib-close-button.component';
+import { LibTextComponent } from '../lib-text/lib-text.component';
 
 @Component({
   selector: 'lib-canvas',
   standalone: true,
   templateUrl: './lib-canvas.component.html',
-  imports: [LibCloseButtonComponent],
+  imports: [LibCloseButtonComponent, LibTextComponent],
 })
 export class LibCanvasComponent {
   readonly title = input('Thông tin');

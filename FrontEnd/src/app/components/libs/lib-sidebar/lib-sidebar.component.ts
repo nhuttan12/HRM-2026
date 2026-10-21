@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { MenuItem } from 'primeng/api';
+import { LibTextComponent } from '../lib-text/lib-text.component';
 
 @Component({
   selector: 'lib-sidebar',
   standalone: true,
-  imports: [RouterModule, PanelMenuModule],
+  imports: [RouterModule, PanelMenuModule, LibTextComponent],
   templateUrl: './lib-sidebar.component.html',
 })
 export class LibSidebarComponent {

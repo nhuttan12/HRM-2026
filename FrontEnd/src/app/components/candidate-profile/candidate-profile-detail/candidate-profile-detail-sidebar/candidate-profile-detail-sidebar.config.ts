@@ -1,4 +1,10 @@
-import { CandidateProfileSidebarItem } from "./candidate-profile-detail-sidebar.model";
+import { CandidateProfileSection } from "../candidate-profile-detail.model";
+
+export interface CandidateProfileSidebarItem {
+  id: CandidateProfileSection;
+  label: string;
+  icon: string;
+}
 
 export const candidateProfileSidebarItems: CandidateProfileSidebarItem[] = [
   { label: 'Tổng quan', icon: 'pi pi-user', id: 'overview' },

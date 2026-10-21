@@ -76,6 +76,11 @@ export interface CandidateProfileDetail {
   expectedSalary: number | null;
   noticePeriod: string | null;
 
+  // Thông tin bổ sung
+  skills: CandidateSkillRow[];
+  cvUrl: string | null;
+  note: string | null;
+
   // Lịch sử công việc
   workHistories: CandidateWorkHistory[];
 
@@ -90,9 +95,11 @@ export interface CandidateProfileDetail {
 
   // Liên kết mạng xã hội
   socialLinks: SocicalLink;
-
-  // Thông tin bổ sung
-  skills: CandidateSkillRow[];
-  cvUrl: string | null;
-  note: string | null;
 }
+
+export type CandidateProfileSection =
+  'overview' | 'personal' | 'skills' | 'certificates' | 'experience' | 'education';
+
+export type CandidateEditableSection = 'overview' | 'socialLinks' | 'relatives';
+
+export type CandidateListSection = 'skills' | 'certificates' | 'workHistories' | 'degrees';
