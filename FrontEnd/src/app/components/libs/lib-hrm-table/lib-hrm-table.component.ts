@@ -17,11 +17,13 @@ export class LibHrmTableComponent<T> {
   data = input<T[]>([]);
   columns = input<HrmTableColumn<T>[]>([]);
   selectable = input(false);
-  
+
   selectedData = model<T[]>([]);
   selectionChange = output<T[]>();
   readonly rowClick = output<T>();
   readonly rowDoubleClick = output<T>();
+  readonly showEditAction = input(false);
+  readonly editRow = output<T>();
 
   onRowClick(row: T): void {
     this.rowClick.emit(row);
@@ -74,5 +76,9 @@ export class LibHrmTableComponent<T> {
 
   trackByRow(_index: number, row: T): T {
     return row;
+  }
+
+  onEditRow(row: T): void {
+    this.editRow.emit(row);
   }
 }

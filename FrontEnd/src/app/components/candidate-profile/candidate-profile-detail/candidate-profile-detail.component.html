@@ -105,7 +105,7 @@
                     <lib-input
                       [label]="field.label"
                       [value]="formatValue(item[field.key])"
-                      [isView]="true"
+                      [isView]="!isSectionEditing('overview')"
                     />
                   </div>
                 }
@@ -131,18 +131,25 @@
                   <lib-input
                     label="Facebook"
                     [value]="item.socialLinks.facebook ?? ''"
-                    [isView]="true"
+                    [isView]="!isSectionEditing('socialLinks')"
                   />
+
                   <lib-input
                     label="LinkedIn"
                     [value]="item.socialLinks.linkedin ?? ''"
-                    [isView]="true"
+                    [isView]="!isSectionEditing('socialLinks')"
                   />
-                  <lib-input label="GitHub" [value]="item.socialLinks.github ?? ''" [isView]="true" />
+
+                  <lib-input
+                    label="GitHub"
+                    [value]="item.socialLinks.github ?? ''"
+                    [isView]="!isSectionEditing('socialLinks')"
+                  />
+
                   <lib-input
                     label="Portfolio"
                     [value]="item.socialLinks.portfolio ?? ''"
-                    [isView]="true"
+                    [isView]="!isSectionEditing('socialLinks')"
                   />
                 </div>
               </div>
@@ -161,17 +168,28 @@
                 @for (relative of item.relatives; track $index) {
                   <div class="mb-4 rounded-xl border border-gray-200 p-4">
                     <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-                      <lib-input label="Họ và tên" [value]="relative.fullName" [isView]="true" />
-                      <lib-input label="Quan hệ" [value]="relative.relationship" [isView]="true" />
+                      <lib-input
+                        label="Họ và tên"
+                        [value]="relative.fullName"
+                        [isView]="!isSectionEditing('relatives')"
+                      />
+
+                      <lib-input
+                        label="Quan hệ"
+                        [value]="relative.relationship"
+                        [isView]="!isSectionEditing('relatives')"
+                      />
+
                       <lib-input
                         label="Năm sinh"
                         [value]="formatValue(relative.birthYear)"
-                        [isView]="true"
+                        [isView]="!isSectionEditing('relatives')"
                       />
+
                       <lib-input
                         label="Nghề nghiệp hiện tại"
                         [value]="relative.currentOccupation ?? ''"
-                        [isView]="true"
+                        [isView]="!isSectionEditing('relatives')"
                       />
                     </div>
                   </div>
@@ -205,6 +223,10 @@
               <lib-hrm-table
                 [data]="skillRows()"
                 [columns]="skillColumns"
+                [selectable]="true"
+                [showEditAction]="true"
+                (selectionChange)="onSelectionChange('skills', $event)"
+                (editRow)="onEditRow('skills', $event)"
               />
             </section>
           }
@@ -228,6 +250,10 @@
               <lib-hrm-table
                 [data]="item.certificates"
                 [columns]="certificateColumns"
+                [selectable]="true"
+                [showEditAction]="true"
+                (selectionChange)="onSelectionChange('certificates', $event)"
+                (editRow)="onEditRow('certificates', $event)"
               />
             </section>
           }
@@ -251,6 +277,10 @@
               <lib-hrm-table
                 [data]="item.workHistories"
                 [columns]="workHistoryColumns"
+                [selectable]="true"
+                [showEditAction]="true"
+                (selectionChange)="onSelectionChange('workHistories', $event)"
+                (editRow)="onEditRow('workHistories', $event)"
               />
             </section>
           }
@@ -274,6 +304,10 @@
               <lib-hrm-table
                 [data]="item.degrees"
                 [columns]="degreeColumns"
+                [selectable]="true"
+                [showEditAction]="true"
+                (selectionChange)="onSelectionChange('degrees', $event)"
+                (editRow)="onEditRow('degrees', $event)"
               />
             </section>
           }
@@ -286,6 +320,14 @@
             />
           }
         }
+
+        <app-candidate-profile-edit-canvas
+          (saveRow)="onSaveListRow($event)"
+        />
+
+        <div class="mt-8 flex justify-end border-t border-gray-200 pt-5">
+          <lib-save-button (saveAction)="onSave()" />
+        </div>
       } @else {
         <lib-text
           tag="p"

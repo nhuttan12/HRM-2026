@@ -29,6 +29,12 @@
               {{ column.header }}
             </th>
           }
+
+          @if (showEditAction()) {
+            <th class="w-20 px-4 py-3 text-center">
+              Hành động
+            </th>
+          }
         </tr>
       </thead>
 
@@ -59,6 +65,20 @@
                 class="whitespace-nowrap border-b border-gray-200 px-4 py-3 last:border-b-0"
               >
                 {{ getCellValue(row, column.field) }}
+              </td>
+            }
+
+            @if (showEditAction()) {
+              <td class="px-4 py-3 text-center">
+                <button
+                  type="button"
+                  class="inline-flex items-center justify-center rounded p-2
+                        text-gray-500 hover:bg-gray-100 hover:text-blue-600"
+                  aria-label="Sửa dòng"
+                  (click)="onEditRow(row); $event.stopPropagation()"
+                >
+                  <i class="pi pi-pencil"></i>
+                </button>
               </td>
             }
           </tr>

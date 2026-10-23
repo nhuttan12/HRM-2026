@@ -103,3 +103,12 @@ export type CandidateProfileSection =
 export type CandidateEditableSection = 'overview' | 'socialLinks' | 'relatives';
 
 export type CandidateListSection = 'skills' | 'certificates' | 'workHistories' | 'degrees';
+
+export type ListFieldType = 'text' | 'number' | 'date' | 'textarea';
+
+export interface ListFieldConfig {
+  key: string;
+  label: string;
+  type?: ListFieldType;
+  required?: boolean;
+}

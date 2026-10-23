@@ -15,16 +15,17 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     LibCanvasComponent,
     LibCandidateProfileHeaderComponent,
     CandidateProfileTableComponent,
-    CandidateProfileDetailComponent
-],
+    CandidateProfileDetailComponent,
+  ],
   templateUrl: './candidate-profile-page.component.html',
 })
 export class CandidateProfilePageComponent implements AfterViewInit {
   readonly canvas = viewChild.required(LibCanvasComponent);
 
-  readonly selectedCandidateCode  = signal<string | null>(null);
+  readonly selectedCandidateCode = signal<string | null>(null);
   readonly canvasMode = signal<'create' | 'detail'>('create');
   readonly openingDetail = signal(false);
+  readonly candidateDetail = viewChild(CandidateProfileDetailComponent);
 
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
@@ -35,18 +36,14 @@ export class CandidateProfilePageComponent implements AfterViewInit {
 
     this.router.events
       .pipe(
-        filter(
-          (event): event is NavigationEnd =>
-            event instanceof NavigationEnd,
-        ),
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(() => this.syncCanvasWithUrl());
   }
 
   private isDetailUrl(): boolean {
-    return this.router.url.split('?')[0] ===
-      '/candidate-profile/detail';
+    return this.router.url.split('?')[0] === '/candidate-profile/detail';
   }
 
   private resetCandidateState(): void {
@@ -81,6 +78,8 @@ export class CandidateProfilePageComponent implements AfterViewInit {
   }
 
   async onCanvasClosed(): Promise<void> {
+    this.candidateDetail()?.resetEditState();
+    
     await this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { code: null },
