@@ -1,10 +1,14 @@
 <button
   type="button"
-  class="fixed inset-0 z-[1000] h-full w-full cursor-default border-0 bg-black/[0.35] p-0 opacity-0 invisible pointer-events-none transition-[opacity,visibility] duration-300 ease-in-out [transition-delay:0.3s]"
+  class="fixed inset-0 z-[1000] h-full w-full cursor-default border-0 bg-black/[0.35] p-0 opacity-0 invisible pointer-events-none"
+  [style.transitionProperty]="
+    transitionEnabled() ? 'opacity, visibility' : 'none'
+  "
+  [class.duration-300]="transitionEnabled()"
+  [class.ease-in-out]="transitionEnabled()"
   [class.opacity-100]="opened()"
   [class.visible]="opened()"
   [class.pointer-events-auto]="opened()"
-  [class.!transition-delay-0]="opened()"
   [attr.aria-label]="opened() ? 'Đóng cửa sổ' : null"
   [attr.aria-hidden]="!opened()"
   [attr.tabindex]="opened() ? 0 : -1"
@@ -13,11 +17,17 @@
 
 <aside
   class="fixed inset-y-0 right-0 z-[1001] flex h-full w-full max-w-full flex-col
-         translate-x-0 bg-white shadow-[-8px_0_32px_rgb(0_0_0_/_12%)]
-         transition-transform duration-[450ms]
-         [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]"
+         bg-white shadow-[-8px_0_32px_rgb(0_0_0_/_12%)]"
   [style.width]="width()"
   [class.translate-x-full]="!opened()"
+  [class.transition-transform]="transitionEnabled()"
+  [style.transitionDuration]="transitionEnabled() ? '450ms' : '0s'"
+  [style.transitionDelay]="transitionEnabled() && !opened() ? '0.3s' : '0s'"
+  [style.transitionTimingFunction]="
+    transitionEnabled()
+      ? 'cubic-bezier(0.22,1,0.36,1)'
+      : ''
+  "
 >
   <!-- Header -->
   <header

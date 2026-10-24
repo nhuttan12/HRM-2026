@@ -61,10 +61,6 @@ export class CandidateProfilePageComponent implements AfterViewInit {
       if (!this.canvas().opened()) {
         this.canvas().open();
       }
-    } else {
-      if (this.canvas().opened()) {
-        this.canvas().close();
-      }
     }
 
     this.openingDetail.set(false);

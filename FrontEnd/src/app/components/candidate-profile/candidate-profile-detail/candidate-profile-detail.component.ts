@@ -13,6 +13,8 @@ import { CandidateEditableSection, CandidateListSection, CandidateProfileDetail,
 import { CandidateDetailService } from './candidate-profile-detail.service';
 import { CandidateProfileEditCanvasComponent } from './candidate-profile-edit-canvas/candidate-profile-edit-canvas.component';
 import { CandidateListRowSaveEvent } from './candidate-profile-edit-canvas/candidate-profile-edit-canvas.model';
+import { CandidateProfileAddCanvasComponent } from './candidate-profile-add-canvas/candidate-profile-add-canvas.component';
+import { CandidateListRowAddEvent } from './candidate-profile-add-canvas/candidate-profile-add-canvas.model';
 
 @Component({
   selector: 'app-candidate-profile-detail',
@@ -29,7 +31,8 @@ import { CandidateListRowSaveEvent } from './candidate-profile-edit-canvas/candi
     LibTextComponent,
     LibSaveButtonComponent,
     CandidateProfileEditCanvasComponent,
-  ],
+    CandidateProfileAddCanvasComponent
+],
 })
 export class CandidateProfileDetailComponent {
   private readonly candidateService = inject(CandidateDetailService);
@@ -44,6 +47,7 @@ export class CandidateProfileDetailComponent {
   readonly editingListSection = signal<CandidateListSection | null>(null);
   readonly editingListRow = signal<Record<string, unknown> | null>(null);
   readonly editCanvas = viewChild(CandidateProfileEditCanvasComponent);
+  readonly addCanvas = viewChild(CandidateProfileAddCanvasComponent);
 
   readonly skillColumns = candidateSkillColumns;
   readonly workHistoryColumns = candidateWorkHistoryColumns;
@@ -113,9 +117,7 @@ export class CandidateProfileDetailComponent {
   }
 
   onAddSectionItem(section: CandidateListSection): void {
-    console.log('Thêm dữ liệu vào section:', section);
-
-    // TODO: Mở form thêm dữ liệu tương ứng.
+    this.addCanvas()?.open(section);
   }
 
   onRemoveSectionItem(section: CandidateListSection): void {
@@ -182,5 +184,13 @@ export class CandidateProfileDetailComponent {
   onSaveListRow(event: CandidateListRowSaveEvent): void {
     const { section, row } = event;
     console.log('Lưu dữ liệu:', section, row);
+  }
+
+  onAddListRow(event: CandidateListRowAddEvent): void {
+    const { section, row } = event;
+
+    // TODO: Gọi API tạo mới theo section.
+    console.log('Loại dữ liệu cần thêm:', section);
+    console.log('Dữ liệu mới:', row);
   }
 }

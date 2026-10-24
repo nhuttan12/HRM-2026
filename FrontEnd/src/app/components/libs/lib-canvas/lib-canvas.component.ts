@@ -14,6 +14,7 @@ export class LibCanvasComponent {
 
   readonly opened = signal(false);
   readonly closed = output<void>();
+  readonly transitionEnabled = signal(false);
 
   private openFrameId: number | null = null;
 
@@ -21,6 +22,8 @@ export class LibCanvasComponent {
     if (this.opened() || this.openFrameId !== null) {
       return;
     }
+
+    this.transitionEnabled.set(true);
 
     this.openFrameId = requestAnimationFrame(() => {
       this.openFrameId = null;
@@ -34,6 +37,7 @@ export class LibCanvasComponent {
       this.openFrameId = null;
     }
 
+    this.transitionEnabled.set(true);
     const wasOpened = this.opened();
     this.opened.set(false);
 

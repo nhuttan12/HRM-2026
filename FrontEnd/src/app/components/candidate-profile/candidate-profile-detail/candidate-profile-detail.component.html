@@ -60,7 +60,10 @@
     </main>
   } @else {
     <!-- Sidebar bên trái -->
-    <app-candidate-profile-detail-sidebar (sectionChange)="onSectionChange($event)" />
+    <app-candidate-profile-detail-sidebar
+      [candidateCode]="candidateCode()"
+      (sectionChange)="onSectionChange($event)"
+    />
 
     <!-- Main content bên phải -->
     <main class="min-w-0 flex-1 overflow-y-auto p-6">
@@ -323,6 +326,10 @@
 
         <app-candidate-profile-edit-canvas
           (saveRow)="onSaveListRow($event)"
+        />
+
+        <app-candidate-profile-add-canvas
+          (addRow)="onAddListRow($event)"
         />
 
         <div class="mt-8 flex justify-end border-t border-gray-200 pt-5">

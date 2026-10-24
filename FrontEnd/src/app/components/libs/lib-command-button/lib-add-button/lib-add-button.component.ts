@@ -8,9 +8,11 @@ import { LibCommandButtonComponent } from '../lib-command-button.component';
   templateUrl: './lib-add-button.component.html',
 })
 export class LibAddButtonComponent {
-  readonly add = output<void>();
+  // Keep the public event name consistent with the other command buttons
+  // and with all current consumers of this component.
+  readonly addAction = output<void>();
 
   onAdd(): void {
-    this.add.emit();
+    this.addAction.emit();
   }
 }
