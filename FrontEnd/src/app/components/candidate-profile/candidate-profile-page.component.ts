@@ -42,10 +42,6 @@ export class CandidateProfilePageComponent implements AfterViewInit {
       .subscribe(() => this.syncCanvasWithUrl());
   }
 
-  private isDetailUrl(): boolean {
-    return this.router.url.split('?')[0] === '/candidate-profile/detail';
-  }
-
   private resetCandidateState(): void {
     this.selectedCandidateCode.set(null);
     this.canvasMode.set('create');

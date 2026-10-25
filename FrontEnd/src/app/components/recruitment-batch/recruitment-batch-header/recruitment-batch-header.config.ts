@@ -1,15 +1,5 @@
 import { HrmTableColumn } from "../../libs/lib-hrm-table/lib-hrm-table.component";
-
-export interface RecruitmentBatch {
-  id: number;
-  code: string;
-  name: string;
-  position: string;
-  quantity: number;
-  startDate: string;
-  endDate: string;
-  status: string;
-}
+import { RecruitmentBatch } from "../recruitment-batch.model";
 
 export const columnsConfig: HrmTableColumn<RecruitmentBatch>[] = [
   {

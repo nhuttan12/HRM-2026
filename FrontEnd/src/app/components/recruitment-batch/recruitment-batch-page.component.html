@@ -1,12 +1,54 @@
 <div class="flex w-full flex-col gap-6 p-6">
   <lib-recruitment-batch-header />
 
-  <lib-recruitment-batch-table
-    [data]="recruitmentBatches()"
-    [columns]="columns"
-    [loading]="loading()"
-    [selectable]="true"
-    [(selectedData)]="selectedData"
-    (selectionChange)="onSelectionChange($event)"
-  />
+  <div class="flex gap-4 border-b border-surface-200 pb-2">
+    <button
+      (click)="onTabChange('proposal')"
+      [class.text-primary]="activeTab() === 'proposal'"
+      [class.font-medium]="activeTab() === 'proposal'"
+      [class.border-b-2]="activeTab() === 'proposal'"
+      [class.border-primary]="activeTab() === 'proposal'"
+      [class.pb-1]="activeTab() === 'proposal'"
+      [class.text-surface-600]="activeTab() !== 'proposal'"
+      [class.hover:text-surface-900]="activeTab() !== 'proposal'"
+    >
+      Đề xuất tuyển dụng
+    </button>
+    <button
+      (click)="onTabChange('batch')"
+      [class.text-primary]="activeTab() === 'batch'"
+      [class.font-medium]="activeTab() === 'batch'"
+      [class.border-b-2]="activeTab() === 'batch'"
+      [class.border-primary]="activeTab() === 'batch'"
+      [class.pb-1]="activeTab() === 'batch'"
+      [class.text-surface-600]="activeTab() !== 'batch'"
+      [class.hover:text-surface-900]="activeTab() !== 'batch'"
+    >
+      Đợt tuyển dụng
+    </button>
+  </div>
+
+  <div [@slideTab]="activeTab()" class="tab-slide-container relative overflow-hidden">
+    @if (activeTab() === 'proposal') {
+      <app-recruitment-batch-table
+        [data]="recruitmentProposals() as RecruitmentBatch[]"
+        [columns]="columns"
+        [loading]="loading()"
+        [selectable]="true"
+        [(selectedData)]="selectedData"
+        (selectionChange)="onSelectionChange($event)"
+      />
+    }
+
+    @if (activeTab() === 'batch') {
+      <app-recruitment-batch-table
+        [data]="recruitmentBatches()"
+        [columns]="columns"
+        [loading]="loading()"
+        [selectable]="true"
+        [(selectedData)]="selectedData"
+        (selectionChange)="onSelectionChange($event)"
+      />
+    }
+  </div>
 </div>

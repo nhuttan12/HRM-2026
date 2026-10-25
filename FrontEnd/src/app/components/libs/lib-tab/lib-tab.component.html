@@ -1,0 +1,33 @@
+<p-tabs
+  [value]="value()"
+  (valueChange)="valueChange.emit($event)"
+  [lazy]="lazy()"
+  [scrollable]="scrollable()"
+  [showNavigators]="showNavigators()"
+  class="w-full"
+>
+  <ng-container pTablist>
+    @for (tab of tabs(); track tab.value) {
+      <p-tab
+        [value]="tab.value"
+        [disabled]="tab.disabled ?? false"
+        class="px-4 py-3 text-sm font-medium text-surface-600 hover:text-surface-900"
+      >
+        @if (tab.icon) {
+          <i class="pi {{ tab.icon }} mr-2"></i>
+        }
+        {{ tab.label }}
+      </p-tab>
+    }
+  </ng-container>
+
+  <ng-container pTabpanels>
+    @for (tab of tabs(); track tab.value) {
+      <p-tabpanel [value]="tab.value" [lazy]="tab.lazy ?? lazy()" class="p-4">
+        @if (tab.content) {
+          <ng-container *ngTemplateOutlet="tab.content" />
+        }
+      </p-tabpanel>
+    }
+  </ng-container>
+</p-tabs>

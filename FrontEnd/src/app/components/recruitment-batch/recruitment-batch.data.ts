@@ -1,4 +1,4 @@
-import { RecruitmentBatch } from "./recruitment-batch-header/recruitment-batch-header.config";
+import { RecruitmentBatch, RecruitmentProposal } from "./recruitment-batch.model";
 
 export const recruitmentBatchesData: RecruitmentBatch[] = [
   {
@@ -30,5 +30,44 @@ export const recruitmentBatchesData: RecruitmentBatch[] = [
     startDate: '10/07/2026',
     endDate: '10/08/2026',
     status: 'Đã kết thúc',
+  },
+];
+
+export const recruitmentProposalsData: RecruitmentProposal[] = [
+  {
+    id: 101,
+    code: 'DP-2026-001',
+    name: 'Đề xuất tuyển dụng IT tháng 9',
+    position: 'Frontend Developer',
+    quantity: 2,
+    startDate: '01/09/2026',
+    endDate: '30/09/2026',
+    status: 'Chờ duyệt',
+    proposalDate: '25/08/2026',
+    approvedBy: 'Trương Văn A',
+  },
+  {
+    id: 102,
+    code: 'DP-2026-002',
+    name: 'Đề xuất tuyển dụng nhân sự',
+    position: 'HR Specialist',
+    quantity: 1,
+    startDate: '05/09/2026',
+    endDate: '05/10/2026',
+    status: 'Đã duyệt',
+    proposalDate: '28/08/2026',
+    approvedBy: 'Lê Thị B',
+  },
+  {
+    id: 103,
+    code: 'DP-2026-003',
+    name: 'Đề xuất tuyển dụng marketing',
+    position: 'Marketing Executive',
+    quantity: 2,
+    startDate: '10/09/2026',
+    endDate: '31/10/2026',
+    status: 'Chờ duyệt',
+    proposalDate: '30/08/2026',
+    approvedBy: 'Trương Văn A',
   },
 ];
