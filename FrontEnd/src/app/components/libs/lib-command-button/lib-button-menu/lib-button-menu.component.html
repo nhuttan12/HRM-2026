@@ -1,0 +1,28 @@
+<div class="relative inline-block overflow-visible">
+  <p-button
+    [label]="label()"
+    icon="pi pi-chevron-down"
+    [severity]="severity()"
+    [text]="text()"
+    size="small"
+    [disabled]="disabled()"
+    styleClass="
+      min-w-[33px] min-h-[33px] items-center justify-center rounded-[10px] border-0 shadow-none px-4 py-2.5
+      hover:!border-0 hover:!shadow-none
+      active:!border-0 active:!shadow-none
+      focus-visible:!border-0
+    "
+    (onClick)="menu.toggle($event)"
+    ariaLabel="Mở danh sách thao tác"
+  />
+
+  <p-menu
+    #menu
+    [model]="menuItems()"
+    [popup]="true"
+    (onItemClick)="onMenuItemClick($event)"
+    appendTo="self"
+    styleClass="button-menu-popup"
+    styleClass="!absolute !left-0 !right-auto !top-full !mt-2 !transform-none !z-[1000]"
+  />
+</div>

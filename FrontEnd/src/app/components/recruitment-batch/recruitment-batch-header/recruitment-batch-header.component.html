@@ -1,4 +1,4 @@
-<div class="mb-4">
+<div class="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
   <div>
     <lib-text
       tag="h2"
@@ -6,8 +6,20 @@
       className="text-xl font-semibold text-surface-900"
     />
 
-    <p class="mt-1 text-sm text-surface-500">
-      Quản lý các đợt tuyển dụng
-    </p>
+    <lib-text
+      tag="p"
+      className="mt-1 text-sm text-surface-500"
+      text="Quản lý các đợt tuyển dụng"
+    />
+  </div>
+
+  <div class="flex items-center gap-2">
+    @if (activeTab() === 'batch') {
+      <lib-button-menu [menuItems]="menuItems" label="Thêm" severity="success" [text]="false" />
+    } @else {
+      <lib-add-button (addAction)="onAddProposal()" />
+    }
+
+    <lib-remove-button [label]="'xóa'" (clicked)="onRemove()" />
   </div>
 </div>

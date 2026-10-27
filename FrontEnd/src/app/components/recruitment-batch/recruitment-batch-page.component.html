@@ -1,37 +1,34 @@
 <div class="flex w-full flex-col gap-6 p-6">
-  <lib-recruitment-batch-header />
+  <lib-recruitment-batch-header
+    [activeTab]="activeTab()"
+    (addDirect)="onAddDirect()"
+    (addFromProposal)="onAddFromProposal()"
+    (addProposal)="onAddProposal()"
+  />
 
   <div class="flex gap-4 border-b border-surface-200 pb-2">
     <button
       (click)="onTabChange('proposal')"
-      [class.text-primary]="activeTab() === 'proposal'"
-      [class.font-medium]="activeTab() === 'proposal'"
-      [class.border-b-2]="activeTab() === 'proposal'"
-      [class.border-primary]="activeTab() === 'proposal'"
-      [class.pb-1]="activeTab() === 'proposal'"
-      [class.text-surface-600]="activeTab() !== 'proposal'"
-      [class.hover:text-surface-900]="activeTab() !== 'proposal'"
+      [class]="activeTab() === 'proposal'
+        ? 'text-primary font-medium border-b-2 border-primary pb-1'
+        : 'text-surface-600 hover:text-surface-900'"
     >
       Đề xuất tuyển dụng
     </button>
     <button
       (click)="onTabChange('batch')"
-      [class.text-primary]="activeTab() === 'batch'"
-      [class.font-medium]="activeTab() === 'batch'"
-      [class.border-b-2]="activeTab() === 'batch'"
-      [class.border-primary]="activeTab() === 'batch'"
-      [class.pb-1]="activeTab() === 'batch'"
-      [class.text-surface-600]="activeTab() !== 'batch'"
-      [class.hover:text-surface-900]="activeTab() !== 'batch'"
+      [class]="activeTab() === 'batch'
+        ? 'text-primary font-medium border-b-2 border-primary pb-1'
+        : 'text-surface-600 hover:text-surface-900'"
     >
       Đợt tuyển dụng
     </button>
   </div>
 
-  <div [@slideTab]="activeTab()" class="tab-slide-container relative overflow-hidden">
+  <div class="relative overflow-hidden">
     @if (activeTab() === 'proposal') {
       <app-recruitment-batch-table
-        [data]="recruitmentProposals() as RecruitmentBatch[]"
+        [data]="proposalBatches()"
         [columns]="columns"
         [loading]="loading()"
         [selectable]="true"

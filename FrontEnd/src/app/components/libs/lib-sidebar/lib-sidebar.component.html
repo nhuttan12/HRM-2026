@@ -40,12 +40,11 @@
 
   <!-- Menu -->
   <nav class="min-h-0 flex-1 overflow-y-auto px-3 py-5">
-    <p
-      class="mb-3 px-3 text-[11px] font-bold uppercase
-             tracking-widest text-surface-400"
-    >
-      Tuyển dụng
-    </p>
+    <lib-text
+      tag="p"
+      className="mb-3 px-3 text-[11px] font-bold uppercase tracking-widest text-surface-400"
+      text="Tuyển dụng"
+    />
 
     <p-panelmenu
       [model]="menuItems"
@@ -103,13 +102,17 @@
 
       <!-- Info -->
       <div class="min-w-0 flex-1">
-        <p class="truncate text-sm font-semibold text-surface-900">
-          Admin User
-        </p>
+        <lib-text
+          tag="p"
+          className="truncate text-sm font-semibold text-surface-900"
+          text="Admin User"
+        />
 
-        <p class="truncate text-xs text-surface-500">
-          Administrator
-        </p>
+        <lib-text
+          tag="p"
+          className="truncate text-xs text-surface-500"
+          text="Administrator"
+        />
       </div>
 
       <!-- More -->
