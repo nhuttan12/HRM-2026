@@ -1,5 +1,9 @@
 import { Component, input, output } from '@angular/core';
 import { LibCommandButtonComponent } from '../lib-command-button.component';
+import {
+  LibCommandButtonSeverity,
+  LibCommandButtonSize,
+} from '../lib-command-button.model';
 
 @Component({
   selector: 'lib-edit-button',
@@ -11,11 +15,9 @@ export class LibEditButtonComponent {
   readonly label = input('');
   readonly icon = input('pi pi-pencil');
 
-  readonly severity = input<
-    'secondary' | 'success' | 'info' | 'warn' | 'danger' | 'contrast' | 'help' | undefined
-  >('secondary');
+  readonly severity = input<LibCommandButtonSeverity>('secondary');
 
-  readonly size = input<'small' | 'large' | undefined>('small');
+  readonly size = input<LibCommandButtonSize>('small');
   readonly disabled = input(false);
   readonly loading = input(false);
 

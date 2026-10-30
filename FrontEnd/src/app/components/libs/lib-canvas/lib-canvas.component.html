@@ -6,12 +6,12 @@
   "
   [class.duration-300]="transitionEnabled()"
   [class.ease-in-out]="transitionEnabled()"
-  [class.opacity-100]="opened()"
-  [class.visible]="opened()"
-  [class.pointer-events-auto]="opened()"
-  [attr.aria-label]="opened() ? 'Đóng cửa sổ' : null"
-  [attr.aria-hidden]="!opened()"
-  [attr.tabindex]="opened() ? 0 : -1"
+  [class.opacity-100]="isOpen()"
+  [class.visible]="isOpen()"
+  [class.pointer-events-auto]="isOpen()"
+  [attr.aria-label]="isOpen() ? 'Đóng cửa sổ' : null"
+  [attr.aria-hidden]="!isOpen()"
+  [attr.tabindex]="isOpen() ? 0 : -1"
   (click)="onClose()"
 ></button>
 
@@ -19,10 +19,10 @@
   class="fixed inset-y-0 right-0 z-[1001] flex h-full w-full max-w-full flex-col
          bg-white shadow-[-8px_0_32px_rgb(0_0_0_/_12%)]"
   [style.width]="width()"
-  [class.translate-x-full]="!opened()"
+  [class.translate-x-full]="!isOpen()"
   [class.transition-transform]="transitionEnabled()"
   [style.transitionDuration]="transitionEnabled() ? '450ms' : '0s'"
-  [style.transitionDelay]="transitionEnabled() && !opened() ? '0.3s' : '0s'"
+  [style.transitionDelay]="transitionEnabled() && !isOpen() ? '0.3s' : '0s'"
   [style.transitionTimingFunction]="
     transitionEnabled()
       ? 'cubic-bezier(0.22,1,0.36,1)'

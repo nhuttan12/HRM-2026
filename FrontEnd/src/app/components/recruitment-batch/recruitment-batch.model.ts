@@ -7,6 +7,7 @@ export interface RecruitmentBatch {
   startDate: string;
   endDate: string;
   status: string;
+  experienceYears?: number;
 }
 
 export type ActiveTab = 'proposal' | 'batch';

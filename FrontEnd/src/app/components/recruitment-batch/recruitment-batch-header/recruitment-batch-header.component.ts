@@ -2,7 +2,7 @@ import { Component, input, output } from '@angular/core';
 import { LibTextComponent } from '../../libs/lib-text/lib-text.component';
 import { LibAddButtonComponent } from '../../libs/lib-command-button/lib-add-button/lib-add-button.component';
 import { LibRemoveButtonComponent } from '../../libs/lib-command-button/lib-remove-button/lib-remove-button.component';
-import { LibButtonMenuComponent } from '../../libs/lib-command-button/lib-button-menu/lib-button-menu.component';
+import { LibDropdownMenuComponent } from '../../libs/lib-dropdown-menu/lib-dropdown-menu.component';
 import { MenuItem } from 'primeng/api';
 import { ActiveTab } from '../recruitment-batch.model';
 
@@ -13,7 +13,7 @@ import { ActiveTab } from '../recruitment-batch.model';
   imports: [
     LibTextComponent,
     LibAddButtonComponent,
-    LibButtonMenuComponent,
+    LibDropdownMenuComponent,
     LibRemoveButtonComponent,
   ],
 })
@@ -38,6 +38,10 @@ export class RecruitmentBatchHeaderComponent {
       command: () => this.addFromProposal.emit(),
     },
   ];
+
+  constructor() {
+    console.log('[RecruitmentBatchHeader] menuItems:', this.menuItems);
+  }
 
   onAddProposal(): void {
     this.addProposal.emit();

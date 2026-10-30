@@ -1,5 +1,9 @@
 import { Component, input, output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
+import {
+  LibCommandButtonSeverity,
+  LibCommandButtonSize,
+} from './lib-command-button.model';
 
 @Component({
   selector: 'lib-command-button',
@@ -10,17 +14,8 @@ import { ButtonModule } from 'primeng/button';
 export class LibCommandButtonComponent {
   label = input('');
   icon = input('');
-  severity = input<
-    | 'secondary'
-    | 'success'
-    | 'info'
-    | 'warn'
-    | 'danger'
-    | 'contrast'
-    | 'help'
-    | undefined
-  >();
-  size = input<'small' | 'large' | undefined>('small');
+  severity = input<LibCommandButtonSeverity>();
+  size = input<LibCommandButtonSize>('small');
   disabled = input(false);
   loading = input(false);
   

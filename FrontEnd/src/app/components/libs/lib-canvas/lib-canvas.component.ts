@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, effect, input, output, signal } from '@angular/core';
 import { LibCloseButtonComponent } from '../lib-command-button/lib-close-button/lib-close-button.component';
 import { LibTextComponent } from '../lib-text/lib-text.component';
 
@@ -12,14 +12,26 @@ export class LibCanvasComponent {
   readonly title = input('Thông tin');
   readonly width = input('480px');
 
-  readonly opened = signal(false);
+  readonly opened = input<boolean>(false);
   readonly closed = output<void>();
   readonly transitionEnabled = signal(false);
 
   private openFrameId: number | null = null;
+  isOpen = signal(false);
+
+  constructor() {
+    effect(() => {
+      const shouldBeOpen = this.opened();
+      if (shouldBeOpen && !this.isOpen()) {
+        this.open();
+      } else if (!shouldBeOpen && this.isOpen()) {
+        this.close();
+      }
+    });
+  }
 
   open(): void {
-    if (this.opened() || this.openFrameId !== null) {
+    if (this.isOpen() || this.openFrameId !== null) {
       return;
     }
 
@@ -27,7 +39,7 @@ export class LibCanvasComponent {
 
     this.openFrameId = requestAnimationFrame(() => {
       this.openFrameId = null;
-      this.opened.set(true);
+      this.isOpen.set(true);
     });
   }
 
@@ -38,8 +50,8 @@ export class LibCanvasComponent {
     }
 
     this.transitionEnabled.set(true);
-    const wasOpened = this.opened();
-    this.opened.set(false);
+    const wasOpened = this.isOpen();
+    this.isOpen.set(false);
 
     if (wasOpened) {
       this.closed.emit();

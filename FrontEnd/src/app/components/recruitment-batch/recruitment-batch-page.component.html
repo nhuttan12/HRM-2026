@@ -45,7 +45,19 @@
         [selectable]="true"
         [(selectedData)]="selectedData"
         (selectionChange)="onSelectionChange($event)"
+        (rowDoubleClick)="onBatchDoubleClick($event)"
       />
     }
   </div>
+
+  @if (showDetailCanvas()) {
+    <lib-canvas
+      [opened]="showDetailCanvas()"
+      [title]="'Chi tiết đợt tuyển dụng'"
+      [width]="'600px'"
+      (closed)="onCloseDetailCanvas()"
+    >
+    <lib-recruitment-batch-detail [data]="selectedBatch()" />
+  </lib-canvas>
+  }
 </div>

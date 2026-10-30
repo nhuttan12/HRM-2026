@@ -21,9 +21,14 @@ export class RecruitmentBatchTableComponent {
   selectedData = model<RecruitmentBatch[]>([]);
 
   selectionChange = output<RecruitmentBatch[]>();
+  rowDoubleClick = output<RecruitmentBatch>();
 
   onSelectionChange(selection: RecruitmentBatch[]): void {
     this.selectedData.set(selection);
     this.selectionChange.emit(selection);
+  }
+
+  onRowDoubleClick(row: RecruitmentBatch): void {
+    this.rowDoubleClick.emit(row);
   }
 }

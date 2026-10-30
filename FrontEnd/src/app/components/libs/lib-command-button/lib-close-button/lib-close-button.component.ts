@@ -1,5 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { LibCommandButtonComponent } from '../lib-command-button.component';
+import { LibCommandButtonSize } from '../lib-command-button.model';
 
 @Component({
   selector: 'lib-close-button',
@@ -8,7 +9,7 @@ import { LibCommandButtonComponent } from '../lib-command-button.component';
   templateUrl: './lib-close-button.component.html',
 })
 export class LibCloseButtonComponent {
-  readonly size = input<'small' | 'large' | undefined>();
+  readonly size = input<LibCommandButtonSize>();
   readonly closed = output<void>();
 
   onClose(): void {

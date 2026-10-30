@@ -1,6 +1,8 @@
 import { Component, signal, computed, OnInit } from '@angular/core';
 import { RecruitmentBatchHeaderComponent } from "./recruitment-batch-header/recruitment-batch-header.component";
 import { RecruitmentBatchTableComponent } from "./recruitment-batch-table/recruitment-batch-table.component";
+import { RecruitmentBatchDetailComponent } from "./recruitment-batch-detail/recruitment-batch-detail.component";
+import { LibCanvasComponent } from '../libs/lib-canvas/lib-canvas.component';
 import { recruitmentBatchesData, recruitmentProposalsData } from './recruitment-batch.data';
 import { columnsConfig } from './recruitment-batch-header/recruitment-batch-header.config';
 import { ActiveTab, RecruitmentBatch, RecruitmentProposal } from './recruitment-batch.model';
@@ -8,7 +10,7 @@ import { ActiveTab, RecruitmentBatch, RecruitmentProposal } from './recruitment-
 @Component({
   selector: 'lib-recruitment-batch',
   standalone: true,
-  imports: [RecruitmentBatchHeaderComponent, RecruitmentBatchTableComponent],
+  imports: [RecruitmentBatchHeaderComponent, RecruitmentBatchTableComponent, RecruitmentBatchDetailComponent, LibCanvasComponent],
   templateUrl: './recruitment-batch-page.component.html',
 })
 export class RecruitmentBatchPageComponent implements OnInit {
@@ -23,6 +25,8 @@ export class RecruitmentBatchPageComponent implements OnInit {
   columns = columnsConfig;
 
   selectedData = signal<RecruitmentBatch[]>([]);
+  selectedBatch = signal<RecruitmentBatch | null>(null);
+  showDetailCanvas = signal(false);
 
   activeTab = signal<ActiveTab>('batch');
 
@@ -52,5 +56,15 @@ export class RecruitmentBatchPageComponent implements OnInit {
 
   onSelectionChange(selection: RecruitmentBatch[]): void {
     this.selectedData.set(selection);
+  }
+
+  onBatchDoubleClick(batch: RecruitmentBatch): void {
+    this.selectedBatch.set(batch);
+    this.showDetailCanvas.set(true);
+  }
+
+  onCloseDetailCanvas(): void {
+    this.showDetailCanvas.set(false);
+    this.selectedBatch.set(null);
   }
 }

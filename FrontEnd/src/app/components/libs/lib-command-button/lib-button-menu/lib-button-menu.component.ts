@@ -1,12 +1,13 @@
 import { Component, input, output } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { MenuModule } from 'primeng/menu';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { SelectModule } from 'primeng/select';
 import { MenuItem } from 'primeng/api';
+import { SelectChangeEvent } from 'primeng/types/select';
 
 @Component({
   selector: 'lib-button-menu',
   standalone: true,
-  imports: [ButtonModule, MenuModule],
+  imports: [SelectModule, ReactiveFormsModule],
   templateUrl: './lib-button-menu.component.html',
 })
 export class LibButtonMenuComponent {
@@ -17,10 +18,13 @@ export class LibButtonMenuComponent {
     'secondary' | 'success' | 'info' | 'warn' | 'danger' | 'contrast' | 'help' | undefined
   >('secondary');
   text = input<boolean>(true);
+  placeholder = input<string>('');
+  formControl = input<FormControl>(null as unknown as FormControl);
   selected = output<MenuItem>();
 
-  onMenuItemClick(event: { item: MenuItem }): void {
-    event.item.command?.(event);
-    this.selected.emit(event.item);
+  onSelectChange(event: SelectChangeEvent): void {
+    const item = event.value as MenuItem;
+    item?.command?.({ item, originalEvent: event.originalEvent });
+    this.selected.emit(item);
   }
 }

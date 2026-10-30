@@ -15,7 +15,11 @@
 
   <div class="flex items-center gap-2">
     @if (activeTab() === 'batch') {
-      <lib-button-menu [menuItems]="menuItems" label="Thêm" severity="success" [text]="false" />
+      <lib-dropdown-menu
+        [menuItems]="menuItems"
+        label="Thêm"
+        severity="success"
+      />
     } @else {
       <lib-add-button (addAction)="onAddProposal()" />
     }
