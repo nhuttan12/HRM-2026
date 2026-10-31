@@ -1,16 +1,132 @@
-<div class="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-6">
-  @for (field of fields; track field.key) {
-    <div class="flex flex-col gap-1">
-      <lib-text
-        tag="p"
-        [text]="field.label"
-        className="text-xs font-medium text-gray-500"
-      />
-      <lib-text
-        tag="p"
-        [text]="getValue(field.key)"
-        className="text-sm font-medium text-gray-900"
-      />
-    </div>
-  }
+﻿<div class="flex h-full w-full overflow-hidden">
+  <app-recruitment-batch-detail-sidebar
+    [batchCode]="detail()?.code ?? null"
+    (sectionChange)="onSectionChange($event)"
+  />
+
+  <main class="min-h-0 flex-1 overflow-y-auto p-6">
+    @switch (activeSection()) {
+      @case ('overview') {
+        <section>
+          <div class="mb-6 flex items-center justify-between gap-4">
+            <lib-text
+              tag="h2"
+              text="Tổng quan"
+              className="text-xl font-semibold"
+            />
+
+            @if (isEditingOverview()) {
+              <lib-save-button (saveAction)="saveOverview()" />
+            } @else {
+              <lib-edit-button (editAction)="onEditOverview()" />
+            }
+          </div>
+
+          <div class="grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2">
+            @for (field of overviewFields; track field.key) {
+              <div
+                [class]="{
+                  'min-w-0': true,
+                  'md:col-span-2': field.width === 'full',
+                }"
+              >
+                <lib-input
+                  [label]="getFieldLabel(field.key)"
+                  [value]="overviewForm.get(field.key)?.value ?? ''"
+                  [isView]="!isEditingOverview()"
+                  (valueChange)="overviewForm.get(field.key)?.setValue($event)"
+                />
+              </div>
+            }
+          </div>
+        </section>
+      }
+
+      @case ('skills') {
+        <section>
+          <div class="mb-6 flex items-center justify-between gap-4">
+            <lib-text tag="h2" text="Kỹ năng" className="text-xl font-semibold" />
+
+            <button
+              type="button"
+              class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
+              (click)="onAddSectionItem('skills')"
+            >
+              Thêm
+            </button>
+          </div>
+
+          <lib-hrm-table
+            [data]="skillRows()"
+            [columns]="skillColumns"
+            [selectable]="true"
+            [showEditAction]="true"
+            (editRow)="removeSkillRow($event)"
+          />
+        </section>
+      }
+
+      @case ('degrees') {
+        <section>
+          <div class="mb-6 flex items-center justify-between gap-4">
+            <lib-text tag="h2" text="Bằng cấp" className="text-xl font-semibold" />
+
+            <button
+              type="button"
+              class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
+              (click)="onAddSectionItem('degrees')"
+            >
+              Thêm
+            </button>
+          </div>
+
+          <lib-hrm-table
+            [data]="degreeRows()"
+            [columns]="degreeColumns"
+            [selectable]="true"
+            [showEditAction]="true"
+            (editRow)="removeDegreeRow($event)"
+          />
+        </section>
+      }
+
+      @case ('certificates') {
+        <section>
+          <div class="mb-6 flex items-center justify-between gap-4">
+            <lib-text tag="h2" text="Chứng chỉ" className="text-xl font-semibold" />
+
+            <button
+              type="button"
+              class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
+              (click)="onAddSectionItem('certificates')"
+            >
+              Thêm
+            </button>
+          </div>
+
+          <lib-hrm-table
+            [data]="certificateRows()"
+            [columns]="certificateColumns"
+            [selectable]="true"
+            [showEditAction]="true"
+            (editRow)="removeCertificateRow($event)"
+          />
+        </section>
+      }
+
+      @default {
+        <lib-text
+          tag="p"
+          text="Không tìm thấy nội dung."
+          className="text-sm text-gray-500"
+        />
+      }
+    }
+  </main>
+
+  <app-candidate-profile-add-canvas
+    (addRow)="onAddListRow($event)"
+  />
 </div>
+
+

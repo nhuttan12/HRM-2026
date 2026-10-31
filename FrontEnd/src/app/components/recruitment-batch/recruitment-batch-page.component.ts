@@ -1,4 +1,4 @@
-import { Component, signal, computed, OnInit } from '@angular/core';
+﻿import { Component, signal, computed, OnInit } from '@angular/core';
 import { RecruitmentBatchHeaderComponent } from "./recruitment-batch-header/recruitment-batch-header.component";
 import { RecruitmentBatchTableComponent } from "./recruitment-batch-table/recruitment-batch-table.component";
 import { RecruitmentBatchDetailComponent } from "./recruitment-batch-detail/recruitment-batch-detail.component";
@@ -51,7 +51,7 @@ export class RecruitmentBatchPageComponent implements OnInit {
   }
 
   onAddProposal(): void {
-    console.log('Thêm đề xuất tuyển dụng (tương đương click row)');
+    console.log('ThÃªm Ä‘á» xuáº¥t tuyá»ƒn dá»¥ng (tÆ°Æ¡ng Ä‘Æ°Æ¡ng click row)');
   }
 
   onSelectionChange(selection: RecruitmentBatch[]): void {

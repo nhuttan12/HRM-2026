@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, DestroyRef, inject, signal, viewChild } from '@angular/core';
+﻿import { AfterViewInit, Component, DestroyRef, inject, signal, viewChild } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CandidateProfileTableComponent } from './candidate-profile-table/candidate-profile-table.component';
 import { LibCandidateProfileHeaderComponent } from './candidate-profile-header/candidate-profile-header.component';
 import { LibCanvasComponent } from '../libs/lib-canvas/lib-canvas.component';
 import { Candidate } from './candidate-profile-table/candidate-profile-table.model';
 import { CandidateProfileDetailComponent } from './candidate-profile-detail/candidate-profile-detail.component';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-candidate-profile',
@@ -20,12 +20,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './candidate-profile-page.component.html',
 })
 export class CandidateProfilePageComponent implements AfterViewInit {
-  readonly canvas = viewChild.required(LibCanvasComponent);
-
   readonly selectedCandidateCode = signal<string | null>(null);
-  readonly canvasMode = signal<'create' | 'detail'>('create');
-  readonly openingDetail = signal(false);
+  readonly canvasOpened = signal(false);
   readonly candidateDetail = viewChild(CandidateProfileDetailComponent);
+  readonly isClosing = signal(false);
 
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
@@ -44,25 +42,29 @@ export class CandidateProfilePageComponent implements AfterViewInit {
 
   private resetCandidateState(): void {
     this.selectedCandidateCode.set(null);
-    this.canvasMode.set('create');
   }
 
   private syncCanvasWithUrl(): void {
+    if (this.isClosing()) {
+      return;
+    }
+
     const code = this.route.snapshot.queryParamMap.get('code');
 
     if (code) {
-      this.canvasMode.set('detail');
       this.selectedCandidateCode.set(code);
-
-      if (!this.canvas().opened()) {
-        this.canvas().open();
-      }
     }
 
-    this.openingDetail.set(false);
+    this.canvasOpened.set(Boolean(code));
   }
 
   async onCandidateClick(candidate: Candidate): Promise<void> {
+    this.isClosing.set(false);
+    this.selectedCandidateCode.set(candidate.candidateCode);
+    if (!this.canvasOpened()) {
+      this.canvasOpened.set(true);
+    }
+
     await this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { code: candidate.candidateCode },
@@ -70,27 +72,36 @@ export class CandidateProfilePageComponent implements AfterViewInit {
   }
 
   async onCanvasClosed(): Promise<void> {
+    this.isClosing.set(true);
+    this.canvasOpened.set(false);
     this.candidateDetail()?.resetEditState();
-    
-    await this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { code: null },
-      queryParamsHandling: 'merge',
-      replaceUrl: true,
-    });
+
+    setTimeout(() => {
+      this.selectedCandidateCode.set(null);
+      this.isClosing.set(false);
+
+      void this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { code: null },
+        queryParamsHandling: 'merge',
+        replaceUrl: true,
+      });
+    }, 460);
   }
 
   onSearch(keyword: string): void {
-    // TODO: Xử lý tìm kiếm ứng viên.
     console.log('Search:', keyword);
   }
 
   onAdd(): void {
-    if (this.openingDetail()) {
-      return;
-    }
-
+    this.isClosing.set(false);
     this.resetCandidateState();
-    this.canvas().open();
+    this.canvasOpened.set(true);
   }
 }
+
+
+
+
+
+

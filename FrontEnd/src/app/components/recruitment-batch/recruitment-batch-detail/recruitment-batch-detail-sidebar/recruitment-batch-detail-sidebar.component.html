@@ -1,0 +1,53 @@
+<aside
+  class="flex h-full min-h-0 w-[240px] min-w-0 shrink-0 flex-col overflow-y-auto border-r border-gray-200 bg-white"
+>
+  <div class="flex min-h-[76px] items-center gap-3 border-b border-gray-200 p-3">
+    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white">
+      <i class="pi pi-briefcase text-lg"></i>
+    </div>
+
+    <div class="overflow-hidden">
+      <lib-text
+        tag="h2"
+        text="Đợt tuyển dụng"
+        className="mb-1 text-base font-bold text-gray-900"
+      />
+
+      <lib-text
+        tag="p"
+        [text]="batchCode() ?? ''"
+        className="mb-0 text-sm text-gray-500"
+      />
+    </div>
+  </div>
+
+  <nav class="flex-1 p-3">
+    <lib-text
+      tag="p"
+      text="CHI TIẾT ĐỢT TUYỂN DỤNG"
+      className="mb-3 px-2 text-[10px] font-bold tracking-widest text-gray-500"
+    />
+
+    <div class="flex flex-col gap-1">
+      @for (item of menuItems; track item.id) {
+        <button
+          type="button"
+          class="flex min-h-[42px] w-full items-center gap-3 rounded-lg border-0 px-3 py-2 text-left text-[13px] transition-colors"
+          [class.bg-blue-50]="activeSection() === item.id"
+          [class.text-blue-700]="activeSection() === item.id"
+          [class.font-semibold]="activeSection() === item.id"
+          [class.text-gray-600]="activeSection() !== item.id"
+          [class.hover:bg-gray-100]="activeSection() !== item.id"
+          (click)="selectSection(item.id)"
+        >
+          <i [class]="item.icon + ' w-[18px]'"></i>
+
+          <lib-text
+            tag="span"
+            [text]="item.label"
+          />
+        </button>
+      }
+    </div>
+  </nav>
+</aside>

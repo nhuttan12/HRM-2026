@@ -1,4 +1,4 @@
-<button
+﻿<button
   type="button"
   class="fixed inset-0 z-[1000] h-full w-full cursor-default border-0 bg-black/[0.35] p-0 opacity-0 invisible pointer-events-none"
   [style.transitionProperty]="
@@ -9,7 +9,7 @@
   [class.opacity-100]="isOpen()"
   [class.visible]="isOpen()"
   [class.pointer-events-auto]="isOpen()"
-  [attr.aria-label]="isOpen() ? 'Đóng cửa sổ' : null"
+  [attr.aria-label]="isOpen() ? 'ÄÃ³ng cá»­a sá»•' : null"
   [attr.aria-hidden]="!isOpen()"
   [attr.tabindex]="isOpen() ? 0 : -1"
   (click)="onClose()"
@@ -22,7 +22,7 @@
   [class.translate-x-full]="!isOpen()"
   [class.transition-transform]="transitionEnabled()"
   [style.transitionDuration]="transitionEnabled() ? '450ms' : '0s'"
-  [style.transitionDelay]="transitionEnabled() && !isOpen() ? '0.3s' : '0s'"
+  [style.transitionDelay]="'0s'"
   [style.transitionTimingFunction]="
     transitionEnabled()
       ? 'cubic-bezier(0.22,1,0.36,1)'
@@ -49,3 +49,4 @@
     <ng-content />
   </section>
 </aside>
+

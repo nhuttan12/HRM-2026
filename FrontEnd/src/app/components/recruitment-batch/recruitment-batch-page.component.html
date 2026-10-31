@@ -1,4 +1,4 @@
-<div class="flex w-full flex-col gap-6 p-6">
+﻿<div class="flex w-full flex-col gap-6 p-6">
   <lib-recruitment-batch-header
     [activeTab]="activeTab()"
     (addDirect)="onAddDirect()"
@@ -50,14 +50,12 @@
     }
   </div>
 
-  @if (showDetailCanvas()) {
     <lib-canvas
       [opened]="showDetailCanvas()"
-      [title]="'Chi tiết đợt tuyển dụng'"
-      [width]="'600px'"
+      [title]="'Chi tiáº¿t Ä‘á»£t tuyá»ƒn dá»¥ng'"
+      [width]="'100%'"
       (closed)="onCloseDetailCanvas()"
     >
     <lib-recruitment-batch-detail [data]="selectedBatch()" />
   </lib-canvas>
-  }
 </div>
