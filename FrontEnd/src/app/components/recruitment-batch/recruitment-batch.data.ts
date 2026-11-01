@@ -1,4 +1,4 @@
-import { RecruitmentBatch, RecruitmentProposal } from "./recruitment-batch.model";
+import { RecruitmentBatch, RecruitmentProposal } from './recruitment-batch.model';
 
 export const recruitmentBatchesData: RecruitmentBatch[] = [
   {

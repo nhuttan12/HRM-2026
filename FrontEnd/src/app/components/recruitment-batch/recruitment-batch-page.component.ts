@@ -1,8 +1,9 @@
 ﻿import { Component, signal, computed, OnInit } from '@angular/core';
-import { RecruitmentBatchHeaderComponent } from "./recruitment-batch-header/recruitment-batch-header.component";
-import { RecruitmentBatchTableComponent } from "./recruitment-batch-table/recruitment-batch-table.component";
-import { RecruitmentBatchDetailComponent } from "./recruitment-batch-detail/recruitment-batch-detail.component";
+import { RecruitmentBatchHeaderComponent } from './recruitment-batch-header/recruitment-batch-header.component';
+import { RecruitmentBatchTableComponent } from './recruitment-batch-table/recruitment-batch-table.component';
+import { RecruitmentBatchDetailComponent } from './recruitment-batch-detail/recruitment-batch-detail.component';
 import { LibCanvasComponent } from '../libs/lib-canvas/lib-canvas.component';
+import { LibTabButtonComponent } from '../libs/lib-command-button/lib-tab-button/lib-tab-button.component';
 import { recruitmentBatchesData, recruitmentProposalsData } from './recruitment-batch.data';
 import { columnsConfig } from './recruitment-batch-header/recruitment-batch-header.config';
 import { ActiveTab, RecruitmentBatch, RecruitmentProposal } from './recruitment-batch.model';
@@ -10,7 +11,13 @@ import { ActiveTab, RecruitmentBatch, RecruitmentProposal } from './recruitment-
 @Component({
   selector: 'lib-recruitment-batch',
   standalone: true,
-  imports: [RecruitmentBatchHeaderComponent, RecruitmentBatchTableComponent, RecruitmentBatchDetailComponent, LibCanvasComponent],
+  imports: [
+    RecruitmentBatchHeaderComponent,
+    RecruitmentBatchTableComponent,
+    RecruitmentBatchDetailComponent,
+    LibCanvasComponent,
+    LibTabButtonComponent,
+  ],
   templateUrl: './recruitment-batch-page.component.html',
 })
 export class RecruitmentBatchPageComponent implements OnInit {

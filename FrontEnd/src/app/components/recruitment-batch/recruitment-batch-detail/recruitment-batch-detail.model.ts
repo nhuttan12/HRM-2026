@@ -1,15 +1,11 @@
-import { RecruitmentBatch } from "../recruitment-batch.model";
+import { RecruitmentBatch } from '../recruitment-batch.model';
 import {
   CandidateCertificate,
   CandidateDegree,
   CandidateSkillRow,
-} from "../../candidate-profile/candidate-profile-detail/candidate-profile-detail.model";
+} from '../../candidate-profile/candidate-profile-detail/candidate-profile-detail.model';
 
-export type RecruitmentBatchSection =
-  | 'overview'
-  | 'skills'
-  | 'degrees'
-  | 'certificates';
+export type RecruitmentBatchSection = 'overview' | 'skills' | 'degrees' | 'certificates';
 
 export type RecruitmentBatchFieldKey =
   | keyof RecruitmentBatch
@@ -68,4 +64,3 @@ export interface RecruitmentBatchDetail extends RecruitmentBatch {
   degrees: CandidateDegree[];
   certificates: CandidateCertificate[];
 }
-

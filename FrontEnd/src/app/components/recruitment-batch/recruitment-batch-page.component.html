@@ -7,22 +7,16 @@
   />
 
   <div class="flex gap-4 border-b border-surface-200 pb-2">
-    <button
-      (click)="onTabChange('proposal')"
-      [class]="activeTab() === 'proposal'
-        ? 'text-primary font-medium border-b-2 border-primary pb-1'
-        : 'text-surface-600 hover:text-surface-900'"
-    >
-      Đề xuất tuyển dụng
-    </button>
-    <button
-      (click)="onTabChange('batch')"
-      [class]="activeTab() === 'batch'
-        ? 'text-primary font-medium border-b-2 border-primary pb-1'
-        : 'text-surface-600 hover:text-surface-900'"
-    >
-      Đợt tuyển dụng
-    </button>
+    <lib-tab-button
+      label="Đề xuất tuyển dụng"
+      [active]="activeTab() === 'proposal'"
+      (clicked)="onTabChange('proposal')"
+    />
+    <lib-tab-button
+      label="Đợt tuyển dụng"
+      [active]="activeTab() === 'batch'"
+      (clicked)="onTabChange('batch')"
+    />
   </div>
 
   <div class="relative overflow-hidden">
@@ -50,12 +44,12 @@
     }
   </div>
 
-    <lib-canvas
-      [opened]="showDetailCanvas()"
-      [title]="'Chi tiáº¿t Ä‘á»£t tuyá»ƒn dá»¥ng'"
-      [width]="'100%'"
-      (closed)="onCloseDetailCanvas()"
-    >
+  <lib-canvas
+    [opened]="showDetailCanvas()"
+    [title]="'Chi tiáº¿t Ä‘á»£t tuyá»ƒn dá»¥ng'"
+    [width]="'100%'"
+    (closed)="onCloseDetailCanvas()"
+  >
     <lib-recruitment-batch-detail [data]="selectedBatch()" />
   </lib-canvas>
 </div>

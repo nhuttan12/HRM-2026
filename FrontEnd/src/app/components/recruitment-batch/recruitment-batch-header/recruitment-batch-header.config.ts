@@ -1,5 +1,5 @@
-import { HrmTableColumn } from "../../libs/lib-hrm-table/lib-hrm-table.component";
-import { RecruitmentBatch } from "../recruitment-batch.model";
+import { HrmTableColumn } from '../../libs/lib-hrm-table/lib-hrm-table.component';
+import { RecruitmentBatch } from '../recruitment-batch.model';
 
 export const columnsConfig: HrmTableColumn<RecruitmentBatch>[] = [
   {

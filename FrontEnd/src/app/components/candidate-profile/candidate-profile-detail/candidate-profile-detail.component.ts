@@ -8,8 +8,21 @@ import { LibInputComponent } from '../../libs/lib-input/lib-input.component';
 import { LibSkeletonComponent } from '../../libs/lib-skeleton/lib-skeleton.component';
 import { LibTextComponent } from '../../libs/lib-text/lib-text.component';
 import { CandidateProfileDetailSidebarComponent } from './candidate-profile-detail-sidebar/candidate-profile-detail-sidebar.component';
-import { candidateCertificateColumns, candidateDegreeColumns, candidateListFieldConfigs, candidateProfileFields, candidateSkillColumns, candidateWorkHistoryColumns } from './candidate-profile-detail.config';
-import { CandidateEditableSection, CandidateListSection, CandidateProfileDetail, CandidateProfileSection, CandidateSkillRow } from './candidate-profile-detail.model';
+import {
+  candidateCertificateColumns,
+  candidateDegreeColumns,
+  candidateListFieldConfigs,
+  candidateProfileFields,
+  candidateSkillColumns,
+  candidateWorkHistoryColumns,
+} from './candidate-profile-detail.config';
+import {
+  CandidateEditableSection,
+  CandidateListSection,
+  CandidateProfileDetail,
+  CandidateProfileSection,
+  CandidateSkillRow,
+} from './candidate-profile-detail.model';
 import { CandidateDetailService } from './candidate-profile-detail.service';
 import { CandidateProfileEditCanvasComponent } from './candidate-profile-edit-canvas/candidate-profile-edit-canvas.component';
 import { CandidateListRowSaveEvent } from './candidate-profile-edit-canvas/candidate-profile-edit-canvas.model';
@@ -31,8 +44,8 @@ import { CandidateListRowAddEvent } from './candidate-profile-add-canvas/candida
     LibTextComponent,
     LibSaveButtonComponent,
     CandidateProfileEditCanvasComponent,
-    CandidateProfileAddCanvasComponent
-],
+    CandidateProfileAddCanvasComponent,
+  ],
 })
 export class CandidateProfileDetailComponent {
   private readonly candidateService = inject(CandidateDetailService);

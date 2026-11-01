@@ -26,11 +26,22 @@ import { RecruitmentBatchDetailSidebarComponent } from './recruitment-batch-deta
 import { CandidateProfileAddCanvasComponent } from '../../candidate-profile/candidate-profile-detail/candidate-profile-add-canvas/candidate-profile-add-canvas.component';
 import { CandidateListRowAddEvent } from '../../candidate-profile/candidate-profile-detail/candidate-profile-add-canvas/candidate-profile-add-canvas.model';
 import type { CandidateListSection } from '../../candidate-profile/candidate-profile-detail/candidate-profile-detail.model';
+import { LibAddButtonComponent } from '../../libs/lib-command-button/lib-add-button/lib-add-button.component';
 
 @Component({
   selector: 'lib-recruitment-batch-detail',
   standalone: true,
-  imports: [ReactiveFormsModule, LibTextComponent, LibHrmTableComponent, LibInputComponent, LibEditButtonComponent, LibSaveButtonComponent, RecruitmentBatchDetailSidebarComponent, CandidateProfileAddCanvasComponent],
+  imports: [
+    ReactiveFormsModule,
+    LibTextComponent,
+    LibHrmTableComponent,
+    LibInputComponent,
+    LibEditButtonComponent,
+    LibAddButtonComponent,
+    LibSaveButtonComponent,
+    RecruitmentBatchDetailSidebarComponent,
+    CandidateProfileAddCanvasComponent,
+  ],
   templateUrl: './recruitment-batch-detail.component.html',
 })
 export class RecruitmentBatchDetailComponent {
@@ -59,7 +70,9 @@ export class RecruitmentBatchDetailComponent {
 
   readonly skillRows = computed<CandidateSkillRow[]>(() => this.detail()?.skills ?? []);
   readonly degreeRows = computed<CandidateDegree[]>(() => this.detail()?.degrees ?? []);
-  readonly certificateRows = computed<CandidateCertificate[]>(() => this.detail()?.certificates ?? []);
+  readonly certificateRows = computed<CandidateCertificate[]>(
+    () => this.detail()?.certificates ?? [],
+  );
 
   constructor() {
     this.overviewForm = this.fb.group(
@@ -168,7 +181,10 @@ export class RecruitmentBatchDetailComponent {
         certificateType: String(row['certificateType'] ?? row['type'] ?? ''),
         issueDate: String(row['issueDate'] ?? ''),
         expiryDate: row['expiryDate'] == null ? null : String(row['expiryDate']),
-        issuingOrganization: row['issuingOrganization'] == null ? null : String(row['issuingOrganization'] ?? row['issuedBy']),
+        issuingOrganization:
+          row['issuingOrganization'] == null
+            ? null
+            : String(row['issuingOrganization'] ?? row['issuedBy']),
       };
       this.detail.set({ ...current, certificates: [...current.certificates, next] });
     }
@@ -200,13 +216,22 @@ export class RecruitmentBatchDetailComponent {
   }
 
   resetRowForms(): void {
-    this.skillForm.reset({ skill: '', yearsOfExperience: 0, companyName: '' }, { emitEvent: false });
+    this.skillForm.reset(
+      { skill: '', yearsOfExperience: 0, companyName: '' },
+      { emitEvent: false },
+    );
     this.degreeForm.reset(
       { schoolName: '', graduationType: '', studyYear: null, graduationYear: null, major: '' },
       { emitEvent: false },
     );
     this.certificateForm.reset(
-      { certificateName: '', certificateType: '', issueDate: '', expiryDate: null, issuingOrganization: '' },
+      {
+        certificateName: '',
+        certificateType: '',
+        issueDate: '',
+        expiryDate: null,
+        issuingOrganization: '',
+      },
       { emitEvent: false },
     );
   }
@@ -236,7 +261,10 @@ export class RecruitmentBatchDetailComponent {
 
     const row = this.skillForm.value as CandidateSkillRow;
     this.detail.set({ ...current, skills: [...current.skills, row] });
-    this.skillForm.reset({ skill: '', yearsOfExperience: 0, companyName: '' }, { emitEvent: false });
+    this.skillForm.reset(
+      { skill: '', yearsOfExperience: 0, companyName: '' },
+      { emitEvent: false },
+    );
   }
 
   removeSkill(index: number): void {
@@ -286,7 +314,13 @@ export class RecruitmentBatchDetailComponent {
     const row = this.certificateForm.value as CandidateCertificate;
     this.detail.set({ ...current, certificates: [...current.certificates, row] });
     this.certificateForm.reset(
-      { certificateName: '', certificateType: '', issueDate: '', expiryDate: null, issuingOrganization: '' },
+      {
+        certificateName: '',
+        certificateType: '',
+        issueDate: '',
+        expiryDate: null,
+        issuingOrganization: '',
+      },
       { emitEvent: false },
     );
   }
@@ -303,16 +337,3 @@ export class RecruitmentBatchDetailComponent {
     });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,5 +1,13 @@
-import { HrmTableColumn } from "../../libs/lib-hrm-table/lib-hrm-table.component";
-import { CandidateCertificate, CandidateDegree, CandidateListSection, CandidateProfileField, CandidateSkillRow, CandidateWorkHistory, ListFieldConfig } from "./candidate-profile-detail.model";
+import { HrmTableColumn } from '../../libs/lib-hrm-table/lib-hrm-table.component';
+import {
+  CandidateCertificate,
+  CandidateDegree,
+  CandidateListSection,
+  CandidateProfileField,
+  CandidateSkillRow,
+  CandidateWorkHistory,
+  ListFieldConfig,
+} from './candidate-profile-detail.model';
 
 export const candidateProfileFields: CandidateProfileField[] = [
   { key: 'candidateCode', label: 'Mã ứng viên', width: 'half' },

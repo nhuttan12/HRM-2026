@@ -1,4 +1,4 @@
-import { CandidateListSection } from "../candidate-profile-detail.model";
+import { CandidateListSection } from '../candidate-profile-detail.model';
 
 export interface CandidateListRowAddEvent {
   section: CandidateListSection;

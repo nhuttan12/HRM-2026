@@ -1,25 +1,13 @@
 <div class="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
   <div>
-    <lib-text
-      tag="h2"
-      text="Đợt tuyển dụng"
-      className="text-xl font-semibold text-surface-900"
-    />
+    <lib-text tag="h2" text="Đợt tuyển dụng" className="text-xl font-semibold text-surface-900" />
 
-    <lib-text
-      tag="p"
-      className="mt-1 text-sm text-surface-500"
-      text="Quản lý các đợt tuyển dụng"
-    />
+    <lib-text tag="p" className="mt-1 text-sm text-surface-500" text="Quản lý các đợt tuyển dụng" />
   </div>
 
   <div class="flex items-center gap-2">
     @if (activeTab() === 'batch') {
-      <lib-dropdown-menu
-        [menuItems]="menuItems"
-        label="Thêm"
-        severity="success"
-      />
+      <lib-dropdown-menu [menuItems]="menuItems" label="Thêm" severity="success" />
     } @else {
       <lib-add-button (addAction)="onAddProposal()" />
     }

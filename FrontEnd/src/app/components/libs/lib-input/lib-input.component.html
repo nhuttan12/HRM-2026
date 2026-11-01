@@ -4,11 +4,7 @@
       {{ label() }}
 
       @if (required()) {
-        <lib-text
-          tag="span"
-          [text]="label()"
-          className="text-sm font-medium text-gray-700"
-        />
+        <lib-text tag="span" [text]="label()" className="text-sm font-medium text-gray-700" />
       }
     </label>
   }

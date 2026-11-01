@@ -1,9 +1,9 @@
-import { RecruitmentBatchField } from "./recruitment-batch-detail.model";
+import { RecruitmentBatchField } from './recruitment-batch-detail.model';
 import {
   candidateCertificateColumns,
   candidateDegreeColumns,
   candidateSkillColumns,
-} from "../../candidate-profile/candidate-profile-detail/candidate-profile-detail.config";
+} from '../../candidate-profile/candidate-profile-detail/candidate-profile-detail.config';
 
 export const recruitmentBatchFields: RecruitmentBatchField[] = [
   { key: 'code', label: 'Mã đợt tuyển dụng', width: 'half' },

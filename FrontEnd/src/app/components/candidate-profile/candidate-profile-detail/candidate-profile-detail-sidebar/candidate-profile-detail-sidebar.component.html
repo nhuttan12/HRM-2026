@@ -3,22 +3,16 @@
 >
   <!-- Header -->
   <div class="flex min-h-[76px] items-center gap-3 border-b border-gray-200 p-3">
-    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white">
+    <div
+      class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white"
+    >
       <i class="pi pi-user text-lg"></i>
     </div>
 
     <div class="overflow-hidden">
-      <lib-text
-        tag="h2"
-        text="Hồ sơ ứng viên"
-        className="mb-1 text-base font-bold text-gray-900"
-      />
+      <lib-text tag="h2" text="Hồ sơ ứng viên" className="mb-1 text-base font-bold text-gray-900" />
 
-      <lib-text
-        tag="p"
-        [text]="candidateCode() ?? ''"
-        className="mb-0 text-sm text-gray-500"
-      />
+      <lib-text tag="p" [text]="candidateCode() ?? ''" className="mb-0 text-sm text-gray-500" />
     </div>
   </div>
 
@@ -44,10 +38,7 @@
         >
           <i [class]="item.icon + ' w-[18px]'"></i>
 
-          <lib-text
-            tag="span"
-            [text]="item.label"
-          />
+          <lib-text tag="span" [text]="item.label" />
         </button>
       }
     </div>
@@ -57,9 +48,6 @@
   <div class="flex items-center gap-2 border-t border-gray-200 p-3 text-sm text-gray-500">
     <i class="pi pi-info-circle"></i>
 
-    <lib-text
-      tag="span"
-      text="Thông tin ứng viên"
-    />
+    <lib-text tag="span" text="Thông tin ứng viên" />
   </div>
 </aside>

@@ -1,4 +1,3 @@
-
 import { Component, input, output, signal } from '@angular/core';
 import { candidateProfileSidebarItems } from './candidate-profile-detail-sidebar.config';
 import { CandidateProfileSection } from '../candidate-profile-detail.model';

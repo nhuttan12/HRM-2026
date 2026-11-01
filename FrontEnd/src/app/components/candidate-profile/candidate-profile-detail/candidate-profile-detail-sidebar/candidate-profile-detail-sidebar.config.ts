@@ -1,4 +1,4 @@
-import { CandidateProfileSection } from "../candidate-profile-detail.model";
+import { CandidateProfileSection } from '../candidate-profile-detail.model';
 
 export interface CandidateProfileSidebarItem {
   id: CandidateProfileSection;

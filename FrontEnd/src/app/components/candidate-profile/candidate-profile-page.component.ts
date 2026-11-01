@@ -99,9 +99,3 @@ export class CandidateProfilePageComponent implements AfterViewInit {
     this.canvasOpened.set(true);
   }
 }
-
-
-
-
-
-

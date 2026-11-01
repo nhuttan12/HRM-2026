@@ -1,9 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import {
-  LibCommandButtonSeverity,
-  LibCommandButtonSize,
-} from './lib-command-button.model';
+import { LibCommandButtonSeverity, LibCommandButtonSize } from './lib-command-button.model';
 
 @Component({
   selector: 'lib-command-button',
@@ -18,7 +15,7 @@ export class LibCommandButtonComponent {
   size = input<LibCommandButtonSize>('small');
   disabled = input(false);
   loading = input(false);
-  
+
   clicked = output<void>();
 
   onClick(): void {

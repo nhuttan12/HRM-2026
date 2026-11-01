@@ -1,14 +1,9 @@
 <div class="flex min-h-full w-full flex-col gap-6 p-6">
   <!-- Header -->
-  <app-candidate-profile-header
-    (searchAction)="onSearch($event)"
-    (addAction)="onAdd()"
-  />
+  <app-candidate-profile-header (searchAction)="onSearch($event)" (addAction)="onAdd()" />
 
   <!-- Table -->
-  <app-candidate-profile-table
-    (candidateClick)="onCandidateClick($event)"
-  />
+  <app-candidate-profile-table (candidateClick)="onCandidateClick($event)" />
 </div>
 
 <lib-canvas
@@ -18,7 +13,5 @@
   [opened]="canvasOpened()"
   (closed)="onCanvasClosed()"
 >
-  <app-candidate-profile-detail
-    [candidateCode]="selectedCandidateCode()"
-  />
+  <app-candidate-profile-detail [candidateCode]="selectedCandidateCode()" />
 </lib-canvas>

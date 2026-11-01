@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write ."
   },
   "private": true,
   "packageManager": "npm@12.0.2",

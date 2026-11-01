@@ -1,15 +1,15 @@
 import { Component, input, model, output } from '@angular/core';
-import { HrmTableColumn, LibHrmTableComponent } from '../../libs/lib-hrm-table/lib-hrm-table.component';
+import {
+  HrmTableColumn,
+  LibHrmTableComponent,
+} from '../../libs/lib-hrm-table/lib-hrm-table.component';
 import { LibSkeletonComponent } from '../../libs/lib-skeleton/lib-skeleton.component';
 import { RecruitmentBatch } from '../recruitment-batch.model';
 
 @Component({
   selector: 'app-recruitment-batch-table',
   standalone: true,
-  imports: [
-    LibHrmTableComponent,
-    LibSkeletonComponent,
-  ],
+  imports: [LibHrmTableComponent, LibSkeletonComponent],
   templateUrl: './recruitment-batch-table.component.html',
 })
 export class RecruitmentBatchTableComponent {

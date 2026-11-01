@@ -1,16 +1,12 @@
 <div class="block w-full">
-  <div
-    class="max-h-[32rem] w-full overflow-auto rounded-xl border border-gray-200 bg-white"
-  >
+  <div class="max-h-[32rem] w-full overflow-auto rounded-xl border border-gray-200 bg-white">
     <table
       class="w-full min-w-[800px] border-separate border-spacing-0 text-left text-sm text-gray-700"
     >
       <thead class="sticky top-0 z-10 bg-gray-50">
         <tr>
           @if (selectable()) {
-            <th
-              class="w-12 border-b border-gray-200 px-4 py-3 text-center"
-            >
+            <th class="w-12 border-b border-gray-200 px-4 py-3 text-center">
               <input
                 type="checkbox"
                 class="size-4 cursor-pointer accent-blue-600"
@@ -31,9 +27,7 @@
           }
 
           @if (showEditAction()) {
-            <th class="w-20 px-4 py-3 text-center">
-              Hành động
-            </th>
+            <th class="w-20 px-4 py-3 text-center">Hành động</th>
           }
         </tr>
       </thead>
@@ -62,9 +56,7 @@
             }
 
             @for (column of columns(); track column.field) {
-              <td
-                class="whitespace-nowrap border-b border-gray-200 px-4 py-3 last:border-b-0"
-              >
+              <td class="whitespace-nowrap border-b border-gray-200 px-4 py-3 last:border-b-0">
                 {{ getCellValue(row, column.field) }}
               </td>
             }
@@ -73,8 +65,7 @@
               <td class="px-4 py-3 text-center">
                 <button
                   type="button"
-                  class="inline-flex items-center justify-center rounded p-2
-                        text-gray-500 hover:bg-gray-100 hover:text-blue-600"
+                  class="inline-flex items-center justify-center rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-blue-600"
                   aria-label="Sửa dòng"
                   (click)="onEditRow(row); $event.stopPropagation()"
                 >

@@ -1,17 +1,9 @@
-<lib-canvas
-  [title]="title()"
-  width="1000px"
-  (closed)="onCanvasClosed()"
->
+<lib-canvas [title]="title()" width="1000px" (closed)="onCanvasClosed()">
   @if (section(); as currentSection) {
     @if (row(); as currentRow) {
       <div class="space-y-6">
         <div>
-          <lib-text
-            tag="h2"
-            [text]="title()"
-            className="text-xl font-semibold"
-          />
+          <lib-text tag="h2" [text]="title()" className="text-xl font-semibold" />
 
           <lib-text
             tag="p"
@@ -21,14 +13,11 @@
         </div>
 
         <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-          @for (
-            field of fieldConfigs[currentSection];
-            track field.key
-          ) {
+          @for (field of fieldConfigs[currentSection]; track field.key) {
             <div
               [class]="{
                 'min-w-0': true,
-                'md:col-span-2': field.type === 'textarea'
+                'md:col-span-2': field.type === 'textarea',
               }"
             >
               <lib-input

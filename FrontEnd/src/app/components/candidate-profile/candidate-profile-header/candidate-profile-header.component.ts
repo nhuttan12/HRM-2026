@@ -5,11 +5,16 @@ import { LibSearchButtonComponent } from '../../libs/lib-command-button/lib-sear
 import { LibRemoveButtonComponent } from '../../libs/lib-command-button/lib-remove-button/lib-remove-button.component';
 import { LibTextComponent } from '../../libs/lib-text/lib-text.component';
 
-
 @Component({
   selector: 'app-candidate-profile-header',
   standalone: true,
-  imports: [FormsModule, LibAddButtonComponent, LibSearchButtonComponent, LibRemoveButtonComponent, LibTextComponent],
+  imports: [
+    FormsModule,
+    LibAddButtonComponent,
+    LibSearchButtonComponent,
+    LibRemoveButtonComponent,
+    LibTextComponent,
+  ],
   templateUrl: './candidate-profile-header.component.html',
 })
 export class LibCandidateProfileHeaderComponent {

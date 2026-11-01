@@ -2,16 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 
 export type LibTextTag =
-  | 'p'
-  | 'span'
-  | 'strong'
-  | 'em'
-  | 'small'
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'h4'
-  | 'h5';
+  'p' | 'span' | 'strong' | 'em' | 'small' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
 
 @Component({
   selector: 'lib-text',

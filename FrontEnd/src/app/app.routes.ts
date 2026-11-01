@@ -14,14 +14,16 @@ export const routes: Routes = [
       {
         path: 'candidate-profile',
         loadComponent: () =>
-          import('./components/candidate-profile/candidate-profile-page.component')
-            .then((m) => m.CandidateProfilePageComponent),
+          import('./components/candidate-profile/candidate-profile-page.component').then(
+            (m) => m.CandidateProfilePageComponent,
+          ),
       },
       {
         path: 'recruitment-batch',
         loadComponent: () =>
-          import('./components/recruitment-batch/recruitment-batch-page.component')
-            .then((m) => m.RecruitmentBatchPageComponent),
+          import('./components/recruitment-batch/recruitment-batch-page.component').then(
+            (m) => m.RecruitmentBatchPageComponent,
+          ),
       },
     ],
   },

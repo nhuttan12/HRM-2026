@@ -1,8 +1,6 @@
 <div class="block w-full">
   @if (loading()) {
-    <div
-      class="w-full overflow-x-auto rounded-xl border border-surface-200 bg-surface-0"
-    >
+    <div class="w-full overflow-x-auto rounded-xl border border-surface-200 bg-surface-0">
       <!-- Header -->
       <div
         class="grid min-w-[1190px] grid-cols-[40px_150px_220px_260px_160px_220px_140px] items-center gap-4 border-b border-surface-200 bg-surface-50 px-4 py-3.5"
@@ -10,10 +8,7 @@
         <lib-skeleton width="40px" height="20px" />
 
         @for (column of columns; track column.field) {
-          <lib-skeleton
-            [width]="column.width ?? '150px'"
-            height="20px"
-          />
+          <lib-skeleton [width]="column.width ?? '150px'" height="20px" />
         }
       </div>
 
@@ -26,10 +21,7 @@
           <lib-skeleton width="40px" height="20px" />
 
           @for (column of columns; track column.field) {
-            <lib-skeleton
-              [width]="column.width ?? '150px'"
-              height="20px"
-            />
+            <lib-skeleton [width]="column.width ?? '150px'" height="20px" />
           }
         </div>
       }

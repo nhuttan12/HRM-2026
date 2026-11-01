@@ -1,9 +1,7 @@
 ﻿<button
   type="button"
   class="fixed inset-0 z-[1000] h-full w-full cursor-default border-0 bg-black/[0.35] p-0 opacity-0 invisible pointer-events-none"
-  [style.transitionProperty]="
-    transitionEnabled() ? 'opacity, visibility' : 'none'
-  "
+  [style.transitionProperty]="transitionEnabled() ? 'opacity, visibility' : 'none'"
   [class.duration-300]="transitionEnabled()"
   [class.ease-in-out]="transitionEnabled()"
   [class.opacity-100]="isOpen()"
@@ -16,37 +14,23 @@
 ></button>
 
 <aside
-  class="fixed inset-y-0 right-0 z-[1001] flex h-full w-full max-w-full flex-col
-         bg-white shadow-[-8px_0_32px_rgb(0_0_0_/_12%)]"
+  class="fixed inset-y-0 right-0 z-[1001] flex h-full w-full max-w-full flex-col bg-white shadow-[-8px_0_32px_rgb(0_0_0_/_12%)]"
   [style.width]="width()"
   [class.translate-x-full]="!isOpen()"
   [class.transition-transform]="transitionEnabled()"
   [style.transitionDuration]="transitionEnabled() ? '450ms' : '0s'"
   [style.transitionDelay]="'0s'"
-  [style.transitionTimingFunction]="
-    transitionEnabled()
-      ? 'cubic-bezier(0.22,1,0.36,1)'
-      : ''
-  "
+  [style.transitionTimingFunction]="transitionEnabled() ? 'cubic-bezier(0.22,1,0.36,1)' : ''"
 >
   <!-- Header -->
-  <header
-    class="flex min-h-16 shrink-0 items-center justify-between border-b border-gray-200 px-6"
-  >
-    <lib-text
-      tag="h2"
-      [text]="title()"
-      className="m-0 text-lg font-semibold"
-    />
+  <header class="flex min-h-16 shrink-0 items-center justify-between border-b border-gray-200 px-6">
+    <lib-text tag="h2" [text]="title()" className="m-0 text-lg font-semibold" />
 
     <lib-close-button size="large" (closed)="onClose()" />
   </header>
 
   <!-- Body -->
-  <section
-    class="min-h-0 flex-1 overflow-y-auto overscroll-contain p-6"
-  >
+  <section class="min-h-0 flex-1 overflow-y-auto overscroll-contain p-6">
     <ng-content />
   </section>
 </aside>
-

@@ -9,11 +9,7 @@
       @case ('overview') {
         <section>
           <div class="mb-6 flex items-center justify-between gap-4">
-            <lib-text
-              tag="h2"
-              text="Tổng quan"
-              className="text-xl font-semibold"
-            />
+            <lib-text tag="h2" text="Tổng quan" className="text-xl font-semibold" />
 
             @if (isEditingOverview()) {
               <lib-save-button (saveAction)="saveOverview()" />
@@ -47,13 +43,7 @@
           <div class="mb-6 flex items-center justify-between gap-4">
             <lib-text tag="h2" text="Kỹ năng" className="text-xl font-semibold" />
 
-            <button
-              type="button"
-              class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
-              (click)="onAddSectionItem('skills')"
-            >
-              Thêm
-            </button>
+            <lib-add-button (addAction)="onAddSectionItem('skills')" />
           </div>
 
           <lib-hrm-table
@@ -71,13 +61,7 @@
           <div class="mb-6 flex items-center justify-between gap-4">
             <lib-text tag="h2" text="Bằng cấp" className="text-xl font-semibold" />
 
-            <button
-              type="button"
-              class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
-              (click)="onAddSectionItem('degrees')"
-            >
-              Thêm
-            </button>
+            <lib-add-button (addAction)="onAddSectionItem('degrees')" />
           </div>
 
           <lib-hrm-table
@@ -95,13 +79,7 @@
           <div class="mb-6 flex items-center justify-between gap-4">
             <lib-text tag="h2" text="Chứng chỉ" className="text-xl font-semibold" />
 
-            <button
-              type="button"
-              class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
-              (click)="onAddSectionItem('certificates')"
-            >
-              Thêm
-            </button>
+            <lib-add-button (addAction)="onAddSectionItem('certificates')" />
           </div>
 
           <lib-hrm-table
@@ -115,18 +93,10 @@
       }
 
       @default {
-        <lib-text
-          tag="p"
-          text="Không tìm thấy nội dung."
-          className="text-sm text-gray-500"
-        />
+        <lib-text tag="p" text="Không tìm thấy nội dung." className="text-sm text-gray-500" />
       }
     }
   </main>
 
-  <app-candidate-profile-add-canvas
-    (addRow)="onAddListRow($event)"
-  />
+  <app-candidate-profile-add-canvas (addRow)="onAddListRow($event)" />
 </div>
-
-

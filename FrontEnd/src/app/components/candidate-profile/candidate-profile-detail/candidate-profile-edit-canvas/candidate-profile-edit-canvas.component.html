@@ -1,17 +1,9 @@
-<lib-canvas
-  [title]="title"
-  width="1000px"
-  (closed)="onCanvasClosed()"
->
+<lib-canvas [title]="title" width="1000px" (closed)="onCanvasClosed()">
   @if (section(); as currentSection) {
     @if (row(); as currentRow) {
       <div class="space-y-6">
         <div>
-          <lib-text
-            tag="h2"
-            [text]="title"
-            className="text-xl font-semibold"
-          />
+          <lib-text tag="h2" [text]="title" className="text-xl font-semibold" />
           <lib-text
             tag="p"
             className="mt-1 text-sm text-gray-500"

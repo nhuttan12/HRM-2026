@@ -6,9 +6,8 @@
     "types": []
   },
   "include": [
-    "src/**/*.ts"
-,       "src/app/components/candidate-profile/candidate-profile-header/candidate-profile-header.component.html"  ],
-  "exclude": [
-    "src/**/*.spec.ts"
-  ]
+    "src/**/*.ts",
+    "src/app/components/candidate-profile/candidate-profile-header/candidate-profile-header.component.html"
+  ],
+  "exclude": ["src/**/*.spec.ts"]
 }
