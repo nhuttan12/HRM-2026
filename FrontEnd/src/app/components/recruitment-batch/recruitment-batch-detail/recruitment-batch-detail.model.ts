@@ -43,10 +43,10 @@ export interface RecruitmentBatchDetail extends RecruitmentBatch {
   approvedBy?: string;
 
   // Thông tin mở / duyệt / đóng đợt
-  openedBy?: string;
-  openedDate?: string;
+  openedBy?: string | null;
+  openedDate?: string | null;
   approvedDate?: string;
-  closedDate?: string;
+  closedDate?: string | null;
 
   // Thông tin quản trị
   createdBy?: string;

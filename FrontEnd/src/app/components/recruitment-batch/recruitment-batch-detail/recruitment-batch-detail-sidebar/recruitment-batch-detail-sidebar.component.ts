@@ -2,11 +2,12 @@ import { Component, input, output, signal } from '@angular/core';
 import { LibTextComponent } from '../../../libs/lib-text/lib-text.component';
 import { RecruitmentBatchSection } from '../recruitment-batch-detail.model';
 import { recruitmentBatchSidebarItems } from './recruitment-batch-detail-sidebar.config';
+import { LibSidebarMenuItemComponent } from '../../../libs/lib-command-button/lib-sidebar-menu-item/lib-sidebar-menu-item.component';
 
 @Component({
   selector: 'app-recruitment-batch-detail-sidebar',
   standalone: true,
-  imports: [LibTextComponent],
+  imports: [LibTextComponent, LibSidebarMenuItemComponent],
   templateUrl: './recruitment-batch-detail-sidebar.component.html',
 })
 export class RecruitmentBatchDetailSidebarComponent {

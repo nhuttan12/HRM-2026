@@ -6,6 +6,7 @@ import { LibEditButtonComponent } from '../../libs/lib-command-button/lib-edit-b
 import { LibSaveButtonComponent } from '../../libs/lib-command-button/lib-save-button/lib-save-button.component';
 import { LibTextComponent } from '../../libs/lib-text/lib-text.component';
 import { RecruitmentBatch } from '../recruitment-batch.model';
+import { RecruitmentBatchDetailService } from './recruitment-batch-detail.service';
 import {
   CandidateCertificate,
   CandidateDegree,
@@ -46,6 +47,9 @@ import { LibAddButtonComponent } from '../../libs/lib-command-button/lib-add-but
 })
 export class RecruitmentBatchDetailComponent {
   private readonly fb = inject(FormBuilder);
+  private readonly recruitmentBatchDetailService = inject(
+    RecruitmentBatchDetailService,
+  );
   data = input<RecruitmentBatch | null>(null);
 
   readonly addCanvas = viewChild(CandidateProfileAddCanvasComponent);
@@ -112,24 +116,16 @@ export class RecruitmentBatchDetailComponent {
         return;
       }
 
-      const nextDetail: RecruitmentBatchDetail = {
-        ...(item as unknown as RecruitmentBatchDetail),
-        skills: Array.isArray((item as unknown as Record<string, unknown>)['skills'])
-          ? ((item as unknown as Record<string, unknown>)['skills'] as CandidateSkillRow[])
-          : [],
-        degrees: Array.isArray((item as unknown as Record<string, unknown>)['degrees'])
-          ? ((item as unknown as Record<string, unknown>)['degrees'] as CandidateDegree[])
-          : [],
-        certificates: Array.isArray((item as unknown as Record<string, unknown>)['certificates'])
-          ? ((item as unknown as Record<string, unknown>)['certificates'] as CandidateCertificate[])
-          : [],
-      };
-
-      this.detail.set(nextDetail);
-      this.overviewForm.patchValue(nextDetail as unknown as Record<string, unknown>, {
-        emitEvent: false,
-      });
-      this.resetRowForms();
+      this.recruitmentBatchDetailService
+        .getByCode(item.code)
+        .subscribe((detail) => {
+          this.detail.set(detail);
+          this.overviewForm.patchValue(
+            detail as unknown as Record<string, unknown>,
+            { emitEvent: false },
+          );
+          this.resetRowForms();
+        });
     });
   }
 
