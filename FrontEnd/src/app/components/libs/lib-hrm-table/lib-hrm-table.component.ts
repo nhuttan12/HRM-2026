@@ -17,6 +17,7 @@ export class LibHrmTableComponent<T> {
   data = input<T[]>([]);
   columns = input<HrmTableColumn<T>[]>([]);
   selectable = input(false);
+  maxHeight = input('32rem');
 
   selectedData = model<T[]>([]);
   selectionChange = output<T[]>();

@@ -51,6 +51,7 @@ export class RecruitmentBatchDetailComponent {
     RecruitmentBatchDetailService,
   );
   data = input<RecruitmentBatch | null>(null);
+  readonly adding = input(false);
 
   readonly addCanvas = viewChild(CandidateProfileAddCanvasComponent);
   readonly selectedRows = signal<Partial<Record<CandidateListSection, unknown[]>>>({});
@@ -110,6 +111,12 @@ export class RecruitmentBatchDetailComponent {
 
     effect(() => {
       const item = this.data();
+      if (this.adding()) {
+        this.detail.set(null);
+        this.isEditingOverview.set(true);
+        this.overviewForm.reset({}, { emitEvent: false });
+        return;
+      }
       if (!item) {
         this.detail.set(null);
         this.overviewForm.reset({}, { emitEvent: false });
@@ -237,6 +244,10 @@ export class RecruitmentBatchDetailComponent {
   }
 
   saveOverview(): void {
+    if (this.adding()) {
+      // TODO: Gọi API tạo đợt tuyển dụng khi tích hợp backend.
+      return;
+    }
     const current = this.detail();
     if (!current || this.overviewForm.invalid) {
       return;

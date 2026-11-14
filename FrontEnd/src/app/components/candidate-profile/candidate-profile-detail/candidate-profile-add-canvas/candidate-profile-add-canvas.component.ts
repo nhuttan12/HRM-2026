@@ -1,4 +1,4 @@
-import { Component, output, signal, viewChild } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 
 import { LibCanvasComponent } from '../../../libs/lib-canvas/lib-canvas.component';
 import { LibInputComponent } from '../../../libs/lib-input/lib-input.component';
@@ -16,7 +16,7 @@ import { CandidateListRowAddEvent } from './candidate-profile-add-canvas.model';
   imports: [LibCanvasComponent, LibInputComponent, LibTextComponent, LibSaveButtonComponent],
 })
 export class CandidateProfileAddCanvasComponent {
-  private readonly canvas = viewChild(LibCanvasComponent);
+  readonly opened = signal(false);
 
   readonly section = signal<CandidateListSection | null>(null);
 
@@ -47,7 +47,7 @@ export class CandidateProfileAddCanvasComponent {
     this.row.set(emptyRow);
     this.title.set(this.titles[section]);
 
-    this.canvas()?.open();
+    this.opened.set(true);
   }
 
   formatFieldValue(value: unknown): string {
@@ -71,11 +71,12 @@ export class CandidateProfileAddCanvasComponent {
       row,
     });
 
-    this.canvas()?.close();
+    this.opened.set(false);
   }
 
   onCanvasClosed(): void {
     this.section.set(null);
     this.row.set(null);
+    this.opened.set(false);
   }
 }

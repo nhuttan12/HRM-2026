@@ -17,6 +17,7 @@ export class RecruitmentBatchTableComponent {
   columns = input<HrmTableColumn<RecruitmentBatch>[]>([]);
   loading = input(false);
   selectable = input(true);
+  maxHeight = input('32rem');
 
   selectedData = model<RecruitmentBatch[]>([]);
 

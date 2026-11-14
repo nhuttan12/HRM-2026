@@ -11,9 +11,10 @@ export class LibSidebarMenuItemComponent {
   label = input('');
   icon = input<string>();
   active = input(false);
+  disabled = input(false);
   selected = output<void>();
 
   onClick(): void {
-    this.selected.emit();
+    if (!this.disabled()) this.selected.emit();
   }
 }

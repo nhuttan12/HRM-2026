@@ -1,0 +1,15 @@
+<div class="pointer-events-none fixed right-4 top-4 z-[2000] flex w-[min(24rem,calc(100vw-2rem))] flex-col gap-3">
+  @for (toast of toastService.toasts(); track toast.id) {
+    <div
+      class="pointer-events-auto flex items-start gap-3 rounded-lg border p-4 shadow-lg"
+      [class]="styles[toast.severity]"
+      [attr.role]="toast.severity === 'error' ? 'alert' : 'status'"
+    >
+      <i [class]="icons[toast.severity]" aria-hidden="true"></i>
+      <p class="min-w-0 flex-1 break-words text-sm">{{ toast.message }}</p>
+      <button type="button" class="rounded p-1 hover:opacity-70" aria-label="Đóng thông báo" (click)="toastService.dismiss(toast.id)">
+        <i class="pi pi-times" aria-hidden="true"></i>
+      </button>
+    </div>
+  }
+</div>

@@ -1,6 +1,7 @@
 ﻿<div class="flex h-full w-full overflow-hidden">
   <app-recruitment-batch-detail-sidebar
     [batchCode]="detail()?.code ?? null"
+    [overviewOnly]="adding()"
     (sectionChange)="onSectionChange($event)"
   />
 
@@ -12,7 +13,7 @@
             <lib-text tag="h2" text="Tổng quan" className="text-xl font-semibold" />
 
             @if (isEditingOverview()) {
-              <lib-save-button (saveAction)="saveOverview()" />
+              <lib-save-button [label]="adding() ? 'Mở đợt tuyển dụng' : 'Lưu'" (saveAction)="saveOverview()" />
             } @else {
               <lib-edit-button (editAction)="onEditOverview()" />
             }
@@ -28,6 +29,8 @@
               >
                 <lib-input
                   [label]="getFieldLabel(field.key)"
+                  [type]="adding() && (field.key === 'startDate' || field.key === 'endDate') ? 'date' : adding() && (field.key === 'quantity' || field.key === 'experienceYears') ? 'number' : 'text'"
+                  [disabled]="adding() && field.key === 'status'"
                   [value]="overviewForm.get(field.key)?.value ?? ''"
                   [isView]="!isEditingOverview()"
                   (valueChange)="overviewForm.get(field.key)?.setValue($event)"

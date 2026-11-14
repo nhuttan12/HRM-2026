@@ -12,11 +12,13 @@ import { LibSidebarMenuItemComponent } from '../../../libs/lib-command-button/li
 })
 export class RecruitmentBatchDetailSidebarComponent {
   readonly sectionChange = output<RecruitmentBatchSection>();
+  readonly overviewOnly = input(false);
   readonly activeSection = signal<RecruitmentBatchSection>('overview');
   readonly menuItems = recruitmentBatchSidebarItems;
   readonly batchCode = input<string | null>(null);
 
   selectSection(id: RecruitmentBatchSection): void {
+    if (this.overviewOnly() && id !== 'overview') return;
     this.activeSection.set(id);
     this.sectionChange.emit(id);
   }

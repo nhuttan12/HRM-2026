@@ -84,7 +84,11 @@
               <div class="mb-6 flex items-center justify-between gap-4">
                 <lib-text tag="h2" text="Tổng quan" className="text-xl font-semibold" />
 
-                <lib-edit-button (editAction)="onEditSection('overview')" />
+                @if (!isEdit()) {
+                  <lib-edit-button (editAction)="onEditSection('overview')" />
+                } @else {
+                  <lib-save-button (saveAction)="onSaveSection()" />
+                }
               </div>
 
               <div class="grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2">
@@ -117,7 +121,11 @@
                     className="text-xl font-semibold"
                   />
 
-                  <lib-edit-button (editAction)="onEditSection('socialLinks')" />
+                  @if (!isEdit()) {
+                    <lib-edit-button (editAction)="onEditSection('socialLinks')" />
+                  } @else {
+                    <lib-save-button (saveAction)="onSaveSection()" />
+                  }
                 </div>
 
                 <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -151,7 +159,11 @@
                 <div class="mb-4 flex items-center justify-between gap-4">
                   <lib-text tag="h2" text="Thông tin thân nhân" className="text-xl font-semibold" />
 
-                  <lib-edit-button (editAction)="onEditSection('relatives')" />
+                  @if (!isEdit()) {
+                    <lib-edit-button (editAction)="onEditSection('relatives')" />
+                  } @else {
+                    <lib-save-button (saveAction)="onSaveSection()" />
+                  }
                 </div>
 
                 @for (relative of item.relatives; track $index) {

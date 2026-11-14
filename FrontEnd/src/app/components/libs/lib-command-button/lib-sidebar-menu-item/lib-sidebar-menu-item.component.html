@@ -5,11 +5,16 @@
   [class.text-blue-700]="active()"
   [class.font-semibold]="active()"
   [class.text-gray-600]="!active()"
-  [class.hover:bg-gray-100]="!active()"
+  [class.hover:bg-gray-100]="!active() && !disabled()"
+  [class.opacity-50]="disabled()"
+  [class.cursor-not-allowed]="disabled()"
+  [attr.aria-disabled]="disabled()"
+  [disabled]="disabled()"
   (click)="onClick()"
 >
   @if (icon()) {
     <i [class]="icon() + ' w-[18px]'"></i>
   }
   <lib-text tag="span" [text]="label()" />
+  @if (disabled()) { <i class="pi pi-ban ml-auto" aria-hidden="true"></i> }
 </button>

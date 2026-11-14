@@ -1,4 +1,4 @@
-import { Component, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { LibCommandButtonComponent } from '../lib-command-button.component';
 
 @Component({
@@ -8,6 +8,7 @@ import { LibCommandButtonComponent } from '../lib-command-button.component';
   templateUrl: './lib-add-button.component.html',
 })
 export class LibAddButtonComponent {
+  readonly label = input('Thêm');
   readonly addAction = output<void>();
 
   onAdd(): void {

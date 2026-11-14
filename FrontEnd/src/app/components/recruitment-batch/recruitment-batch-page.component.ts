@@ -1,5 +1,6 @@
 ﻿import { Component, signal, computed, OnInit } from '@angular/core';
 import { RecruitmentBatchHeaderComponent } from './recruitment-batch-header/recruitment-batch-header.component';
+import { RecruitmentBatchAddingComponent } from './recruitment-batch-adding/recruitment-batch-adding.component';
 import { RecruitmentBatchTableComponent } from './recruitment-batch-table/recruitment-batch-table.component';
 import { RecruitmentBatchDetailComponent } from './recruitment-batch-detail/recruitment-batch-detail.component';
 import { LibCanvasComponent } from '../libs/lib-canvas/lib-canvas.component';
@@ -13,6 +14,7 @@ import { ActiveTab, RecruitmentBatch, RecruitmentProposal } from './recruitment-
   standalone: true,
   imports: [
     RecruitmentBatchHeaderComponent,
+    RecruitmentBatchAddingComponent,
     RecruitmentBatchTableComponent,
     RecruitmentBatchDetailComponent,
     LibCanvasComponent,
@@ -48,13 +50,11 @@ export class RecruitmentBatchPageComponent implements OnInit {
   }
 
   onAddDirect(): void {
-    this.addMode.set('direct');
     this.showAddCanvas.set(true);
   }
 
   onAddFromProposal(): void {
     this.addMode.set('from-proposal');
-    this.showAddCanvas.set(true);
   }
 
   onAddProposal(): void {

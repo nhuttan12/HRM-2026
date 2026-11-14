@@ -1,0 +1,7 @@
+<lib-canvas [opened]="opened()" title="Mở đợt tuyển dụng trực tiếp" width="100%" (closed)="closed.emit()">
+  @if (opened()) {
+    <lib-recruitment-batch-detail
+      [adding]="true"
+    />
+  }
+</lib-canvas>

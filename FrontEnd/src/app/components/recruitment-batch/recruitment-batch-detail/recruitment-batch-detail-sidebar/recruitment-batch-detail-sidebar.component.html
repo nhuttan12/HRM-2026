@@ -28,6 +28,7 @@
           [label]="item.label"
           [icon]="item.icon"
           [active]="activeSection() === item.id"
+          [disabled]="overviewOnly() && item.id !== 'overview'"
           (selected)="selectSection(item.id)"
         />
       }

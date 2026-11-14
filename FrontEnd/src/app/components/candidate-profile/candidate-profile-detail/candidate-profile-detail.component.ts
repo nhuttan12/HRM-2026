@@ -59,6 +59,7 @@ export class CandidateProfileDetailComponent {
   readonly editingDraft = signal<CandidateProfileDetail | null>(null);
   readonly editingListSection = signal<CandidateListSection | null>(null);
   readonly editingListRow = signal<Record<string, unknown> | null>(null);
+  readonly isEdit = signal(false);
   readonly editCanvas = viewChild(CandidateProfileEditCanvasComponent);
   readonly addCanvas = viewChild(CandidateProfileAddCanvasComponent);
 
@@ -127,6 +128,15 @@ export class CandidateProfileDetailComponent {
     }
 
     this.editingSection.set(section);
+    this.isEdit.set(true);
+  }
+
+  onSaveSection(): void {
+    this.onSave();
+
+    this.editingSection.set(null);
+    this.editingDraft.set(null);
+    this.isEdit.set(false);
   }
 
   onAddSectionItem(section: CandidateListSection): void {

@@ -1,4 +1,4 @@
-<lib-canvas [title]="title()" width="1000px" (closed)="onCanvasClosed()">
+<lib-canvas [title]="title()" width="1000px" [opened]="opened()" (closed)="onCanvasClosed()">
   @if (section(); as currentSection) {
     @if (row(); as currentRow) {
       <div class="space-y-6">

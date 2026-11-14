@@ -23,6 +23,7 @@
     @if (activeTab() === 'proposal') {
       <app-recruitment-batch-table
         [data]="proposalBatches()"
+        maxHeight="max(12rem, calc(100dvh - 16rem))"
         [columns]="columns"
         [loading]="loading()"
         [selectable]="true"
@@ -43,6 +44,11 @@
       />
     }
   </div>
+
+  <lib-recruitment-batch-adding
+    [opened]="showAddCanvas()"
+    (closed)="showAddCanvas.set(false)"
+  />
 
   <lib-canvas
     [opened]="showDetailCanvas()"
