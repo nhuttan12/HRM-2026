@@ -47,9 +47,7 @@ import { LibAddButtonComponent } from '../../libs/lib-command-button/lib-add-but
 })
 export class RecruitmentBatchDetailComponent {
   private readonly fb = inject(FormBuilder);
-  private readonly recruitmentBatchDetailService = inject(
-    RecruitmentBatchDetailService,
-  );
+  private readonly recruitmentBatchDetailService = inject(RecruitmentBatchDetailService);
   data = input<RecruitmentBatch | null>(null);
   readonly adding = input(false);
 
@@ -123,16 +121,13 @@ export class RecruitmentBatchDetailComponent {
         return;
       }
 
-      this.recruitmentBatchDetailService
-        .getByCode(item.code)
-        .subscribe((detail) => {
-          this.detail.set(detail);
-          this.overviewForm.patchValue(
-            detail as unknown as Record<string, unknown>,
-            { emitEvent: false },
-          );
-          this.resetRowForms();
+      this.recruitmentBatchDetailService.getByCode(item.code).subscribe((detail) => {
+        this.detail.set(detail);
+        this.overviewForm.patchValue(detail as unknown as Record<string, unknown>, {
+          emitEvent: false,
         });
+        this.resetRowForms();
+      });
     });
   }
 

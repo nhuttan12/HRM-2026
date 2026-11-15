@@ -19,6 +19,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'recruitment-tracking',
+        loadComponent: () =>
+          import('./components/recruitment-tracking/recruitment-tracking.component').then(
+            (m) => m.RecruitmentTrackingComponent,
+          ),
+      },
+      {
         path: 'recruitment-batch',
         loadComponent: () =>
           import('./components/recruitment-batch/recruitment-batch-page.component').then(

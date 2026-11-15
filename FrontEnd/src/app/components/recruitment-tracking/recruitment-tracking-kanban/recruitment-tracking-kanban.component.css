@@ -1,0 +1,6 @@
+.cdk-drag-preview { box-sizing: border-box; border-radius: 0.75rem; box-shadow: 0 16px 32px rgb(15 23 42 / 0.18); }
+.cdk-drag-placeholder { opacity: 0.25; }
+.cdk-drag-animating { transition: transform 200ms ease; }
+.cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-placeholder) { transition: transform 200ms ease; }
+
+.cdk-drag { display: block; touch-action: none; }

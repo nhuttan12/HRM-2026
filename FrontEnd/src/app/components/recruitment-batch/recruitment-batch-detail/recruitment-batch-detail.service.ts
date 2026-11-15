@@ -162,9 +162,7 @@ export class RecruitmentBatchDetailService {
   getByCode(batchCode?: string | null): Observable<RecruitmentBatchDetail> {
     console.log('[Service] Mã đợt tuyển dụng nhận được:', batchCode);
 
-    const batch = mockRecruitmentBatchDetails.find(
-      (item) => item.code === batchCode,
-    );
+    const batch = mockRecruitmentBatchDetails.find((item) => item.code === batchCode);
 
     if (!batch) {
       throw new Error('Không tìm thấy dữ liệu mẫu cho mã đợt tuyển dụng.');

@@ -1,9 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { LibToastService, ToastSeverity } from './lib-toast.service';
+import { LibTextComponent } from '../lib-text/lib-text.component';
 
 @Component({
   selector: 'lib-toast',
   standalone: true,
+  imports: [LibTextComponent],
   templateUrl: './lib-toast.component.html',
 })
 export class LibToastComponent {

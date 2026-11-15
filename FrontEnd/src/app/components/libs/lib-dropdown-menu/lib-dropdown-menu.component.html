@@ -20,7 +20,7 @@
     (keydown.enter)="toggle()"
     aria-label="Mở danh sách thao tác"
   >
-    <span>{{ label() }}</span>
+    <lib-text tag="span" [text]="label()" />
     <svg
       class="w-4 h-4 shrink-0"
       xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@
           @if (item.icon) {
             <i [class]="item.icon + ' w-4 h-4 shrink-0 text-gray-500'"></i>
           }
-          <span>{{ item.label }}</span>
+          <lib-text tag="span" [text]="item.label ?? ''" />
         </button>
       }
     </div>

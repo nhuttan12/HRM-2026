@@ -1,0 +1,46 @@
+<div class="flex h-dvh min-h-[32rem] flex-col gap-6 p-6">
+  @if (selectedBatch(); as batch) {
+    <header class="flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <button
+          type="button"
+          class="mb-3 text-sm font-medium text-blue-700 hover:underline"
+          (click)="selectedBatch.set(null)"
+        >
+          <i class="pi pi-arrow-left mr-1" aria-hidden="true"></i> Danh sách đợt tuyển dụng
+        </button>
+        <lib-text
+          tag="p"
+          [text]="batch.code + ' · ' + batch.position"
+          className="mt-1 text-sm text-surface-500"
+        />
+      </div>
+      <lib-text
+        tag="span"
+        [text]="batch.status"
+        className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700"
+      />
+    </header>
+    <app-recruitment-tracking-kanban class="block min-h-0 flex-1" [stages]="stages()" (stagesChange)="updateBoard($event)" (addCandidate)="addCandidateOpened.set(true)" />
+    <app-recruitment-tracking-add-candidate
+      [opened]="addCandidateOpened()"
+      [excludedIds]="assignedCandidateIds()"
+      (added)="addCandidates($event)"
+      (closed)="addCandidateOpened.set(false)"
+    />
+  } @else {
+    <header>
+      <lib-text
+        tag="h1"
+        text="Theo dõi tuyển dụng"
+        className="text-xl font-semibold text-surface-900"
+      />
+      <lib-text
+        tag="p"
+        text="Nhấp đúp vào đợt đang mở để theo dõi ứng viên."
+        className="mt-1 text-sm text-surface-500"
+      />
+    </header>
+    <lib-hrm-table [data]="batches" [columns]="columns" (rowDoubleClick)="openBatch($event)" />
+  }
+</div>

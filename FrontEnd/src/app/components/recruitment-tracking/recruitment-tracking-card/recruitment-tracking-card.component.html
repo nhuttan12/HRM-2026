@@ -1,0 +1,25 @@
+<article class="group cursor-grab rounded-xl active:cursor-grabbing border border-slate-200/80 bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+  <div class="flex items-start gap-3">
+    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-indigo-100 text-sm font-bold text-indigo-700" aria-hidden="true">{{ initials() }}</div>
+    <div class="min-w-0 flex-1">
+      <lib-text tag="p" [text]="candidate().fullName" className="truncate text-sm font-semibold text-slate-900" />
+      <lib-text tag="p" [text]="candidate().candidateCode" className="mt-1 text-xs font-medium text-slate-400" />
+    </div>
+    <i class="pi pi-bars text-slate-400" aria-hidden="true"></i>
+  </div>
+  <div class="mt-4 space-y-2 border-t border-slate-100 pt-3 text-xs text-slate-500">
+    <div class="flex items-center gap-2"><i class="pi pi-briefcase text-slate-400" aria-hidden="true"></i><lib-text tag="span" [text]="candidate().position" /></div>
+    <div class="flex flex-wrap items-center gap-2 pt-1">
+      <lib-text tag="span" text="Tình trạng:" className="text-xs font-medium text-slate-500" />
+      <lib-text tag="span" [text]="candidate().recruitmentStatus" [className]="'inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ' + statusClasses[candidate().recruitmentStatus]" />
+    </div>
+  </div>
+  <div class="mt-4 flex gap-2 border-t border-slate-100 pt-3">
+    <button type="button" class="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-indigo-200 px-2 py-2 text-xs font-semibold text-indigo-700 hover:bg-indigo-50" (pointerdown)="$event.stopPropagation()" (mousedown)="$event.stopPropagation()" (touchstart)="$event.stopPropagation()" (click)="profileClick.emit(candidate())">
+      <i class="pi pi-user" aria-hidden="true"></i> Hồ sơ
+    </button>
+    <button type="button" class="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-slate-200 px-2 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50" (pointerdown)="$event.stopPropagation()" (mousedown)="$event.stopPropagation()" (touchstart)="$event.stopPropagation()" (click)="detailClick.emit(candidate())">
+      <i class="pi pi-info-circle" aria-hidden="true"></i> Chi tiết
+    </button>
+  </div>
+</article>

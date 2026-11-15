@@ -20,7 +20,10 @@ export class LibToastService {
     const id = ++this.nextId;
     this.messages.update((items) => [...items, { id, severity, message }]);
     if (duration > 0) {
-      this.timers.set(id, setTimeout(() => this.dismiss(id), duration));
+      this.timers.set(
+        id,
+        setTimeout(() => this.dismiss(id), duration),
+      );
     }
   }
 

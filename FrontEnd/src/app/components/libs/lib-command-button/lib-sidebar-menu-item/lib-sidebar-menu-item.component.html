@@ -16,5 +16,7 @@
     <i [class]="icon() + ' w-[18px]'"></i>
   }
   <lib-text tag="span" [text]="label()" />
-  @if (disabled()) { <i class="pi pi-ban ml-auto" aria-hidden="true"></i> }
+  @if (disabled()) {
+    <i class="pi pi-ban ml-auto" aria-hidden="true"></i>
+  }
 </button>

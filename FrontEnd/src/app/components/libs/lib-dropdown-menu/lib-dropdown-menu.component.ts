@@ -1,10 +1,11 @@
 import { Component, input, output } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { LibTextComponent } from '../lib-text/lib-text.component';
 
 @Component({
   selector: 'lib-dropdown-menu',
   standalone: true,
-  imports: [],
+  imports: [LibTextComponent],
   templateUrl: './lib-dropdown-menu.component.html',
 })
 export class LibDropdownMenuComponent {
