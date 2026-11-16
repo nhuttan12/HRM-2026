@@ -60,7 +60,11 @@
 
             @for (column of columns(); track column.field) {
               <td class="whitespace-nowrap border-b border-gray-200 px-4 py-3 last:border-b-0">
-                {{ getCellValue(row, column.field) }}
+                @if (cellTemplates()[column.field]; as cellTemplate) {
+                  <ng-container *ngTemplateOutlet="cellTemplate; context: { $implicit: row }" />
+                } @else {
+                  {{ getCellValue(row, column.field) }}
+                }
               </td>
             }
 

@@ -1,0 +1,42 @@
+<aside
+  class="w-full shrink-0 border-b border-slate-200 bg-slate-50 md:h-full md:w-72 md:overflow-y-auto md:border-b-0 md:border-r"
+>
+  <div class="relative h-20 bg-gradient-to-r from-blue-600 via-indigo-500 to-violet-500"></div>
+  <div class="px-5 pb-5">
+    <div
+      class="relative -mt-9 flex h-16 w-16 items-center justify-center rounded-2xl border-4 border-slate-50 bg-indigo-100 text-lg font-bold text-indigo-700"
+      aria-hidden="true"
+    >
+      {{ initials() }}
+    </div>
+    <lib-text
+      tag="h2"
+      [text]="candidate().fullName"
+      className="mt-3 text-lg font-semibold text-slate-900"
+    />
+    <lib-text tag="p" [text]="candidate().candidateCode" className="mt-1 text-sm text-slate-500" />
+    <lib-text
+      tag="p"
+      text="Đợt tuyển dụng"
+      className="mt-4 text-xs font-semibold uppercase tracking-wide text-slate-400"
+    />
+    <lib-text tag="p" [text]="batch().name" className="mt-1 text-sm font-medium text-slate-700" />
+    <lib-text tag="p" [text]="batch().code" className="mt-1 text-xs text-slate-500" />
+  </div>
+  <nav class="flex gap-1 border-t border-slate-200 p-3 md:flex-col" aria-label="Chi tiết ứng viên">
+    <lib-sidebar-menu-item
+      class="flex-1"
+      label="Tổng quan"
+      icon="pi pi-user"
+      [active]="activeSection() === 'overview'"
+      (selected)="sectionChange.emit('overview')"
+    />
+    <lib-sidebar-menu-item
+      class="flex-1"
+      label="Vòng phỏng vấn"
+      icon="pi pi-list"
+      [active]="activeSection() === 'interviews'"
+      (selected)="sectionChange.emit('interviews')"
+    />
+  </nav>
+</aside>

@@ -1,0 +1,90 @@
+<main class="min-w-0 flex-1 overflow-y-auto p-6">
+  @if (activeSection() === 'overview') {
+    <lib-text tag="h2" text="Tổng quan" className="text-xl font-semibold text-slate-900" />
+    <div class="mt-5 grid gap-5 rounded-xl border border-slate-200 p-5 sm:grid-cols-2">
+      <div>
+        <lib-text tag="p" text="Ứng viên" className="text-sm text-slate-500" /><lib-text
+          tag="p"
+          [text]="candidate().fullName"
+          className="mt-1 font-medium text-slate-900"
+        />
+      </div>
+      <div>
+        <lib-text tag="p" text="Vị trí ứng tuyển" className="text-sm text-slate-500" /><lib-text
+          tag="p"
+          [text]="candidate().position"
+          className="mt-1 font-medium text-slate-900"
+        />
+      </div>
+      <div>
+        <lib-text tag="p" text="Đợt tuyển dụng" className="text-sm text-slate-500" /><lib-text
+          tag="p"
+          [text]="batch().name"
+          className="mt-1 font-medium text-slate-900"
+        />
+      </div>
+      <div>
+        <lib-text
+          tag="p"
+          text="Tình trạng tuyển dụng"
+          className="text-sm text-slate-500"
+        /><lib-text
+          tag="p"
+          [text]="candidate().recruitmentStatus"
+          className="mt-1 font-medium text-slate-900"
+        />
+      </div>
+    </div>
+  } @else {
+    <lib-text tag="h2" text="Vòng phỏng vấn" className="text-xl font-semibold text-slate-900" />
+    <lib-text
+      tag="p"
+      text="Thông tin vòng phỏng vấn minh họa; thay đổi chỉ lưu trong phiên hiện tại."
+      className="mt-1 text-sm text-slate-500"
+    />
+    <ng-template #statusCell let-round>
+      <lib-label [text]="round.status" [variant]="statusVariant(round.status)" />
+    </ng-template>
+    <div class="mt-5">
+      <lib-hrm-table
+        [data]="rounds()"
+        [columns]="columns"
+        [cellTemplates]="{ status: statusCell }"
+        [showEditAction]="true"
+        (editRow)="editRound($event)"
+      />
+    </div>
+  }
+</main>
+<lib-canvas
+  [opened]="statusCanvasOpened()"
+  title="Trạng thái vòng phỏng vấn"
+  width="500px"
+  (closed)="closeStatus()"
+>
+  <div class="flex flex-col gap-5">
+    <lib-text
+      tag="p"
+      [text]="editingRound()?.name ?? ''"
+      className="text-sm font-medium text-slate-700"
+    />
+    <div>
+      <label for="interview-round-status" class="mb-2 block text-sm font-medium text-slate-700"
+        >Trạng thái vòng phỏng vấn</label
+      >
+      <select
+        id="interview-round-status"
+        class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+        [value]="selectedStatus()"
+        (change)="setStatus($any($event.target).value)"
+      >
+        @for (status of statuses; track status) {
+          <option [value]="status">{{ status }}</option>
+        }
+      </select>
+    </div>
+    <div class="flex justify-end">
+      <lib-save-button label="Xác nhận" icon="pi pi-check" (saveAction)="confirm()" />
+    </div>
+  </div>
+</lib-canvas>

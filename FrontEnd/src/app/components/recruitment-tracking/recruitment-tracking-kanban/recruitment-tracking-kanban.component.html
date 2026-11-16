@@ -1,31 +1,97 @@
-<div cdkDropListGroup class="flex h-full min-h-0 items-stretch gap-4 overflow-x-auto pb-4">
-  @for (stage of stages(); track stage.id; let isFirst = $first) {
-    <section class="flex w-72 min-h-0 shrink-0 flex-col rounded-2xl border p-3" [class]="(colors[stage.id] ?? defaultColors).panel">
-      <div class="mb-3 flex items-center justify-between gap-2 px-1 py-1">
-        <div class="flex min-w-0 items-center gap-2">
-          <div class="h-2.5 w-2.5 shrink-0 rounded-full" [class]="(colors[stage.id] ?? defaultColors).dot"></div>
-          <lib-text tag="h2" [text]="stage.label" className="text-sm font-bold text-slate-800" />
+@if (loading()) {
+  <div
+    class="flex h-full min-h-0 gap-4 overflow-hidden pb-4"
+    role="status"
+    aria-label="Đang tải bảng theo dõi tuyển dụng"
+  >
+    @for (column of [1, 2, 3, 4, 5]; track column) {
+      <div
+        class="flex w-72 shrink-0 flex-col gap-4 rounded-2xl border border-surface-200 bg-surface-50 p-4"
+      >
+        <div class="flex items-center justify-between">
+          <lib-skeleton width="120px" height="20px" /><lib-skeleton width="32px" height="28px" />
         </div>
-        <div class="flex items-center gap-2">
-          <lib-text tag="span" [text]="stage.candidates.length.toString()" [className]="'rounded-full px-2.5 py-1 text-xs font-semibold ' + (colors[stage.id] ?? defaultColors).badge" />
-          @if (isFirst) {
-            <button type="button" class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white transition hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" aria-label="Thêm ứng viên" (click)="addCandidate.emit()">
-              <i class="pi pi-plus" aria-hidden="true"></i>
-            </button>
+        <div class="space-y-3 rounded-xl border border-surface-200 bg-white p-4">
+          <div class="flex gap-3">
+            <lib-skeleton width="40px" height="40px" />
+            <div class="flex-1 space-y-2">
+              <lib-skeleton width="80%" height="14px" /><lib-skeleton width="45%" height="12px" />
+            </div>
+          </div>
+          <lib-skeleton width="70%" height="12px" />
+          <lib-skeleton width="55%" height="24px" />
+        </div>
+      </div>
+    }
+  </div>
+} @else {
+  <div cdkDropListGroup class="flex h-full min-h-0 items-stretch gap-4 overflow-x-auto pb-4">
+    @for (stage of stages(); track stage.id; let isFirst = $first) {
+      <section
+        class="flex w-72 min-h-0 shrink-0 flex-col rounded-2xl border p-3"
+        [class]="(colors[stage.id] ?? defaultColors).panel"
+      >
+        <div class="mb-3 flex items-center justify-between gap-2 px-1 py-1">
+          <div class="flex min-w-0 items-center gap-2">
+            <div
+              class="h-2.5 w-2.5 shrink-0 rounded-full"
+              [class]="(colors[stage.id] ?? defaultColors).dot"
+            ></div>
+            <lib-text tag="h2" [text]="stage.label" className="text-sm font-bold text-slate-800" />
+          </div>
+          <div class="flex items-center gap-2">
+            <lib-text
+              tag="span"
+              [text]="stage.candidates.length.toString()"
+              [className]="
+                'rounded-full px-2.5 py-1 text-xs font-semibold ' +
+                (colors[stage.id] ?? defaultColors).badge
+              "
+            />
+            @if (isFirst) {
+              <button
+                type="button"
+                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg bg-blue-600 text-white transition hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                aria-label="Thêm ứng viên"
+                (click)="addCandidate.emit()"
+              >
+                <i class="pi pi-plus" aria-hidden="true"></i>
+              </button>
+            }
+          </div>
+        </div>
+        <div
+          cdkDropList
+          [id]="stage.id"
+          [cdkDropListData]="stage.candidates"
+          (cdkDropListDropped)="drop($event)"
+          class="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto rounded-xl"
+        >
+          @for (candidate of stage.candidates; track candidate.id) {
+            <app-recruitment-tracking-card
+              cdkDrag
+              [candidate]="candidate"
+              (detailClick)="candidateDetail.emit($event)"
+            />
+          } @empty {
+            <div
+              class="rounded-xl border border-dashed border-slate-300/80 bg-white/50 px-3 py-7 text-center"
+            >
+              <i class="pi pi-inbox mb-2 text-lg text-slate-400" aria-hidden="true"></i>
+              <lib-text
+                tag="p"
+                text="Chưa có ứng viên"
+                className="text-xs font-medium text-slate-500"
+              />
+              <lib-text
+                tag="p"
+                text="Kéo ứng viên vào đây"
+                className="mt-1 text-xs text-slate-400"
+              />
+            </div>
           }
         </div>
-      </div>
-      <div cdkDropList [id]="stage.id" [cdkDropListData]="stage.candidates" (cdkDropListDropped)="drop($event)" class="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto rounded-xl">
-        @for (candidate of stage.candidates; track candidate.id) {
-          <app-recruitment-tracking-card cdkDrag [candidate]="candidate" />
-        } @empty {
-          <div class="rounded-xl border border-dashed border-slate-300/80 bg-white/50 px-3 py-7 text-center">
-            <i class="pi pi-inbox mb-2 text-lg text-slate-400" aria-hidden="true"></i>
-            <lib-text tag="p" text="Chưa có ứng viên" className="text-xs font-medium text-slate-500" />
-            <lib-text tag="p" text="Kéo ứng viên vào đây" className="mt-1 text-xs text-slate-400" />
-          </div>
-        }
-      </div>
-    </section>
-  }
-</div>
+      </section>
+    }
+  </div>
+}

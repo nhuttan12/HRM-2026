@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, model, output } from '@angular/core';
+import { Component, input, model, output, TemplateRef } from '@angular/core';
 
 export interface HrmTableColumn<T> {
   field: keyof T;
@@ -18,6 +18,7 @@ export class LibHrmTableComponent<T> {
   columns = input<HrmTableColumn<T>[]>([]);
   selectable = input(false);
   maxHeight = input('32rem');
+  cellTemplates = input<Partial<Record<keyof T, TemplateRef<{ $implicit: T }>>>>({});
 
   selectedData = model<T[]>([]);
   selectionChange = output<T[]>();
