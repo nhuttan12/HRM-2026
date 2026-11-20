@@ -1,5 +1,5 @@
 <main class="min-w-0 flex-1 overflow-y-auto p-6">
-  @if (activeSection() === 'overview') {
+  @if (activeSection() === sections.overview) {
     <lib-text tag="h2" text="Tổng quan" className="text-xl font-semibold text-slate-900" />
     <div class="mt-5 grid gap-5 rounded-xl border border-slate-200 p-5 sm:grid-cols-2">
       <div>
@@ -28,10 +28,9 @@
           tag="p"
           text="Tình trạng tuyển dụng"
           className="text-sm text-slate-500"
-        /><lib-text
-          tag="p"
+        /><lib-label
           [text]="candidate().recruitmentStatus"
-          className="mt-1 font-medium text-slate-900"
+          [variant]="statusVariant(candidate().recruitmentStatus)"
         />
       </div>
     </div>

@@ -1,4 +1,9 @@
-import { RecruitmentBatch, RecruitmentProposal } from './recruitment-batch.model';
+import {
+  BatchStatuses,
+  ProposalStatuses,
+  RecruitmentBatch,
+  RecruitmentProposal,
+} from './recruitment-batch.model';
 
 export const recruitmentBatchesData: RecruitmentBatch[] = [
   {
@@ -9,7 +14,7 @@ export const recruitmentBatchesData: RecruitmentBatch[] = [
     quantity: 3,
     startDate: '01/08/2026',
     endDate: '31/08/2026',
-    status: 'Đang tuyển',
+    status: BatchStatuses.recruiting,
   },
   {
     id: 2,
@@ -19,7 +24,7 @@ export const recruitmentBatchesData: RecruitmentBatch[] = [
     quantity: 2,
     startDate: '05/08/2026',
     endDate: '15/09/2026',
-    status: 'Đang tuyển',
+    status: BatchStatuses.recruiting,
   },
   {
     id: 3,
@@ -29,7 +34,7 @@ export const recruitmentBatchesData: RecruitmentBatch[] = [
     quantity: 5,
     startDate: '10/07/2026',
     endDate: '10/08/2026',
-    status: 'Đã kết thúc',
+    status: BatchStatuses.closed,
   },
 ];
 
@@ -42,7 +47,7 @@ export const recruitmentProposalsData: RecruitmentProposal[] = [
     quantity: 2,
     startDate: '01/09/2026',
     endDate: '30/09/2026',
-    status: 'Chờ duyệt',
+    status: ProposalStatuses.pending,
     proposalDate: '25/08/2026',
     approvedBy: 'Trương Văn A',
   },
@@ -54,7 +59,7 @@ export const recruitmentProposalsData: RecruitmentProposal[] = [
     quantity: 1,
     startDate: '05/09/2026',
     endDate: '05/10/2026',
-    status: 'Đã duyệt',
+    status: ProposalStatuses.approved,
     proposalDate: '28/08/2026',
     approvedBy: 'Lê Thị B',
   },
@@ -66,7 +71,7 @@ export const recruitmentProposalsData: RecruitmentProposal[] = [
     quantity: 2,
     startDate: '10/09/2026',
     endDate: '31/10/2026',
-    status: 'Chờ duyệt',
+    status: ProposalStatuses.pending,
     proposalDate: '30/08/2026',
     approvedBy: 'Trương Văn A',
   },

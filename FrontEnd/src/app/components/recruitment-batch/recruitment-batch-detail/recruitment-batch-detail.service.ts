@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
 import { RecruitmentBatchDetail } from './recruitment-batch-detail.model';
+import { BatchStatuses } from '../recruitment-batch.model';
 
 export const mockRecruitmentBatchDetails: RecruitmentBatchDetail[] = [
   {
@@ -11,7 +12,7 @@ export const mockRecruitmentBatchDetails: RecruitmentBatchDetail[] = [
     quantity: 3,
     startDate: '01/08/2026',
     endDate: '31/08/2026',
-    status: 'Đang mở',
+    status: BatchStatuses.open,
     experienceYears: 3,
 
     proposalDate: '2026-10-15',
@@ -64,7 +65,7 @@ export const mockRecruitmentBatchDetails: RecruitmentBatchDetail[] = [
     quantity: 2,
     startDate: '05/08/2026',
     endDate: '15/09/2026',
-    status: 'Đang tuyển',
+    status: BatchStatuses.recruiting,
     experienceYears: 5,
 
     proposalDate: '2026-10-10',
@@ -109,7 +110,7 @@ export const mockRecruitmentBatchDetails: RecruitmentBatchDetail[] = [
     quantity: 5,
     startDate: '10/07/2026',
     endDate: '10/08/2026',
-    status: 'Đã kết thúc',
+    status: BatchStatuses.closed,
     experienceYears: 2,
 
     proposalDate: '2026-09-01',

@@ -1,7 +1,10 @@
 import { Component, input, output, signal } from '@angular/core';
 import { RecruitmentBatch } from '../../recruitment-batch/recruitment-batch.model';
 import { InterviewRound, TrackingCandidate } from '../recruitment-tracking.model';
-import { CandidateDetailSection } from './recruitment-tracking-candidate-detail.model';
+import {
+  CandidateDetailSection,
+  CandidateDetailSections,
+} from './recruitment-tracking-candidate-detail.model';
 import { RecruitmentTrackingCandidateDetailSidebarComponent } from './recruitment-tracking-candidate-detail-sidebar/recruitment-tracking-candidate-detail-sidebar.component';
 import { RecruitmentTrackingCandidateDetailContentComponent } from './recruitment-tracking-candidate-detail-content/recruitment-tracking-candidate-detail-content.component';
 
@@ -19,5 +22,5 @@ export class RecruitmentTrackingCandidateDetailComponent {
   readonly batch = input.required<RecruitmentBatch>();
   readonly rounds = input.required<InterviewRound[]>();
   readonly roundsChange = output<InterviewRound[]>();
-  readonly activeSection = signal<CandidateDetailSection>('interviews');
+  readonly activeSection = signal<CandidateDetailSection>(CandidateDetailSections.interviews);
 }

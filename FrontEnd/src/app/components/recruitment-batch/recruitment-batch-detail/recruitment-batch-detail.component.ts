@@ -5,6 +5,8 @@ import { LibInputComponent } from '../../libs/lib-input/lib-input.component';
 import { LibEditButtonComponent } from '../../libs/lib-command-button/lib-edit-button/lib-edit-button.component';
 import { LibSaveButtonComponent } from '../../libs/lib-command-button/lib-save-button/lib-save-button.component';
 import { LibTextComponent } from '../../libs/lib-text/lib-text.component';
+import { LibLabelComponent } from '../../libs/lib-label/lib-label.component';
+import { batchStatusVariant } from '../recruitment-batch-status.config';
 import { RecruitmentBatch } from '../recruitment-batch.model';
 import { RecruitmentBatchDetailService } from './recruitment-batch-detail.service';
 import {
@@ -16,6 +18,7 @@ import {
   RecruitmentBatchDetail,
   RecruitmentBatchField,
   RecruitmentBatchSection,
+  RecruitmentBatchSections,
 } from './recruitment-batch-detail.model';
 import {
   recruitmentBatchCertificateColumns,
@@ -35,6 +38,7 @@ import { LibAddButtonComponent } from '../../libs/lib-command-button/lib-add-but
   imports: [
     ReactiveFormsModule,
     LibTextComponent,
+    LibLabelComponent,
     LibHrmTableComponent,
     LibInputComponent,
     LibEditButtonComponent,
@@ -46,6 +50,8 @@ import { LibAddButtonComponent } from '../../libs/lib-command-button/lib-add-but
   templateUrl: './recruitment-batch-detail.component.html',
 })
 export class RecruitmentBatchDetailComponent {
+  readonly statusVariant = batchStatusVariant;
+  readonly sections = RecruitmentBatchSections;
   private readonly fb = inject(FormBuilder);
   private readonly recruitmentBatchDetailService = inject(RecruitmentBatchDetailService);
   data = input<RecruitmentBatch | null>(null);
@@ -54,7 +60,7 @@ export class RecruitmentBatchDetailComponent {
   readonly addCanvas = viewChild(CandidateProfileAddCanvasComponent);
   readonly selectedRows = signal<Partial<Record<CandidateListSection, unknown[]>>>({});
 
-  readonly activeSection = signal<RecruitmentBatchSection>('overview');
+  readonly activeSection = signal<RecruitmentBatchSection>(RecruitmentBatchSections.overview);
   readonly isEditingOverview = signal(false);
   readonly detail = signal<RecruitmentBatchDetail | null>(null);
 
@@ -159,15 +165,15 @@ export class RecruitmentBatchDetailComponent {
     const row = event.row;
     if (event.section === 'skills') {
       const next: CandidateSkillRow = {
-        skill: String(row['skill'] ?? row['name'] ?? ''),
+        skill: String(row['skill'] ?? ''),
         yearsOfExperience: Number(row['yearsOfExperience'] ?? 0),
-        companyName: String(row['companyName'] ?? row['company'] ?? ''),
+        companyName: String(row['companyName'] ?? ''),
       };
       this.detail.set({ ...current, skills: [...current.skills, next] });
     } else if (event.section === 'degrees') {
       const next: CandidateDegree = {
         schoolName: String(row['schoolName'] ?? ''),
-        graduationType: String(row['graduationType'] ?? row['degreeName'] ?? ''),
+        graduationType: String(row['graduationType'] ?? ''),
         studyYear: row['studyYear'] == null ? null : Number(row['studyYear']),
         graduationYear: row['graduationYear'] == null ? null : Number(row['graduationYear']),
         major: row['major'] == null ? null : String(row['major']),
@@ -175,14 +181,12 @@ export class RecruitmentBatchDetailComponent {
       this.detail.set({ ...current, degrees: [...current.degrees, next] });
     } else if (event.section === 'certificates') {
       const next: CandidateCertificate = {
-        certificateName: String(row['certificateName'] ?? row['name'] ?? ''),
-        certificateType: String(row['certificateType'] ?? row['type'] ?? ''),
+        certificateName: String(row['certificateName'] ?? ''),
+        certificateType: String(row['certificateType'] ?? ''),
         issueDate: String(row['issueDate'] ?? ''),
         expiryDate: row['expiryDate'] == null ? null : String(row['expiryDate']),
         issuingOrganization:
-          row['issuingOrganization'] == null
-            ? null
-            : String(row['issuingOrganization'] ?? row['issuedBy']),
+          row['issuingOrganization'] == null ? null : String(row['issuingOrganization']),
       };
       this.detail.set({ ...current, certificates: [...current.certificates, next] });
     }

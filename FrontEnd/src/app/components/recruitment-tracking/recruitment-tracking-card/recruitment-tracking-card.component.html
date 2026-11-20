@@ -28,13 +28,9 @@
     </div>
     <div class="flex flex-wrap items-center gap-2 pt-1">
       <lib-text tag="span" text="Tình trạng:" className="text-xs font-medium text-slate-500" />
-      <lib-text
-        tag="span"
+      <lib-label
         [text]="candidate().recruitmentStatus"
-        [className]="
-          'inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ' +
-          statusClasses[candidate().recruitmentStatus]
-        "
+        [variant]="statusVariant(candidate().recruitmentStatus)"
       />
     </div>
   </div>

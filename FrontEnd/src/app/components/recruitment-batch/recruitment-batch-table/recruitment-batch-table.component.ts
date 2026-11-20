@@ -5,14 +5,17 @@ import {
 } from '../../libs/lib-hrm-table/lib-hrm-table.component';
 import { LibSkeletonComponent } from '../../libs/lib-skeleton/lib-skeleton.component';
 import { RecruitmentBatch } from '../recruitment-batch.model';
+import { LibLabelComponent } from '../../libs/lib-label/lib-label.component';
+import { batchStatusVariant } from '../recruitment-batch-status.config';
 
 @Component({
   selector: 'app-recruitment-batch-table',
   standalone: true,
-  imports: [LibHrmTableComponent, LibSkeletonComponent],
+  imports: [LibHrmTableComponent, LibSkeletonComponent, LibLabelComponent],
   templateUrl: './recruitment-batch-table.component.html',
 })
 export class RecruitmentBatchTableComponent {
+  readonly statusVariant = batchStatusVariant;
   data = input<RecruitmentBatch[]>([]);
   columns = input<HrmTableColumn<RecruitmentBatch>[]>([]);
   loading = input(false);

@@ -9,9 +9,13 @@
     }
   </div>
 } @else {
+  <ng-template #statusCell let-row>
+    <lib-label [text]="row.status" [variant]="statusVariant(row.status)" />
+  </ng-template>
   <lib-hrm-table
     [data]="data()"
     [columns]="columns()"
+    [cellTemplates]="{ status: statusCell }"
     [selectable]="selectable()"
     [maxHeight]="maxHeight()"
     [(selectedData)]="selectedData"

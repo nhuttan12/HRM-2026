@@ -7,7 +7,12 @@ import { LibCanvasComponent } from '../libs/lib-canvas/lib-canvas.component';
 import { LibTabButtonComponent } from '../libs/lib-command-button/lib-tab-button/lib-tab-button.component';
 import { recruitmentBatchesData, recruitmentProposalsData } from './recruitment-batch.data';
 import { columnsConfig } from './recruitment-batch-header/recruitment-batch-header.config';
-import { ActiveTab, RecruitmentBatch, RecruitmentProposal } from './recruitment-batch.model';
+import {
+  ActiveTab,
+  BatchTabs,
+  RecruitmentBatch,
+  RecruitmentProposal,
+} from './recruitment-batch.model';
 
 @Component({
   selector: 'lib-recruitment-batch',
@@ -37,7 +42,8 @@ export class RecruitmentBatchPageComponent implements OnInit {
   selectedBatch = signal<RecruitmentBatch | null>(null);
   showDetailCanvas = signal(false);
 
-  activeTab = signal<ActiveTab>('batch');
+  readonly batchTabs = BatchTabs;
+  activeTab = signal<ActiveTab>(BatchTabs.batch);
 
   ngOnInit(): void {
     setTimeout(() => {

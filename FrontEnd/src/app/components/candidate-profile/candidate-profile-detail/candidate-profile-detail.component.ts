@@ -21,6 +21,7 @@ import {
   CandidateListSection,
   CandidateProfileDetail,
   CandidateProfileSection,
+  CandidateProfileSections,
   CandidateSkillRow,
 } from './candidate-profile-detail.model';
 import { CandidateDetailService } from './candidate-profile-detail.service';
@@ -48,13 +49,14 @@ import { CandidateListRowAddEvent } from './candidate-profile-add-canvas/candida
   ],
 })
 export class CandidateProfileDetailComponent {
+  readonly sections = CandidateProfileSections;
   private readonly candidateService = inject(CandidateDetailService);
   readonly candidateCode = input<string | null>(null);
   readonly candidate = signal<CandidateProfileDetail | null>(null);
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
   readonly fields = candidateProfileFields;
-  readonly activeSection = signal<CandidateProfileSection>('overview');
+  readonly activeSection = signal<CandidateProfileSection>(CandidateProfileSections.overview);
   readonly editingSection = signal<CandidateEditableSection | null>(null);
   readonly editingDraft = signal<CandidateProfileDetail | null>(null);
   readonly editingListSection = signal<CandidateListSection | null>(null);

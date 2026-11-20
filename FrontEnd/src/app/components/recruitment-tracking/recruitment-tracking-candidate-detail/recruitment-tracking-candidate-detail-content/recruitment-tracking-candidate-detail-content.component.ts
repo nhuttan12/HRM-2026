@@ -6,15 +6,20 @@ import {
 } from '../../../libs/lib-hrm-table/lib-hrm-table.component';
 import { LibSaveButtonComponent } from '../../../libs/lib-command-button/lib-save-button/lib-save-button.component';
 import { LibTextComponent } from '../../../libs/lib-text/lib-text.component';
-import { LibLabelComponent, LibLabelVariant } from '../../../libs/lib-label/lib-label.component';
+import { LibLabelComponent } from '../../../libs/lib-label/lib-label.component';
+import { recruitmentStatusVariant } from '../../recruitment-tracking-status.config';
 import { RecruitmentBatch } from '../../../recruitment-batch/recruitment-batch.model';
 import {
   InterviewRound,
   recruitmentStatuses,
   RecruitmentStatus,
+  RecruitmentStatuses,
   TrackingCandidate,
 } from '../../recruitment-tracking.model';
-import { CandidateDetailSection } from '../recruitment-tracking-candidate-detail.model';
+import {
+  CandidateDetailSection,
+  CandidateDetailSections,
+} from '../recruitment-tracking-candidate-detail.model';
 
 @Component({
   selector: 'app-recruitment-tracking-candidate-detail-content',
@@ -29,31 +34,23 @@ import { CandidateDetailSection } from '../recruitment-tracking-candidate-detail
   templateUrl: './recruitment-tracking-candidate-detail-content.component.html',
 })
 export class RecruitmentTrackingCandidateDetailContentComponent {
+  readonly sections = CandidateDetailSections;
   readonly candidate = input.required<TrackingCandidate>();
   readonly batch = input.required<RecruitmentBatch>();
   readonly rounds = input.required<InterviewRound[]>();
   readonly activeSection = input.required<CandidateDetailSection>();
   readonly roundsChange = output<InterviewRound[]>();
   readonly editingRound = signal<InterviewRound | null>(null);
-  readonly selectedStatus = signal<RecruitmentStatus>('Đang chờ duyệt');
+  readonly selectedStatus = signal<RecruitmentStatus>(RecruitmentStatuses.pending);
   readonly statusCanvasOpened = signal(false);
   readonly statuses = recruitmentStatuses;
-  readonly statusVariants: Record<RecruitmentStatus, LibLabelVariant> = {
-    'Đang chờ duyệt': 'warning',
-    'Đã đậu': 'success',
-    'Đã rớt': 'error',
-    'Đã bỏ phỏng vấn': 'error',
-  };
+  readonly statusVariant = recruitmentStatusVariant;
   readonly columns: HrmTableColumn<InterviewRound>[] = [
     { field: 'name', header: 'Tên vòng', width: '200px' },
     { field: 'interviewer', header: 'Người phỏng vấn', width: '200px' },
     { field: 'interviewDate', header: 'Ngày phỏng vấn', width: '160px' },
     { field: 'status', header: 'Tình trạng', width: '170px' },
   ];
-
-  statusVariant(status: string): LibLabelVariant {
-    return this.statusVariants[status as RecruitmentStatus] ?? 'neutral';
-  }
 
   editRound(round: InterviewRound): void {
     this.editingRound.set(round);

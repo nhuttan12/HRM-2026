@@ -26,16 +26,16 @@
   </div>
 } @else {
   <div cdkDropListGroup class="flex h-full min-h-0 items-stretch gap-4 overflow-x-auto pb-4">
-    @for (stage of stages(); track stage.id; let isFirst = $first) {
+    @for (stage of stages(); track stage.code; let isFirst = $first) {
       <section
         class="flex w-72 min-h-0 shrink-0 flex-col rounded-2xl border p-3"
-        [class]="(colors[stage.id] ?? defaultColors).panel"
+        [class]="(colors[stage.code] ?? defaultColors).panel"
       >
         <div class="mb-3 flex items-center justify-between gap-2 px-1 py-1">
           <div class="flex min-w-0 items-center gap-2">
             <div
               class="h-2.5 w-2.5 shrink-0 rounded-full"
-              [class]="(colors[stage.id] ?? defaultColors).dot"
+              [class]="(colors[stage.code] ?? defaultColors).dot"
             ></div>
             <lib-text tag="h2" [text]="stage.label" className="text-sm font-bold text-slate-800" />
           </div>
@@ -45,7 +45,7 @@
               [text]="stage.candidates.length.toString()"
               [className]="
                 'rounded-full px-2.5 py-1 text-xs font-semibold ' +
-                (colors[stage.id] ?? defaultColors).badge
+                (colors[stage.code] ?? defaultColors).badge
               "
             />
             @if (isFirst) {
@@ -62,7 +62,7 @@
         </div>
         <div
           cdkDropList
-          [id]="stage.id"
+          [id]="stage.code"
           [cdkDropListData]="stage.candidates"
           (cdkDropListDropped)="drop($event)"
           class="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto rounded-xl"

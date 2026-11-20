@@ -5,35 +5,23 @@ import {
   CandidateSkillRow,
 } from '../../candidate-profile/candidate-profile-detail/candidate-profile-detail.model';
 
-export type RecruitmentBatchSection = 'overview' | 'skills' | 'degrees' | 'certificates';
+export const RecruitmentBatchSections = {
+  overview: 'overview',
+  skills: 'skills',
+  degrees: 'degrees',
+  certificates: 'certificates',
+} as const;
+export type RecruitmentBatchSection =
+  (typeof RecruitmentBatchSections)[keyof typeof RecruitmentBatchSections];
 
-export type RecruitmentBatchFieldKey =
-  | keyof RecruitmentBatch
-  | 'experienceYears'
-  | 'skills'
-  | 'degrees'
-  | 'certificates'
-  // Ngày / người liên quan đến đợt tuyển dụng
-  | 'proposalDate'
-  | 'approvedBy'
-  | 'openedBy'
-  | 'openedDate'
-  | 'approvedDate'
-  | 'closedDate'
-  | 'createdBy'
-  | 'updatedBy'
-  | 'hiringManager'
-  | 'hrOwner'
-  | 'department'
-  | 'location'
-  | 'salaryRange'
-  | 'priority'
-  | 'note';
+export type RecruitmentBatchFieldKey = keyof RecruitmentBatchDetail;
 
 export interface RecruitmentBatchField {
   key: RecruitmentBatchFieldKey;
   label: string;
   width: 'half' | 'full';
+  inputTypeWhenAdding?: 'date' | 'number';
+  disabledWhenAdding?: boolean;
 }
 
 // Chi tiết đợt tuyển dụng (không ảnh hưởng model dùng cho table bên ngoài).

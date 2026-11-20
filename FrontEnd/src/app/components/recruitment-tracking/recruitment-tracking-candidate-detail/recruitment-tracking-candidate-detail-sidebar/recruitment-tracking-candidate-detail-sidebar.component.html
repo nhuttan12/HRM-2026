@@ -28,15 +28,15 @@
       class="flex-1"
       label="Tổng quan"
       icon="pi pi-user"
-      [active]="activeSection() === 'overview'"
-      (selected)="sectionChange.emit('overview')"
+      [active]="activeSection() === sections.overview"
+      (selected)="sectionChange.emit(sections.overview)"
     />
     <lib-sidebar-menu-item
       class="flex-1"
       label="Vòng phỏng vấn"
       icon="pi pi-list"
-      [active]="activeSection() === 'interviews'"
-      (selected)="sectionChange.emit('interviews')"
+      [active]="activeSection() === sections.interviews"
+      (selected)="sectionChange.emit(sections.interviews)"
     />
   </nav>
 </aside>

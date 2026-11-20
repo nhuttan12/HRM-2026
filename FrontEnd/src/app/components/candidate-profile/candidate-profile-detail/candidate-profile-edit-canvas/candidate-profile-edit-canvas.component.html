@@ -15,6 +15,7 @@
           @for (field of fieldConfigs[currentSection]; track field.key) {
             <lib-input
               [label]="field.label"
+              [type]="field.type === 'textarea' ? 'text' : (field.type ?? 'text')"
               [value]="formatFieldValue(currentRow[field.key])"
               [isView]="false"
               [required]="field.required ?? false"

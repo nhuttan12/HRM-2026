@@ -1,4 +1,7 @@
-import { RecruitmentBatchSection } from '../recruitment-batch-detail.model';
+import {
+  RecruitmentBatchSection,
+  RecruitmentBatchSections,
+} from '../recruitment-batch-detail.model';
 
 export interface RecruitmentBatchSidebarItem {
   id: RecruitmentBatchSection;
@@ -7,8 +10,8 @@ export interface RecruitmentBatchSidebarItem {
 }
 
 export const recruitmentBatchSidebarItems: RecruitmentBatchSidebarItem[] = [
-  { id: 'overview', label: 'Tổng quan', icon: 'pi pi-list' },
-  { id: 'skills', label: 'Kỹ năng', icon: 'pi pi-star' },
-  { id: 'degrees', label: 'Bằng cấp', icon: 'pi pi-graduation-cap' },
-  { id: 'certificates', label: 'Chứng chỉ', icon: 'pi pi-verified' },
+  { id: RecruitmentBatchSections.overview, label: 'Tổng quan', icon: 'pi pi-list' },
+  { id: RecruitmentBatchSections.skills, label: 'Kỹ năng', icon: 'pi pi-star' },
+  { id: RecruitmentBatchSections.degrees, label: 'Bằng cấp', icon: 'pi pi-graduation-cap' },
+  { id: RecruitmentBatchSections.certificates, label: 'Chứng chỉ', icon: 'pi pi-verified' },
 ];

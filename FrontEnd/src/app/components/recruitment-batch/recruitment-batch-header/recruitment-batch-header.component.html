@@ -6,7 +6,7 @@
   </div>
 
   <div class="flex items-center gap-2">
-    @if (activeTab() === 'batch') {
+    @if (activeTab() === batchTabs.batch) {
       <lib-dropdown-menu [menuItems]="menuItems" label="Mở đợt tuyển dụng" severity="success" />
     } @else {
       <lib-add-button label="Mở đợt tuyển dụng" (addAction)="onAddProposal()" />

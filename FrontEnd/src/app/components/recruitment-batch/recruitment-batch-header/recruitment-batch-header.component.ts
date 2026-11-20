@@ -4,7 +4,7 @@ import { LibAddButtonComponent } from '../../libs/lib-command-button/lib-add-but
 import { LibRemoveButtonComponent } from '../../libs/lib-command-button/lib-remove-button/lib-remove-button.component';
 import { LibDropdownMenuComponent } from '../../libs/lib-dropdown-menu/lib-dropdown-menu.component';
 import { MenuItem } from 'primeng/api';
-import { ActiveTab } from '../recruitment-batch.model';
+import { ActiveTab, BatchTabs } from '../recruitment-batch.model';
 
 @Component({
   selector: 'lib-recruitment-batch-header',
@@ -18,6 +18,7 @@ import { ActiveTab } from '../recruitment-batch.model';
   ],
 })
 export class RecruitmentBatchHeaderComponent {
+  readonly batchTabs = BatchTabs;
   activeTab = input<ActiveTab>();
 
   addDirect = output<void>();

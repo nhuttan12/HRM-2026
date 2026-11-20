@@ -15,11 +15,7 @@
           className="mt-1 text-sm text-surface-500"
         />
       </div>
-      <lib-text
-        tag="span"
-        [text]="batch.status"
-        className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700"
-      />
+      <lib-label [text]="batch.status" [variant]="statusVariant(batch.status)" />
     </header>
     <app-recruitment-tracking-kanban
       class="block min-h-0 flex-1"
@@ -80,7 +76,15 @@
         }
       </div>
     } @else {
-      <lib-hrm-table [data]="batches" [columns]="columns" (rowDoubleClick)="openBatch($event)" />
+      <ng-template #statusCell let-row>
+        <lib-label [text]="row.status" [variant]="statusVariant(row.status)" />
+      </ng-template>
+      <lib-hrm-table
+        [data]="batches"
+        [columns]="columns"
+        [cellTemplates]="{ status: statusCell }"
+        (rowDoubleClick)="openBatch($event)"
+      />
     }
   }
 </div>

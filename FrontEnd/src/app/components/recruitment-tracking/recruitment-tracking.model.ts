@@ -1,12 +1,29 @@
 import { Candidate } from '../candidate-profile/candidate-profile-table/candidate-profile-table.model';
 
-export const recruitmentStatuses = [
-  'Đang chờ duyệt',
-  'Đã đậu',
-  'Đã rớt',
-  'Đã bỏ phỏng vấn',
+export const RecruitmentStatuses = {
+  pending: 'Đang chờ duyệt',
+  passed: 'Đã đậu',
+  failed: 'Đã rớt',
+  withdrawn: 'Đã bỏ phỏng vấn',
+} as const;
+export type RecruitmentStatus = (typeof RecruitmentStatuses)[keyof typeof RecruitmentStatuses];
+export const recruitmentStatuses = Object.values(RecruitmentStatuses);
+
+export const TrackingStageCodes = {
+  new: 'new',
+  screening: 'screening',
+  interview: 'interview',
+  offer: 'offer',
+  hired: 'hired',
+} as const;
+export type TrackingStageCode = (typeof TrackingStageCodes)[keyof typeof TrackingStageCodes];
+export const trackingStageDefinitions = [
+  { code: TrackingStageCodes.new, label: 'Mới' },
+  { code: TrackingStageCodes.screening, label: 'Sàng lọc' },
+  { code: TrackingStageCodes.interview, label: 'Phỏng vấn' },
+  { code: TrackingStageCodes.offer, label: 'Đề nghị' },
+  { code: TrackingStageCodes.hired, label: 'Đã tuyển' },
 ] as const;
-export type RecruitmentStatus = (typeof recruitmentStatuses)[number];
 
 export interface InterviewRound {
   id: string;
@@ -21,7 +38,7 @@ export interface TrackingCandidate extends Candidate {
 }
 
 export interface TrackingStage {
-  id: string;
+  code: TrackingStageCode;
   label: string;
   candidates: TrackingCandidate[];
 }

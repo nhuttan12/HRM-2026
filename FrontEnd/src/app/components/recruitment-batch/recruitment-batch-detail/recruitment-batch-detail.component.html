@@ -7,7 +7,7 @@
 
   <main class="min-h-0 flex-1 overflow-y-auto p-6">
     @switch (activeSection()) {
-      @case ('overview') {
+      @case (sections.overview) {
         <section>
           <div class="mb-6 flex items-center justify-between gap-4">
             <lib-text tag="h2" text="Tổng quan" className="text-xl font-semibold" />
@@ -30,27 +30,33 @@
                   'md:col-span-2': field.width === 'full',
                 }"
               >
-                <lib-input
-                  [label]="getFieldLabel(field.key)"
-                  [type]="
-                    adding() && (field.key === 'startDate' || field.key === 'endDate')
-                      ? 'date'
-                      : adding() && (field.key === 'quantity' || field.key === 'experienceYears')
-                        ? 'number'
-                        : 'text'
-                  "
-                  [disabled]="adding() && field.key === 'status'"
-                  [value]="overviewForm.get(field.key)?.value ?? ''"
-                  [isView]="!isEditingOverview()"
-                  (valueChange)="overviewForm.get(field.key)?.setValue($event)"
-                />
+                @if (field.key === 'status' && !isEditingOverview()) {
+                  <lib-text
+                    tag="p"
+                    [text]="field.label"
+                    className="mb-1.5 block text-sm font-medium text-gray-700"
+                  />
+                  <lib-label
+                    [text]="overviewForm.get(field.key)?.value ?? ''"
+                    [variant]="statusVariant(overviewForm.get(field.key)?.value ?? '')"
+                  />
+                } @else {
+                  <lib-input
+                    [label]="getFieldLabel(field.key)"
+                    [type]="adding() ? (field.inputTypeWhenAdding ?? 'text') : 'text'"
+                    [disabled]="adding() && (field.disabledWhenAdding ?? false)"
+                    [value]="overviewForm.get(field.key)?.value ?? ''"
+                    [isView]="!isEditingOverview()"
+                    (valueChange)="overviewForm.get(field.key)?.setValue($event)"
+                  />
+                }
               </div>
             }
           </div>
         </section>
       }
 
-      @case ('skills') {
+      @case (sections.skills) {
         <section>
           <div class="mb-6 flex items-center justify-between gap-4">
             <lib-text tag="h2" text="Kỹ năng" className="text-xl font-semibold" />
@@ -68,7 +74,7 @@
         </section>
       }
 
-      @case ('degrees') {
+      @case (sections.degrees) {
         <section>
           <div class="mb-6 flex items-center justify-between gap-4">
             <lib-text tag="h2" text="Bằng cấp" className="text-xl font-semibold" />
@@ -86,7 +92,7 @@
         </section>
       }
 
-      @case ('certificates') {
+      @case (sections.certificates) {
         <section>
           <div class="mb-6 flex items-center justify-between gap-4">
             <lib-text tag="h2" text="Chứng chỉ" className="text-xl font-semibold" />

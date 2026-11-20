@@ -2,11 +2,10 @@ import { HrmTableColumn } from '../../libs/lib-hrm-table/lib-hrm-table.component
 import {
   CandidateCertificate,
   CandidateDegree,
-  CandidateListSection,
+  CandidateListFieldConfigs,
   CandidateProfileField,
   CandidateSkillRow,
   CandidateWorkHistory,
-  ListFieldConfig,
 } from './candidate-profile-detail.model';
 
 export const candidateProfileFields: CandidateProfileField[] = [
@@ -66,28 +65,30 @@ export const candidateCertificateColumns: HrmTableColumn<CandidateCertificate>[]
   },
 ];
 
-export const candidateListFieldConfigs: Record<CandidateListSection, ListFieldConfig[]> = {
+export const candidateListFieldConfigs: CandidateListFieldConfigs = {
   skills: [
-    { key: 'name', label: 'Tên kỹ năng', required: true },
-    { key: 'level', label: 'Trình độ' },
+    { key: 'skill', label: 'Tên kỹ năng', required: true },
+    { key: 'companyName', label: 'Công ty áp dụng' },
     { key: 'yearsOfExperience', label: 'Số năm kinh nghiệm', type: 'number' },
   ],
   certificates: [
-    { key: 'name', label: 'Tên chứng chỉ', required: true },
-    { key: 'issuedBy', label: 'Đơn vị cấp' },
+    { key: 'certificateName', label: 'Tên chứng chỉ', required: true },
+    { key: 'certificateType', label: 'Loại chứng chỉ' },
+    { key: 'issuingOrganization', label: 'Đơn vị cấp' },
     { key: 'issueDate', label: 'Ngày cấp', type: 'date' },
     { key: 'expiryDate', label: 'Ngày hết hạn', type: 'date' },
   ],
   workHistories: [
     { key: 'companyName', label: 'Công ty', required: true },
-    { key: 'position', label: 'Chức vụ' },
+    { key: 'jobTitle', label: 'Chức vụ' },
     { key: 'startDate', label: 'Ngày bắt đầu', type: 'date' },
     { key: 'endDate', label: 'Ngày kết thúc', type: 'date' },
     { key: 'description', label: 'Mô tả công việc', type: 'textarea' },
   ],
   degrees: [
     { key: 'schoolName', label: 'Trường đào tạo', required: true },
-    { key: 'degreeName', label: 'Bằng cấp' },
+    { key: 'graduationType', label: 'Loại bằng cấp' },
+    { key: 'studyYear', label: 'Năm học', type: 'number' },
     { key: 'major', label: 'Chuyên ngành' },
     { key: 'graduationYear', label: 'Năm tốt nghiệp', type: 'number' },
   ],

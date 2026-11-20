@@ -79,7 +79,7 @@
       } @else if (candidate(); as item) {
         @switch (activeSection()) {
           <!-- Tổng quan -->
-          @case ('overview') {
+          @case (sections.overview) {
             <section>
               <div class="mb-6 flex items-center justify-between gap-4">
                 <lib-text tag="h2" text="Tổng quan" className="text-xl font-semibold" />
@@ -206,7 +206,7 @@
           }
 
           <!-- Kỹ năng -->
-          @case ('skills') {
+          @case (sections.skills) {
             <section>
               <div class="mb-6 flex items-center justify-between gap-4">
                 <lib-text tag="h2" text="Kỹ năng" className="text-xl font-semibold" />
@@ -229,7 +229,7 @@
           }
 
           <!-- Chứng chỉ -->
-          @case ('certificates') {
+          @case (sections.certificates) {
             <section>
               <div class="mb-6 flex items-center justify-between gap-4">
                 <lib-text tag="h2" text="Chứng chỉ" className="text-xl font-semibold" />
@@ -252,7 +252,7 @@
           }
 
           <!-- Kinh nghiệm -->
-          @case ('experience') {
+          @case (sections.experience) {
             <section>
               <div class="mb-6 flex items-center justify-between gap-4">
                 <lib-text tag="h2" text="Kinh nghiệm làm việc" className="text-xl font-semibold" />
@@ -275,7 +275,7 @@
           }
 
           <!-- Học vấn -->
-          @case ('education') {
+          @case (sections.education) {
             <section>
               <div class="mb-6 flex items-center justify-between gap-4">
                 <lib-text tag="h2" text="Học vấn" className="text-xl font-semibold" />

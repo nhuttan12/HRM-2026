@@ -4,13 +4,22 @@ import {
   mockingCandidates,
 } from '../candidate-profile/candidate-profile-table/candidate-profile-table.model';
 import { recruitmentBatchesData } from '../recruitment-batch/recruitment-batch.data';
-import { RecruitmentBatch } from '../recruitment-batch/recruitment-batch.model';
+import { BatchStatuses, RecruitmentBatch } from '../recruitment-batch/recruitment-batch.model';
+import { batchStatusVariant } from '../recruitment-batch/recruitment-batch-status.config';
+import { LibLabelComponent } from '../libs/lib-label/lib-label.component';
 import { columnsConfig } from '../recruitment-batch/recruitment-batch-header/recruitment-batch-header.config';
 import { LibHrmTableComponent } from '../libs/lib-hrm-table/lib-hrm-table.component';
 import { LibTextComponent } from '../libs/lib-text/lib-text.component';
 import { LibSkeletonComponent } from '../libs/lib-skeleton/lib-skeleton.component';
 
-import { InterviewRound, TrackingCandidate, TrackingStage } from './recruitment-tracking.model';
+import {
+  InterviewRound,
+  RecruitmentStatuses,
+  TrackingCandidate,
+  TrackingStage,
+  TrackingStageCodes,
+  trackingStageDefinitions,
+} from './recruitment-tracking.model';
 import { LibCanvasComponent } from '../libs/lib-canvas/lib-canvas.component';
 import { RecruitmentTrackingCandidateDetailComponent } from './recruitment-tracking-candidate-detail/recruitment-tracking-candidate-detail.component';
 import { RecruitmentTrackingAddCandidateComponent } from './recruitment-tracking-add-candidate/recruitment-tracking-add-candidate.component';
@@ -24,6 +33,7 @@ import { RecruitmentTrackingKanbanComponent } from './recruitment-tracking-kanba
     LibCanvasComponent,
     RecruitmentTrackingCandidateDetailComponent,
     LibTextComponent,
+    LibLabelComponent,
     LibSkeletonComponent,
     RecruitmentTrackingKanbanComponent,
     RecruitmentTrackingAddCandidateComponent,
@@ -31,6 +41,7 @@ import { RecruitmentTrackingKanbanComponent } from './recruitment-tracking-kanba
   templateUrl: './recruitment-tracking.component.html',
 })
 export class RecruitmentTrackingComponent {
+  readonly statusVariant = batchStatusVariant;
   readonly columns = columnsConfig;
   readonly listLoading = signal(true);
   readonly kanbanLoading = signal(false);
@@ -44,8 +55,8 @@ export class RecruitmentTrackingComponent {
       clearTimeout(this.kanbanTimer);
     });
   }
-  readonly batches = recruitmentBatchesData.filter((batch) =>
-    ['Đang tuyển', 'Đang mở'].includes(batch.status),
+  readonly batches = recruitmentBatchesData.filter(
+    (batch) => batch.status === BatchStatuses.recruiting || batch.status === BatchStatuses.open,
   );
   readonly selectedBatch = signal<RecruitmentBatch | null>(null);
   readonly addCandidateOpened = signal(false);
@@ -73,7 +84,7 @@ export class RecruitmentTrackingComponent {
       .filter((candidate) => !existing.has(candidate.id))
       .map((candidate) => ({
         ...candidate,
-        recruitmentStatus: 'Đang chờ duyệt' as const,
+        recruitmentStatus: RecruitmentStatuses.pending,
       }));
     if (additions.length) {
       this.updateBoard(
@@ -98,14 +109,14 @@ export class RecruitmentTrackingComponent {
             name: 'Sàng lọc',
             interviewer: 'Chưa cập nhật',
             interviewDate: 'Chưa cập nhật',
-            status: 'Đang chờ duyệt',
+            status: RecruitmentStatuses.pending,
           },
           {
             id: 'interview',
             name: 'Phỏng vấn',
             interviewer: 'Chưa cập nhật',
             interviewDate: 'Chưa cập nhật',
-            status: 'Đang chờ duyệt',
+            status: RecruitmentStatuses.pending,
           },
         ],
       }));
@@ -133,19 +144,18 @@ export class RecruitmentTrackingComponent {
     if (!this.boards()[batch.id]) {
       this.boards.update((boards) => ({
         ...boards,
-        [batch.id]: [
-          {
-            id: 'new',
-            label: 'Mới',
-            candidates: mockingCandidates
-              .filter((candidate) => candidate.position === batch.position)
-              .map((candidate) => ({ ...candidate, recruitmentStatus: 'Đang chờ duyệt' as const })),
-          },
-          { id: 'screening', label: 'Sàng lọc', candidates: [] },
-          { id: 'interview', label: 'Phỏng vấn', candidates: [] },
-          { id: 'offer', label: 'Đề nghị', candidates: [] },
-          { id: 'hired', label: 'Đã tuyển', candidates: [] },
-        ],
+        [batch.id]: trackingStageDefinitions.map((stage) => ({
+          ...stage,
+          candidates:
+            stage.code === TrackingStageCodes.new
+              ? mockingCandidates
+                  .filter((candidate) => candidate.position === batch.position)
+                  .map((candidate) => ({
+                    ...candidate,
+                    recruitmentStatus: RecruitmentStatuses.pending,
+                  }))
+              : [],
+        })),
       }));
     }
     this.selectedBatch.set(batch);

@@ -97,8 +97,16 @@ export interface CandidateProfileDetail {
   socialLinks: SocicalLink;
 }
 
+export const CandidateProfileSections = {
+  overview: 'overview',
+  personal: 'personal',
+  skills: 'skills',
+  certificates: 'certificates',
+  experience: 'experience',
+  education: 'education',
+} as const;
 export type CandidateProfileSection =
-  'overview' | 'personal' | 'skills' | 'certificates' | 'experience' | 'education';
+  (typeof CandidateProfileSections)[keyof typeof CandidateProfileSections];
 
 export type CandidateEditableSection = 'overview' | 'socialLinks' | 'relatives';
 
@@ -106,9 +114,13 @@ export type CandidateListSection = 'skills' | 'certificates' | 'workHistories' |
 
 export type ListFieldType = 'text' | 'number' | 'date' | 'textarea';
 
-export interface ListFieldConfig {
-  key: string;
+export interface ListFieldConfig<T> {
+  key: Extract<keyof T, string>;
   label: string;
   type?: ListFieldType;
   required?: boolean;
 }
+
+export type CandidateListFieldConfigs = {
+  [K in CandidateListSection]: ListFieldConfig<CandidateProfileDetail[K][number]>[];
+};

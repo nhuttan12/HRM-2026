@@ -9,18 +9,18 @@
   <div class="flex gap-4 border-b border-surface-200 pb-2">
     <lib-tab-button
       label="Đề xuất tuyển dụng"
-      [active]="activeTab() === 'proposal'"
-      (clicked)="onTabChange('proposal')"
+      [active]="activeTab() === batchTabs.proposal"
+      (clicked)="onTabChange(batchTabs.proposal)"
     />
     <lib-tab-button
       label="Đợt tuyển dụng"
-      [active]="activeTab() === 'batch'"
-      (clicked)="onTabChange('batch')"
+      [active]="activeTab() === batchTabs.batch"
+      (clicked)="onTabChange(batchTabs.batch)"
     />
   </div>
 
   <div class="relative overflow-hidden">
-    @if (activeTab() === 'proposal') {
+    @if (activeTab() === batchTabs.proposal) {
       <app-recruitment-batch-table
         [data]="proposalBatches()"
         maxHeight="max(12rem, calc(100dvh - 16rem))"
@@ -32,7 +32,7 @@
       />
     }
 
-    @if (activeTab() === 'batch') {
+    @if (activeTab() === batchTabs.batch) {
       <app-recruitment-batch-table
         [data]="recruitmentBatches()"
         [columns]="columns"
